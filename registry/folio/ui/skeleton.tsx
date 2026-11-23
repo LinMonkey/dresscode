@@ -3,7 +3,7 @@
 import { cn } from "cn"
 
 function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="skeleton" className={cn("animate-pulse rounded-[2px] bg-hairline motion-reduce:animate-none", className)} {...props} />
+  return <div data-slot="skeleton" className={cn("animate-pulse rounded-(--radius) bg-hairline motion-reduce:animate-none", className)} {...props} />
 }
 
 export { Skeleton }

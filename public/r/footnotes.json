@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footnotes",
+  "type": "registry:ui",
+  "title": "footnotes",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://dresscodeui.com/r/folio.json"
+  ],
+  "files": [
+    {
+      "path": "registry/folio/ui/footnotes.tsx",
+      "type": "registry:ui",
+      "content": "// Footnotes: a superscript reference in the text and a ruled list of notes at the end, each with a\n// link back to where it was cited. Numbers are explicit, so server-rendered pages need no state.\n// Two lists on one page? Give each pair the same idPrefix so their links don't cross.\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\nimport { CornerLeftUp } from \"lucide-react\"\n\nconst ids = (prefix: string, id?: string | number) => ({\n  title: `${prefix}footnotes-title`,\n  note: `${prefix}fn-${id}`,\n  ref: `${prefix}fnref-${id}`,\n})\n\nfunction FootnoteRef({\n  id,\n  label,\n  idPrefix = \"\",\n  className,\n  ...props\n}: Omit<React.ComponentProps<\"a\">, \"href\" | \"id\"> & {\n  id: string | number\n  label?: React.ReactNode\n  /** Match the idPrefix of the Footnotes list this points to. */\n  idPrefix?: string\n}) {\n  const at = ids(idPrefix, id)\n  return (\n    <sup data-slot=\"footnote-ref\" id={at.ref} className=\"not-prose leading-none\">\n      <a\n        href={`#${at.note}`}\n        aria-describedby={at.title}\n        className={cn(\"ml-[1px] px-[1px] font-sans text-[0.7em] font-semibold text-press no-underline hover:text-ink\", className)}\n        {...props}\n      >\n        {label ?? id}\n      </a>\n    </sup>\n  )\n}\n\ntype FootnoteItem = { id: string | number; content: React.ReactNode }\n\nfunction Footnotes({\n  items,\n  title = \"Notes\",\n  idPrefix = \"\",\n  className,\n  ...props\n}: React.ComponentProps<\"section\"> & {\n  items: FootnoteItem[]\n  title?: React.ReactNode\n  /** Prefix for the ids, when a page has more than one list. */\n  idPrefix?: string\n}) {\n  const titleId = ids(idPrefix).title\n  return (\n    <section\n      data-slot=\"footnotes\"\n      aria-labelledby={titleId}\n      className={cn(\"not-prose mt-[48px] max-w-[68ch] border-t-2 border-rule pt-[16px] font-sans\", className)}\n      {...props}\n    >\n      <h2 id={titleId} className=\"text-[15px] font-semibold text-ink\">\n        {title}\n      </h2>\n      <ol className=\"mt-[10px] space-y-[8px] text-[15px] leading-[1.5] text-ink-2\">\n        {items.map((item) => {\n          const at = ids(idPrefix, item.id)\n          return (\n            <li key={item.id} id={at.note} className=\"grid grid-cols-[24px_1fr] gap-x-[4px] scroll-mt-[96px] target:text-ink\">\n              <span className=\"font-semibold text-ink tabular-nums\">{item.id}.</span>\n              <span>\n                {item.content}{\" \"}\n                <a href={`#${at.ref}`} aria-label={`Back to note ${item.id} in the text`} className=\"inline-flex translate-y-[2px] text-press hover:text-ink\">\n                  <CornerLeftUp className=\"size-[14px]\" aria-hidden />\n                </a>\n              </span>\n            </li>\n          )\n        })}\n      </ol>\n    </section>\n  )\n}\n\nexport { FootnoteRef, Footnotes, type FootnoteItem }\n"
+    }
+  ]
+}

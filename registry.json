@@ -764,6 +764,110 @@
       ]
     },
     {
+      "name": "prose",
+      "type": "registry:ui",
+      "title": "prose",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/prose.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "article-header",
+      "type": "registry:ui",
+      "title": "article-header",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/avatar.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/article-header.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pull-quote",
+      "type": "registry:ui",
+      "title": "pull-quote",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/pull-quote.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "footnotes",
+      "type": "registry:ui",
+      "title": "footnotes",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/footnotes.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "table-of-contents",
+      "type": "registry:ui",
+      "title": "table-of-contents",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/table-of-contents.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "newsletter-signup",
+      "type": "registry:ui",
+      "title": "newsletter-signup",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/button.json",
+        "https://dresscodeui.com/r/input.json",
+        "https://dresscodeui.com/r/spinner.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/newsletter-signup.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "empty-state",
       "type": "registry:block",
       "title": "empty-state",

@@ -28,13 +28,28 @@ Then load the fonts in your root layout (see [Installation](https://dresscodeui.
 
 - `registry/folio/folio.css`: the theme. Colors, type scale and spacing as Tailwind v4 theme variables, mapped onto
   shadcn's variables.
-- `registry/folio/ui`: 35 components with the same names and props as shadcn/ui's.
+- `registry/folio/ui`: 41 components. 35 are shadcn/ui's, restyled with the same names and props;
+  6 are for long-form writing: Prose, Article header, Pull quote, Footnotes, Table of contents, Newsletter signup.
 - `registry/folio/blocks`: the files behind 16 free blocks (marketing sections, empty states, form fields,
   a date range picker). Their photos are placeholders in `public/folio/placeholder`.
 - `registry/folio/lib/folio-fonts.ts`: Newsreader and DM Sans with next/font.
 - `registry/folio/DESIGN.md`: the style written down, for people and agents.
 - `registry/folio/rules.md`: a short rules file for CLAUDE.md, AGENTS.md or Cursor.
 - `registry.json` and `public/r`: the shadcn registry. `public/r` is exactly what https://dresscodeui.com/r serves.
+- `examples`: whole pages built from the components and blocks (article, landing, magazine), and
+  `examples/charts.tsx`, eight charts on the shadcn chart in Folio's colors.
+
+## Make it yours
+
+[Themes](https://dresscodeui.com/themes) tunes Folio's accent, paper, type pairing, corners and rules on real
+components, and gives you one command for your version:
+
+```bash
+npx shadcn@latest add https://dresscodeui.com/r/themes/<your-theme-code>.json
+```
+
+See the pages live at [dresscodeui.com/examples](https://dresscodeui.com/examples) and the charts at
+[dresscodeui.com/docs/charts](https://dresscodeui.com/docs/charts).
 
 ## The Sundial template
 

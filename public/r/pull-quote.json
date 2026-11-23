@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pull-quote",
+  "type": "registry:ui",
+  "title": "pull-quote",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://dresscodeui.com/r/folio.json"
+  ],
+  "files": [
+    {
+      "path": "registry/folio/ui/pull-quote.tsx",
+      "type": "registry:ui",
+      "content": "// A pull quote: a line lifted from the article and set large in Newsreader. \"rule\" sits between two\n// rules; \"mark\" leads with a press-red quotation mark. Float it beside the text on wide screens.\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nfunction PullQuote({\n  className,\n  variant = \"rule\",\n  float,\n  cite,\n  children,\n  ...props\n}: React.ComponentProps<\"figure\"> & {\n  variant?: \"rule\" | \"mark\"\n  /** Beside the text from 768px; the body text wraps around it. */\n  float?: \"left\" | \"right\"\n  /** Who said it, or where it's from. */\n  cite?: React.ReactNode\n}) {\n  return (\n    <figure\n      data-slot=\"pull-quote\"\n      data-variant={variant}\n      className={cn(\n        // not-prose: inside <Prose>, the quote keeps this look instead of Prose's block quote.\n        \"not-prose my-[1.6em] font-serif text-ink\",\n        variant === \"rule\" && \"border-y-2 border-rule py-[20px]\",\n        float === \"right\" && \"md:float-right md:my-[0.4em] md:ml-[32px] md:w-[42%]\",\n        float === \"left\" && \"md:float-left md:my-[0.4em] md:mr-[32px] md:w-[42%]\",\n        className,\n      )}\n      {...props}\n    >\n      {variant === \"mark\" && (\n        <span aria-hidden className=\"block h-[0.62em] font-serif text-[64px] leading-none font-bold text-press\">\n          “\n        </span>\n      )}\n      <blockquote className={cn(\"text-[26px] leading-[1.22] font-semibold tracking-[-0.015em] text-pretty sm:text-[30px]\", float && \"md:text-[24px]\")}>\n        {children}\n      </blockquote>\n      {cite && <figcaption className=\"mt-[12px] font-sans text-[15px] text-ink-2\">— {cite}</figcaption>}\n    </figure>\n  )\n}\n\nexport { PullQuote }\n"
+    }
+  ]
+}

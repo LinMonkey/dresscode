@@ -28,4 +28,4 @@ SOFTWARE.
 ```
 
 Newsreader and DM Sans are loaded from Google Fonts with next/font and are licensed under the SIL Open Font
-License 1.1.
+License 1.1. So are the families a tuned theme can pick: Fraunces, Source Serif 4, Inter, IBM Plex Sans and Geist.

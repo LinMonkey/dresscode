@@ -148,6 +148,30 @@
       "type": "registry:ui"
     },
     {
+      "name": "prose",
+      "type": "registry:ui"
+    },
+    {
+      "name": "article-header",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pull-quote",
+      "type": "registry:ui"
+    },
+    {
+      "name": "footnotes",
+      "type": "registry:ui"
+    },
+    {
+      "name": "table-of-contents",
+      "type": "registry:ui"
+    },
+    {
+      "name": "newsletter-signup",
+      "type": "registry:ui"
+    },
+    {
       "name": "empty-state",
       "type": "registry:block"
     },

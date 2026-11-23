@@ -46,7 +46,7 @@ function InputOTPSlot({
       data-active={isActive}
       data-filled={char ? "" : undefined}
       className={cn(
-        "relative flex h-[56px] w-[48px] items-center justify-center rounded-[2px] border border-input bg-background font-serif text-[28px] leading-none text-foreground tabular-nums transition-colors",
+        "relative flex h-[56px] w-[48px] items-center justify-center rounded-(--radius) border border-input bg-background font-serif text-[28px] leading-none text-foreground tabular-nums transition-colors",
         "group-hover/otp:border-ink-2 data-[active=true]:z-10 data-[active=true]:border-2 data-[active=true]:border-foreground data-[active=true]:ring-2 data-[active=true]:ring-ring/15",
         "group-has-aria-invalid/otp:border-destructive group-has-aria-invalid/otp:bg-press-tint/45",
         className

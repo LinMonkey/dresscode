@@ -31,8 +31,8 @@ const Toaster = ({ ...props }: ToasterProps) => {
           toast: "font-sans !text-[14.5px] !shadow-md !shadow-ink/10",
           title: "!font-semibold",
           description: "!text-ink-2",
-          actionButton: "!rounded-[2px] !bg-ink !text-paper !font-semibold",
-          cancelButton: "!rounded-[2px] !bg-secondary !text-ink",
+          actionButton: "!rounded-(--radius) !bg-ink !text-paper !font-semibold",
+          cancelButton: "!rounded-(--radius) !bg-secondary !text-ink",
         },
       }}
       {...props}

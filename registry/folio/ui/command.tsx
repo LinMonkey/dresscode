@@ -37,7 +37,7 @@ function CommandDialog({
 function CommandInput({ className, hint, ...props }: React.ComponentProps<typeof CommandPrimitive.Input> & { hint?: React.ReactNode }) {
   return (
     <div data-slot="command-input-wrapper" className="p-[10px] pb-[8px]">
-      <div className="flex h-[38px] items-center gap-[10px] rounded-[2px] border border-input px-[12px] focus-within:border-foreground">
+      <div className="flex h-[38px] items-center gap-[10px] rounded-(--radius) border border-input px-[12px] focus-within:border-foreground">
         <SearchIcon className="size-[17px] shrink-0 text-ink-2" strokeWidth={2} />
         <CommandPrimitive.Input
           data-slot="command-input"
@@ -86,7 +86,7 @@ function CommandItem({ className, ...props }: React.ComponentProps<typeof Comman
     <CommandPrimitive.Item
       data-slot="command-item"
       className={cn(
-        "group/command-item relative flex h-[32px] cursor-pointer items-center gap-[12px] rounded-[2px] px-[8px] text-[14.5px] outline-hidden select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-press-tint [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[17px] data-selected:[&_svg]:text-press",
+        "group/command-item relative flex h-[32px] cursor-pointer items-center gap-[12px] rounded-(--radius) px-[8px] text-[14.5px] outline-hidden select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-press-tint [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[17px] data-selected:[&_svg]:text-press",
         className
       )}
       {...props}
@@ -100,7 +100,7 @@ function CommandShortcut({ className, keys, children, ...props }: React.Componen
     <span data-slot="command-shortcut" className={cn("ml-auto flex items-center gap-[4px] text-[12px] text-ink-2", className)} {...props}>
       {keys
         ? keys.map((k, i) => (
-            <kbd key={i} className="inline-grid h-[20px] min-w-[20px] place-items-center rounded-[2px] border border-hairline bg-background px-[5px] font-sans text-[11.5px] font-semibold text-foreground">
+            <kbd key={i} className="inline-grid h-[20px] min-w-[20px] place-items-center rounded-(--radius) border border-hairline bg-background px-[5px] font-sans text-[11.5px] font-semibold text-foreground">
               {k}
             </kbd>
           ))

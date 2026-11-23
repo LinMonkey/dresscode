@@ -36,7 +36,7 @@ function ToggleGroup({
       data-orientation={orientation}
       style={{ "--gap": spacing } as React.CSSProperties}
       className={cn(
-        "group/toggle-group flex w-fit flex-row items-center gap-[--spacing(var(--gap))] rounded-[2px] data-vertical:flex-col data-vertical:items-stretch",
+        "group/toggle-group flex w-fit flex-row items-center gap-[--spacing(var(--gap))] rounded-(--radius) data-vertical:flex-col data-vertical:items-stretch",
         className
       )}
       {...props}
@@ -57,7 +57,7 @@ function ToggleGroupItem({ className, children, variant = "default", size = "def
       className={cn(
         "shrink-0 focus:z-10 focus-visible:z-10",
         // joined strip: square inner corners, one shared rule between items
-        "group-data-[spacing=0]/toggle-group:rounded-none group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-l-[2px] group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-r-[2px] group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-t-[2px] group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-b-[2px]",
+        "group-data-[spacing=0]/toggle-group:rounded-none group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-l-(--radius) group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-r-(--radius) group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-t-(--radius) group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-b-(--radius)",
         "group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:border-l-0 group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-l group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:border-t-0 group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t",
         toggleVariants({ variant: context.variant || variant, size: context.size || size }),
         className

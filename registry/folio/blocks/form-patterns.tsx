@@ -34,9 +34,9 @@ export function TagInput({
   return (
     <div className={cn(fieldClass, "flex min-h-[36px] flex-wrap items-center gap-[6px] px-[6px] py-[4px] focus-within:border-foreground focus-within:ring-2 focus-within:ring-ring/15", className)}>
       {tags.map((t) => (
-        <span key={t} className="inline-flex h-[24px] items-center gap-[6px] rounded-[2px] bg-secondary pr-[4px] pl-[8px] text-[14px]">
+        <span key={t} className="inline-flex h-[24px] items-center gap-[6px] rounded-(--radius) bg-secondary pr-[4px] pl-[8px] text-[14px]">
           {t}
-          <button type="button" onClick={() => setTags(tags.filter((x) => x !== t))} className="grid size-[16px] place-items-center rounded-[2px] text-ink-2 hover:bg-hairline hover:text-ink" aria-label={`Remove ${t}`}>
+          <button type="button" onClick={() => setTags(tags.filter((x) => x !== t))} className="grid size-[16px] place-items-center rounded-(--radius) text-ink-2 hover:bg-hairline hover:text-ink" aria-label={`Remove ${t}`}>
             <X className="size-[12px]" strokeWidth={2.5} />
           </button>
         </span>

@@ -21,7 +21,7 @@ function ComboboxTrigger({ className, children, ...props }: ComboboxPrimitive.Tr
   return (
     <ComboboxPrimitive.Trigger
       data-slot="combobox-trigger"
-      className={cn("grid size-[28px] shrink-0 place-items-center rounded-[2px] text-foreground outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/25", className)}
+      className={cn("grid size-[28px] shrink-0 place-items-center rounded-(--radius) text-foreground outline-none hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring/25", className)}
       {...props}
     >
       {children}
@@ -34,7 +34,7 @@ function ComboboxClear({ className, ...props }: ComboboxPrimitive.Clear.Props) {
   return (
     <ComboboxPrimitive.Clear
       data-slot="combobox-clear"
-      className={cn("grid size-[24px] place-items-center rounded-[2px] text-ink-2 hover:bg-secondary hover:text-foreground", className)}
+      className={cn("grid size-[24px] place-items-center rounded-(--radius) text-ink-2 hover:bg-secondary hover:text-foreground", className)}
       {...props}
     >
       <XIcon className="pointer-events-none size-[14px]" />
@@ -79,7 +79,7 @@ function ComboboxContent({
           data-slot="combobox-content"
           data-chips={!!anchor}
           className={cn(
-            "group/combobox-content relative max-h-(--available-height) w-(--anchor-width) max-w-(--available-width) origin-(--transform-origin) overflow-hidden rounded-[4px] border border-divider bg-popover text-popover-foreground shadow-lg shadow-ink/10 duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+            "group/combobox-content relative max-h-(--available-height) w-(--anchor-width) max-w-(--available-width) origin-(--transform-origin) overflow-hidden rounded-[calc(var(--radius)*2)] border border-divider bg-popover text-popover-foreground shadow-lg shadow-ink/10 duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
             className
           )}
           {...props}
@@ -105,7 +105,7 @@ function ComboboxItem({ className, children, checkbox = false, ...props }: Combo
     <ComboboxPrimitive.Item
       data-slot="combobox-item"
       className={cn(
-        "group/combobox-item relative flex w-full cursor-pointer items-center gap-[10px] rounded-[2px] px-[10px] py-[6px] text-[14px] outline-hidden select-none data-highlighted:bg-secondary data-disabled:pointer-events-none data-disabled:opacity-50 data-[selected]:font-semibold [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "group/combobox-item relative flex w-full cursor-pointer items-center gap-[10px] rounded-(--radius) px-[10px] py-[6px] text-[14px] outline-hidden select-none data-highlighted:bg-secondary data-disabled:pointer-events-none data-disabled:opacity-50 data-[selected]:font-semibold [&_svg]:pointer-events-none [&_svg]:shrink-0",
         !checkbox && "pr-[32px]",
         className
       )}
@@ -114,7 +114,7 @@ function ComboboxItem({ className, children, checkbox = false, ...props }: Combo
       {checkbox && (
         <span
           aria-hidden
-          className="grid size-[18px] shrink-0 place-items-center rounded-[2px] border border-ink-2 bg-background text-paper group-data-[selected]/combobox-item:border-press group-data-[selected]/combobox-item:bg-press"
+          className="grid size-[18px] shrink-0 place-items-center rounded-(--radius) border border-ink-2 bg-background text-paper group-data-[selected]/combobox-item:border-press group-data-[selected]/combobox-item:bg-press"
         >
           <CheckIcon className="hidden size-[14px] group-data-[selected]/combobox-item:block" strokeWidth={3} />
         </span>
@@ -161,7 +161,7 @@ function ComboboxChips({ className, ...props }: React.ComponentPropsWithRef<type
     <ComboboxPrimitive.Chips
       data-slot="combobox-chips"
       className={cn(
-        "group/combobox flex min-h-[36px] flex-wrap items-center gap-[6px] rounded-[2px] border border-input bg-background px-[8px] py-[4px] text-[14px] transition-colors hover:border-ink-2 focus-within:border-foreground focus-within:ring-2 focus-within:ring-ring/15",
+        "group/combobox flex min-h-[36px] flex-wrap items-center gap-[6px] rounded-(--radius) border border-input bg-background px-[8px] py-[4px] text-[14px] transition-colors hover:border-ink-2 focus-within:border-foreground focus-within:ring-2 focus-within:ring-ring/15",
         className
       )}
       {...props}
@@ -174,7 +174,7 @@ function ComboboxChip({ className, children, showRemove = true, ...props }: Comb
     <ComboboxPrimitive.Chip
       data-slot="combobox-chip"
       className={cn(
-        "flex h-[24px] w-fit items-center gap-[4px] rounded-[2px] bg-secondary pl-[9px] text-[13.5px] font-semibold whitespace-nowrap text-foreground outline-none data-highlighted:bg-hairline",
+        "flex h-[24px] w-fit items-center gap-[4px] rounded-(--radius) bg-secondary pl-[9px] text-[13.5px] font-semibold whitespace-nowrap text-foreground outline-none data-highlighted:bg-hairline",
         !showRemove && "pr-[9px]",
         className
       )}
@@ -182,7 +182,7 @@ function ComboboxChip({ className, children, showRemove = true, ...props }: Comb
     >
       {children}
       {showRemove && (
-        <ComboboxPrimitive.ChipRemove data-slot="combobox-chip-remove" className="grid h-full w-[22px] place-items-center rounded-r-[2px] text-ink-2 hover:bg-hairline hover:text-foreground">
+        <ComboboxPrimitive.ChipRemove data-slot="combobox-chip-remove" className="grid h-full w-[22px] place-items-center rounded-r-(--radius) text-ink-2 hover:bg-hairline hover:text-foreground">
           <XIcon className="pointer-events-none size-[13px]" strokeWidth={2.25} />
         </ComboboxPrimitive.ChipRemove>
       )}

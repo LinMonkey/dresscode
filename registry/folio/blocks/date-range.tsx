@@ -131,7 +131,7 @@ export function DateRangePicker({ presets, className }: { presets?: Preset[]; cl
             variant="outline"
             size="sm"
             aria-label={`Date range: ${formatRange(range)}`}
-            className={cn("h-[31px] gap-[8px] rounded-[4px] px-[10px] text-[13.5px] font-normal lg:w-[232px] aria-expanded:border-foreground", className)}
+            className={cn("h-[31px] gap-[8px] rounded-[calc(var(--radius)*2)] px-[10px] text-[13.5px] font-normal lg:w-[232px] aria-expanded:border-foreground", className)}
           />
         }
       >
@@ -153,7 +153,7 @@ export function DateRangePicker({ presets, className }: { presets?: Preset[]; cl
                     onClick={() => p.range && setDraft(p.range)}
                     aria-pressed={on}
                     className={cn(
-                      "w-full rounded-[2px] px-[10px] py-[6px] text-left text-[14px] whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-ring/25 sm:border-l-[3px] sm:border-transparent sm:pl-[9px]",
+                      "w-full rounded-(--radius) px-[10px] py-[6px] text-left text-[14px] whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-ring/25 sm:border-l-[3px] sm:border-transparent sm:pl-[9px]",
                       on ? "bg-press-tint font-semibold text-foreground sm:border-press" : "hover:bg-secondary",
                       !p.range && !on && "text-ink-2",
                     )}
