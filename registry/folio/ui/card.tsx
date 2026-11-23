@@ -1,5 +1,6 @@
-// Folio restyle of shadcn/ui's card: a ruled panel, not a floating tile. Square corners, a 1px divider
-// border, no shadow, and a Newsreader headline. Same exports as the stock component.
+// Folio restyle of shadcn/ui's card: a ruled panel, not a floating tile. Twice the theme's corner
+// (12px by default), a 1px divider border, no shadow, and a Newsreader headline. Same exports as the
+// stock component.
 import * as React from "react"
 import { cn } from "cn"
 
@@ -9,7 +10,7 @@ function Card({ className, size = "default", ...props }: React.ComponentProps<"d
       data-slot="card"
       data-size={size}
       className={cn(
-        "group/card flex flex-col gap-(--card-gap) border border-divider bg-card pt-[9px] pb-(--card-spacing) text-[14px] text-card-foreground [--card-gap:6px] [--card-spacing:--spacing(4)] data-[size=sm]:[--card-spacing:--spacing(3)]",
+        "group/card flex flex-col gap-(--card-gap) rounded-[calc(var(--radius)*2)] border border-divider bg-card pt-[9px] pb-(--card-spacing) text-[14px] text-card-foreground [--card-gap:6px] [--card-spacing:--spacing(4)] data-[size=sm]:[--card-spacing:--spacing(3)]",
         className
       )}
       {...props}

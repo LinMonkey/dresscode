@@ -1,4 +1,4 @@
-// Folio restyle of shadcn/ui's input: a 36px ruled field with 2px corners.
+// Folio restyle of shadcn/ui's input: a 36px ruled field with the theme's corners (6px by default).
 // Focus is an ink border with a faint ink ring; an invalid field (aria-invalid) turns press red on a press tint.
 import * as React from "react"
 import { Input as InputPrimitive } from "@base-ui/react/input"

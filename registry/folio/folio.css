@@ -16,6 +16,7 @@
   --color-hairline: #dcdfdb;
   --color-rule: #6e7877;
   --color-paper: #ffffff;
+  --color-shade: #171a19; /* scrims and the shadows of floating layers: ink in light, black in dark */
 
   /* Status colors (review fix #7). Each pairs a dark text color with a light tint;
      text on its tint passes WCAG AA (success 5.4, warning 5.4, info 7.0, press 6.0). */
@@ -82,7 +83,7 @@ html:root {
   --border: #dcdfdb;
   --input: #aeb5b0;
   --ring: #171a19;
-  --radius: 0.125rem;
+  --radius: 0.375rem;
 
   /* Charts: press red leads, then ink and the greys. */
   --chart-1: #a32420;
@@ -100,6 +101,63 @@ html:root {
   --sidebar-accent-foreground: #171a19;
   --sidebar-border: #aeb5b0;
   --sidebar-ring: #171a19;
+}
+
+/* Dark: put .dark on <html> (the shadcn convention). The same roles, turned over: paper is ink-dark, ink
+   is newsprint-light, press red is lifted until it reads on the dark paper (5.2:1), and every status
+   color keeps a dark tint behind a light text color (all pairs pass WCAG AA). Scrims and floating-layer
+   shadows use --color-shade, which turns black. */
+:root.dark {
+  --color-ink: #eef0ec;
+  --color-ink-2: #a9b1ac;
+  --color-newsprint: #1f2321;
+  --color-press: #e16464;
+  --color-press-tint: #292120;
+  --color-press-deep: #e78383;
+  --color-divider: #4b534f;
+  --color-hairline: #2d3330;
+  --color-rule: #858e8a;
+  --color-paper: #171a19;
+  --color-shade: #000000;
+  --color-success: #7cc08c;
+  --color-success-tint: #1d2e22;
+  --color-warning: #e2b25e;
+  --color-warning-tint: #322814;
+  --color-info: #8db2e3;
+  --color-info-tint: #1c2736;
+  --color-neutral-tint: #272c2a;
+
+  --background: #171a19;
+  --foreground: #eef0ec;
+  --card: #171a19;
+  --card-foreground: #eef0ec;
+  --popover: #1d201f;
+  --popover-foreground: #eef0ec;
+  --primary: #eef0ec;
+  --primary-foreground: #171a19;
+  --secondary: #1f2321;
+  --secondary-foreground: #eef0ec;
+  --muted: #1f2321;
+  --muted-foreground: #a9b1ac;
+  --accent: #292120;
+  --accent-foreground: #eef0ec;
+  --destructive: #e16464;
+  --border: #2d3330;
+  --input: #4b534f;
+  --ring: #eef0ec;
+  --chart-1: #e16464;
+  --chart-2: #eef0ec;
+  --chart-3: #858e8a;
+  --chart-4: #4b534f;
+  --chart-5: #a9b1ac;
+  --sidebar: #1f2321;
+  --sidebar-foreground: #eef0ec;
+  --sidebar-primary: #e16464;
+  --sidebar-primary-foreground: #171a19;
+  --sidebar-accent: #292120;
+  --sidebar-accent-foreground: #eef0ec;
+  --sidebar-border: #4b534f;
+  --sidebar-ring: #eef0ec;
 }
 
 /* The masthead double rule: two 2px lines with a 4px gap. */

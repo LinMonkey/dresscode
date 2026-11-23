@@ -107,8 +107,8 @@ typography:
     fontFeature: "'tnum' 1"
 rounded:
   none: 0px
-  sm: 2px
-  md: 4px
+  sm: 6px
+  md: 12px
   full: 9999px
 spacing:
   xs: 4px
@@ -279,6 +279,29 @@ The palette is high-contrast neutrals plus a single accent.
 
 Never add other hues: no blue links, no orange highlights, no purple gradients. Charts use press red first, then ink and the greys (`--chart-1` to `--chart-5`).
 
+**Shade (#171A19, black in dark mode), `shade`:** only for dialog and sheet scrims (`bg-shade/40`) and the one soft shadow under floating layers (`shadow-shade/10`). Never for text or fills.
+
+### Dark mode
+
+Put `.dark` on `<html>` (the shadcn convention) and every token turns over; components need no `dark:` classes. Paper becomes ink-dark, ink becomes newsprint-light, and press red is lifted so it still reads:
+
+| Token | Light | Dark |
+|---|---|---|
+| paper, background, card | #FFFFFF | #171A19 |
+| newsprint, secondary, muted, sidebar | #F4F5F2 | #1F2321 |
+| ink, foreground, primary | #171A19 | #EEF0EC |
+| ink-2, muted-foreground | #4B524F | #A9B1AC |
+| press, destructive, chart-1 | #A32420 | #E16464 |
+| press-tint, accent | #F8E3DF | #292120 |
+| hairline, border | #DCDFDB | #2D3330 |
+| divider, input | #AEB5B0 | #4B524F |
+| rule | #6E7877 | #858E8A |
+| success / tint | #2F6A3F / #E3EEE2 | #7CC08C / #1D2E22 |
+| warning / tint | #83560E / #F6EBD3 | #E2B25E / #322814 |
+| info / tint | #2C4D78 / #E2E9F2 | #8DB2E3 / #1C2736 |
+
+The rules stay the same: primary buttons are the light ink with dark text, press red is still only for noticing, and every text-on-tint pair passes WCAG AA.
+
 ## Typography
 
 Two families, loaded with `next/font` (Newsreader with its optical-size axis, so display sizes get the tighter display cut automatically):
@@ -326,14 +349,14 @@ Folio is flat. Depth comes from rules and tone, not shadows.
 - 2px rule (#6E7877) under table headers and as a strong separator.
 - **The double rule** (two 2px rules with a 4px gap) under the masthead, under the dashboard top bar, and at the top of every marketing section.
 - Newsprint bands and the sidebar give a second surface tone.
-- Only floating layers get a shadow: menus, selects, popovers and dialogs carry one soft, ink-tinted shadow (`shadow-lg shadow-ink/10`). Dialog and sheet scrims are ink at 40%.
+- Only floating layers get a shadow: menus, selects, popovers and dialogs carry one soft, ink-tinted shadow (`shadow-lg shadow-shade/10`). Dialog and sheet scrims are ink at 40%.
 - Never put drop shadows on cards, tiles, buttons or images.
 
 ## Shapes
 
-- **0px** for panels, cards, tiles, tables and images.
-- **2px** (`rounded.sm`) for buttons, inputs, badges, checkboxes, tooltips and menu items.
-- **4px** (`rounded.md`) for floating layers (menus, popovers, dialogs) and for the sidebar's switcher and search fields.
+- **0px** for ruled panels inside a page (dashboard panels, tables) and for images.
+- **6px** (`rounded.sm`, `--radius`) for buttons, inputs, badges, tooltips and menu items. Checkboxes cap it at 4px so they stay square.
+- **12px** (`rounded.md`, twice `--radius`) for cards and floating layers (menus, popovers, dialogs) and for the sidebar's switcher and search fields.
 - **Circles** only where the shape carries meaning: avatars, radios, switches, timeline dots and step numbers.
 - **Images** are high-contrast, grainy black-and-white photographs, full-bleed inside their column, with an italic "Fig." caption. Grain and the Quarterly duotone are added in CSS, not baked into the files.
 
@@ -342,7 +365,7 @@ Folio is flat. Depth comes from rules and tone, not shadows.
 Restyled shadcn/ui primitives (same props and slots as the stock components):
 
 - **Button:** `default` (ink), `outline` (white with a divider border that turns ink on hover), `secondary` (newsprint), `ghost`, `destructive` (press red, deep red on hover), `link` (press red, underlined). Sizes 30 / 36 / 44px. A loading button shows the Spinner and a present-tense label ("Publishing…").
-- **Input, Textarea, Select:** 36px ruled fields with 2px corners. Focus is an ink border with a faint ink ring. An invalid field (`aria-invalid`) gets a press-red border on a press tint, with the message in press red underneath.
+- **Input, Textarea, Select:** 36px ruled fields with 6px corners. Focus is an ink border with a faint ink ring. An invalid field (`aria-invalid`) gets a press-red border on a press tint, with the message in press red underneath.
 - **Checkbox, Radio, Switch:** 18px controls; checked states are press red with white marks; the switch track is hairline grey when off.
 - **Tabs:** `default` is newspaper section tabs (a divider rule under the row; the active tab is press red with a 2px underline); `segmented` is a boxed switch with the active segment filled ink.
 - **Badge:** sentence-case tags, 20px tall: `success`, `warning`, `info`, `attention`, `neutral`, plus ink `default`.

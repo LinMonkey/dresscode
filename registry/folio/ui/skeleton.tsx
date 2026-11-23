@@ -1,4 +1,4 @@
-// Folio restyle of shadcn/ui's skeleton: a flat hairline-grey block with 2px corners that pulses while data loads.
+// Folio restyle of shadcn/ui's skeleton: a flat hairline-grey block with the theme's corners that pulses while data loads.
 // Size it like the text it stands in for (a 13px table cell is about h-[12px]); never round it into pills.
 import { cn } from "cn"
 

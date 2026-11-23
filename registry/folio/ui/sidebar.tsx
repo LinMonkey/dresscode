@@ -2,7 +2,7 @@
 
 // Folio restyle of shadcn/ui's sidebar. Same API and behaviour as the stock component; what changes:
 // 210px width, 15px items on a 28px row, sentence-case group labels, press-tint selection with a
-// press-red marker, square-ish 2px corners, and the desktop panel appears from 1024px (lg) instead of 768px.
+// press-red marker, the theme's small corners, and the desktop panel appears from 1024px (lg) instead of 768px.
 
 import * as React from "react"
 import { mergeProps } from "@base-ui/react/merge-props"

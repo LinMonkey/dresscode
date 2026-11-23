@@ -25,7 +25,7 @@ function AlertDialogOverlay({ className, ...props }: AlertDialogPrimitive.Backdr
   return (
     <AlertDialogPrimitive.Backdrop
       data-slot="alert-dialog-overlay"
-      className={cn("fixed inset-0 isolate z-50 bg-ink/40 duration-100 data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0", className)}
+      className={cn("fixed inset-0 isolate z-50 bg-shade/40 duration-100 data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0", className)}
       {...props}
     />
   )
@@ -39,7 +39,7 @@ function AlertDialogContent({ className, size = "default", ...props }: AlertDial
         data-slot="alert-dialog-content"
         data-size={size}
         className={cn(
-          "group/alert-dialog-content fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-5 rounded-[calc(var(--radius)*2)] border border-divider bg-popover p-6 text-[15px] text-popover-foreground shadow-lg shadow-ink/10 duration-100 outline-none data-[size=default]:sm:max-w-[460px] data-[size=sm]:sm:max-w-[360px] data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "group/alert-dialog-content fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-5 rounded-[calc(var(--radius)*2)] border border-divider bg-popover p-6 text-[15px] text-popover-foreground shadow-lg shadow-shade/10 duration-100 outline-none data-[size=default]:sm:max-w-[460px] data-[size=sm]:sm:max-w-[360px] data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
           className
         )}
         {...props}
