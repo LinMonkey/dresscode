@@ -44,5 +44,5 @@ is not in this repository.
 
 ## License
 
-MIT. The components are restyled from [shadcn/ui](https://github.com/shadcn-ui/ui) (MIT). Newsreader and DM Sans
-are under the SIL Open Font License.
+MIT. The components are restyled from [shadcn/ui](https://github.com/shadcn-ui/ui) (MIT); see
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Newsreader and DM Sans are under the SIL Open Font License.
