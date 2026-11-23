@@ -1,0 +1,1134 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "dresscode",
+  "homepage": "https://dresscodeui.com",
+  "items": [
+    {
+      "name": "folio",
+      "type": "registry:theme",
+      "title": "Folio",
+      "description": "Folio's tokens: palette, status colors, type scale and spacing, mapped onto shadcn's theme variables.",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "cssVars": {
+        "theme": {
+          "font-serif": "var(--font-newsreader)",
+          "text-masthead": "74px",
+          "text-masthead--line-height": "1",
+          "text-masthead--letter-spacing": "-0.035em",
+          "text-display": "67px",
+          "text-display--line-height": "70px",
+          "text-display--letter-spacing": "-0.035em",
+          "text-h2": "64px",
+          "text-h2--line-height": "1.05",
+          "text-h2--letter-spacing": "-0.03em",
+          "text-h3": "36px",
+          "text-h3--line-height": "1.1",
+          "text-h3--letter-spacing": "-0.02em",
+          "text-lead-lg": "26px",
+          "text-lead-lg--line-height": "32px",
+          "text-lead": "25px",
+          "text-lead--line-height": "31px",
+          "text-nav": "18px",
+          "text-nav--line-height": "1.2",
+          "text-body-lg": "19px",
+          "text-body-lg--line-height": "23.5px",
+          "text-note": "16px",
+          "text-note--line-height": "1.4",
+          "spacing-section": "128px",
+          "spacing-section-sm": "96px",
+          "spacing-gutter": "30px",
+          "spacing-heading": "56px"
+        },
+        "light": {
+          "ink": "#171a19",
+          "ink-2": "#4b524f",
+          "newsprint": "#f4f5f2",
+          "press": "#a32420",
+          "press-tint": "#f8e3df",
+          "press-deep": "#7e1916",
+          "divider": "#aeb5b0",
+          "hairline": "#dcdfdb",
+          "rule": "#6e7877",
+          "paper": "#ffffff",
+          "success": "#2f6a3f",
+          "success-tint": "#e3eee2",
+          "warning": "#83560e",
+          "warning-tint": "#f6ebd3",
+          "info": "#2c4d78",
+          "info-tint": "#e2e9f2",
+          "neutral-tint": "#e8eae6",
+          "background": "#ffffff",
+          "foreground": "#171a19",
+          "card": "#ffffff",
+          "card-foreground": "#171a19",
+          "popover": "#ffffff",
+          "popover-foreground": "#171a19",
+          "primary": "#171a19",
+          "primary-foreground": "#ffffff",
+          "secondary": "#f4f5f2",
+          "secondary-foreground": "#171a19",
+          "muted": "#f4f5f2",
+          "muted-foreground": "#4b524f",
+          "accent": "#f8e3df",
+          "accent-foreground": "#171a19",
+          "destructive": "#a32420",
+          "border": "#dcdfdb",
+          "input": "#aeb5b0",
+          "ring": "#171a19",
+          "radius": "0.125rem",
+          "chart-1": "#a32420",
+          "chart-2": "#171a19",
+          "chart-3": "#6e7877",
+          "chart-4": "#aeb5b0",
+          "chart-5": "#4b524f",
+          "sidebar": "#f4f5f2",
+          "sidebar-foreground": "#171a19",
+          "sidebar-primary": "#a32420",
+          "sidebar-primary-foreground": "#ffffff",
+          "sidebar-accent": "#f8e3df",
+          "sidebar-accent-foreground": "#171a19",
+          "sidebar-border": "#aeb5b0",
+          "sidebar-ring": "#171a19"
+        }
+      },
+      "css": {
+        ".folio-double-rule": {
+          "height": "8px",
+          "border-top": "2px solid var(--color-rule)",
+          "border-bottom": "2px solid var(--color-rule)"
+        },
+        "@layer base": {
+          ":where(button, [role=\"button\"], [role=\"tab\"], [role=\"menuitem\"], [role=\"menuitemcheckbox\"], [role=\"menuitemradio\"], [role=\"option\"], [role=\"switch\"], [role=\"checkbox\"], [role=\"radio\"], [cmdk-item], summary, select, input:is([type=\"checkbox\"], [type=\"radio\"], [type=\"file\"], [type=\"color\"], [type=\"submit\"], [type=\"button\"], [type=\"reset\"]), label:has(button, input[type=\"checkbox\"], input[type=\"radio\"], [role=\"switch\"], [role=\"checkbox\"], [role=\"radio\"])):not(:disabled, [aria-disabled=\"true\"], [data-disabled=\"\"], [data-disabled=\"true\"])": {
+            "cursor": "pointer"
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "registry/folio/lib/folio-fonts.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "accordion",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "alert",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/alert.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "alert-dialog",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "avatar",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "badge",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "breadcrumb",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/breadcrumb.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "button",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "calendar",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react",
+        "react-day-picker"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "card",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "checkbox",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "combobox",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/combobox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "command",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "cmdk",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/dialog.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/command.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "dialog",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "dropdown-menu",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "input",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "input-otp",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "input-otp",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/input-otp.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "label",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "pagination",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "popover",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "progress",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "radio-group",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/radio-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "select",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "separator",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "sheet",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/sheet.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "sidebar",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/button.json",
+        "https://dresscodeui.com/r/input.json",
+        "https://dresscodeui.com/r/separator.json",
+        "https://dresscodeui.com/r/sheet.json",
+        "https://dresscodeui.com/r/skeleton.json",
+        "https://dresscodeui.com/r/tooltip.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "skeleton",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "sonner",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react",
+        "sonner"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/sonner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "spinner",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/spinner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "switch",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "table",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "tabs",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "textarea",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "toggle",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "toggle-group",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/toggle.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/toggle-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "tooltip",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:block",
+      "title": "empty-state",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/empty-state.tsx",
+          "type": "registry:component",
+          "target": "components/folio/empty-state.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pricing-table",
+      "type": "registry:block",
+      "title": "pricing-table",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/pricing.tsx",
+          "type": "registry:component",
+          "target": "components/folio/pricing.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/shared.tsx",
+          "type": "registry:component",
+          "target": "components/folio/shared.tsx"
+        }
+      ]
+    },
+    {
+      "name": "form-fields",
+      "type": "registry:block",
+      "title": "form-fields",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/button.json",
+        "https://dresscodeui.com/r/calendar.json",
+        "https://dresscodeui.com/r/input.json",
+        "https://dresscodeui.com/r/label.json",
+        "https://dresscodeui.com/r/popover.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/patterns.tsx",
+          "type": "registry:component",
+          "target": "components/folio/patterns.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/form-patterns.tsx",
+          "type": "registry:component",
+          "target": "components/folio/form-patterns.tsx"
+        }
+      ]
+    },
+    {
+      "name": "date-range-picker",
+      "type": "registry:block",
+      "title": "date-range-picker",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json",
+        "https://dresscodeui.com/r/button.json",
+        "https://dresscodeui.com/r/calendar.json",
+        "https://dresscodeui.com/r/popover.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/date-range.tsx",
+          "type": "registry:component",
+          "target": "components/folio/date-range.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navigation",
+      "type": "registry:block",
+      "title": "navigation",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/masthead-nav.tsx",
+          "type": "registry:component",
+          "target": "components/folio/masthead-nav.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/mega-menu.tsx",
+          "type": "registry:component",
+          "target": "components/folio/mega-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "announcement-bar",
+      "type": "registry:block",
+      "title": "announcement-bar",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/announcement-bar.tsx",
+          "type": "registry:component",
+          "target": "components/folio/announcement-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero",
+      "type": "registry:block",
+      "title": "hero",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/hero-editorial.tsx",
+          "type": "registry:component",
+          "target": "components/folio/hero-editorial.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/editor-preview.tsx",
+          "type": "registry:component",
+          "target": "components/folio/editor-preview.tsx"
+        }
+      ]
+    },
+    {
+      "name": "logo-strip",
+      "type": "registry:block",
+      "title": "logo-strip",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/logo-strip.tsx",
+          "type": "registry:component",
+          "target": "components/folio/logo-strip.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/shared.tsx",
+          "type": "registry:component",
+          "target": "components/folio/shared.tsx"
+        }
+      ]
+    },
+    {
+      "name": "feature-rows",
+      "type": "registry:block",
+      "title": "feature-rows",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/feature-alternating.tsx",
+          "type": "registry:component",
+          "target": "components/folio/feature-alternating.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/shared.tsx",
+          "type": "registry:component",
+          "target": "components/folio/shared.tsx"
+        }
+      ]
+    },
+    {
+      "name": "feature-showcase",
+      "type": "registry:block",
+      "title": "feature-showcase",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/feature-showcase.tsx",
+          "type": "registry:component",
+          "target": "components/folio/feature-showcase.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/editor-preview.tsx",
+          "type": "registry:component",
+          "target": "components/folio/editor-preview.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bento-grid",
+      "type": "registry:block",
+      "title": "bento-grid",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/bento-grid.tsx",
+          "type": "registry:component",
+          "target": "components/folio/bento-grid.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/shared.tsx",
+          "type": "registry:component",
+          "target": "components/folio/shared.tsx"
+        }
+      ]
+    },
+    {
+      "name": "steps-and-stats",
+      "type": "registry:block",
+      "title": "steps-and-stats",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/steps-stats.tsx",
+          "type": "registry:component",
+          "target": "components/folio/steps-stats.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/shared.tsx",
+          "type": "registry:component",
+          "target": "components/folio/shared.tsx"
+        }
+      ]
+    },
+    {
+      "name": "testimonials",
+      "type": "registry:block",
+      "title": "testimonials",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/testimonials.tsx",
+          "type": "registry:component",
+          "target": "components/folio/testimonials.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/shared.tsx",
+          "type": "registry:component",
+          "target": "components/folio/shared.tsx"
+        }
+      ]
+    },
+    {
+      "name": "integrations",
+      "type": "registry:block",
+      "title": "integrations",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/integrations-list.tsx",
+          "type": "registry:component",
+          "target": "components/folio/integrations-list.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/shared.tsx",
+          "type": "registry:component",
+          "target": "components/folio/shared.tsx"
+        }
+      ]
+    },
+    {
+      "name": "faq",
+      "type": "registry:block",
+      "title": "faq",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/faq-journal.tsx",
+          "type": "registry:component",
+          "target": "components/folio/faq-journal.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/shared.tsx",
+          "type": "registry:component",
+          "target": "components/folio/shared.tsx"
+        }
+      ]
+    },
+    {
+      "name": "closing",
+      "type": "registry:block",
+      "title": "closing",
+      "author": "DressCode UI <https://dresscodeui.com>",
+      "dependencies": [],
+      "registryDependencies": [
+        "https://dresscodeui.com/r/folio.json"
+      ],
+      "files": [
+        {
+          "path": "registry/folio/blocks/closing.tsx",
+          "type": "registry:component",
+          "target": "components/folio/closing.tsx"
+        },
+        {
+          "path": "registry/folio/blocks/shared.tsx",
+          "type": "registry:component",
+          "target": "components/folio/shared.tsx"
+        }
+      ]
+    }
+  ]
+}

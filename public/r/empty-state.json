@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state",
+  "type": "registry:block",
+  "title": "empty-state",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://dresscodeui.com/r/folio.json"
+  ],
+  "files": [
+    {
+      "path": "registry/folio/blocks/empty-state.tsx",
+      "type": "registry:component",
+      "target": "components/folio/empty-state.tsx",
+      "content": "\"use client\"\n\n// Empty, no-results and error states (design images E1 and E2). The 404 page (X1) is in not-found.tsx.\n// EmptyState is one centered column: a line icon, a Newsreader title, one or two lines of help, the actions.\n// size=\"lg\" fills a page (no posts yet); size=\"md\" sits inside a panel or a table. tone=\"danger\" turns the icon\n// press red for \"couldn't load\" (keep the buttons calm: Try again is an outline button, not a red one).\n// DataTable takes `empty` and `error` and shows its own \"No results for …\" with Clear search.\nimport type { ReactNode } from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport function EmptyState({\n  icon,\n  title,\n  description,\n  actions,\n  footnote,\n  tone = \"default\",\n  size = \"lg\",\n  as: Heading = \"h2\",\n  className,\n}: {\n  icon?: ReactNode\n  title: ReactNode\n  description?: ReactNode\n  /** Buttons. Lay out one ink button and at most one outline button; a third option belongs in `footnote`. */\n  actions?: ReactNode\n  /** A link or a small line under the actions (\"Error 503 · 10:42 AM\"). */\n  footnote?: ReactNode\n  tone?: \"default\" | \"danger\"\n  size?: \"lg\" | \"md\"\n  as?: \"h1\" | \"h2\" | \"h3\"\n  className?: string\n}) {\n  const lg = size === \"lg\"\n  return (\n    <div role={tone === \"danger\" ? \"alert\" : undefined} className={cn(\"mx-auto flex flex-col items-center text-center\", lg ? \"max-w-[640px]\" : \"max-w-[340px]\", className)}>\n      {icon && (\n        <span\n          aria-hidden\n          className={cn(\n            \"[&_svg]:stroke-[1.25]\",\n            lg ? \"[&_svg]:size-[84px]\" : \"[&_svg]:size-[68px]\",\n            tone === \"danger\" ? \"text-press\" : \"text-foreground\",\n          )}\n        >\n          {icon}\n        </span>\n      )}\n      <Heading\n        className={cn(\n          \"font-serif leading-[1.08] font-bold tracking-[-0.03em] text-balance\",\n          lg ? \"mt-[30px] text-[34px] sm:text-[46px]\" : \"mt-[34px] text-[28px] sm:text-[33px]\",\n        )}\n      >\n        {title}\n      </Heading>\n      {description && <p className={cn(\"mt-[12px] text-ink-2\", lg ? \"text-[17px] leading-[1.5] sm:text-[19.5px]\" : \"text-[17px] leading-[1.5] text-foreground/85 sm:text-[18px]\")}>{description}</p>}\n      {actions && <div className={cn(\"flex flex-wrap items-center justify-center\", lg ? \"mt-[44px] gap-[24px]\" : \"mt-[46px] flex-col gap-[16px]\")}>{actions}</div>}\n      {footnote && <div className={cn(\"text-ink-2\", lg ? \"mt-[54px] text-[17px] sm:text-[19.5px]\" : \"mt-[24px] text-[16px] sm:text-[17px]\")}>{footnote}</div>}\n    </div>\n  )\n}\n\n/** A press link for an EmptyState footnote: \"How other writers plan their first month\". */\nexport function EmptyStateLink({ href, children }: { href: string; children: ReactNode }) {\n  return (\n    <a href={href} className=\"text-press underline decoration-1 underline-offset-[4px] outline-none hover:text-ink focus-visible:ring-2 focus-visible:ring-ring\">\n      {children}\n    </a>\n  )\n}\n"
+    }
+  ]
+}

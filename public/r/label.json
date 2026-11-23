@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "type": "registry:ui",
+  "title": "label",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://dresscodeui.com/r/folio.json"
+  ],
+  "files": [
+    {
+      "path": "registry/folio/ui/label.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\"\n\n// Folio restyle of shadcn/ui's label: 14px semibold, sentence case.\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nfunction Label({ className, ...props }: React.ComponentProps<\"label\">) {\n  return (\n    <label\n      data-slot=\"label\"\n      className={cn(\n        \"flex items-center gap-[8px] text-[14px] leading-none font-semibold select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Label }\n"
+    }
+  ]
+}

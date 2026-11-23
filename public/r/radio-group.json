@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radio-group",
+  "type": "registry:ui",
+  "title": "radio-group",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "https://dresscodeui.com/r/folio.json"
+  ],
+  "files": [
+    {
+      "path": "registry/folio/ui/radio-group.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\"\n\n// Folio restyle of shadcn/ui's radio group: an 18px ring; the chosen option gets a press-red ring and dot.\nimport { Radio as RadioPrimitive } from \"@base-ui/react/radio\"\nimport { RadioGroup as RadioGroupPrimitive } from \"@base-ui/react/radio-group\"\nimport { cn } from \"@/lib/utils\"\n\nfunction RadioGroup({ className, ...props }: RadioGroupPrimitive.Props) {\n  return <RadioGroupPrimitive data-slot=\"radio-group\" className={cn(\"grid w-full gap-[10px]\", className)} {...props} />\n}\n\nfunction RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {\n  return (\n    <RadioPrimitive.Root\n      data-slot=\"radio-group-item\"\n      className={cn(\n        \"group/radio-group-item peer relative flex aspect-square size-[18px] shrink-0 rounded-full border border-ink-2 bg-background outline-none after:absolute after:-inset-x-3 after:-inset-y-2 hover:border-foreground focus-visible:ring-2 focus-visible:ring-ring/25 focus-visible:ring-offset-1 disabled:cursor-not-allowed data-disabled:border-hairline data-disabled:bg-secondary aria-invalid:border-destructive data-checked:border-[1.5px] data-checked:border-press\",\n        className\n      )}\n      {...props}\n    >\n      <RadioPrimitive.Indicator data-slot=\"radio-group-indicator\" className=\"flex size-full items-center justify-center\">\n        <span className=\"size-[8px] rounded-full bg-press\" />\n      </RadioPrimitive.Indicator>\n    </RadioPrimitive.Root>\n  )\n}\n\nexport { RadioGroup, RadioGroupItem }\n"
+    }
+  ]
+}

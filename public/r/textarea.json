@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "type": "registry:ui",
+  "title": "textarea",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://dresscodeui.com/r/folio.json"
+  ],
+  "files": [
+    {
+      "path": "registry/folio/ui/textarea.tsx",
+      "type": "registry:ui",
+      "content": "// Folio restyle of shadcn/ui's textarea: the same ruled field as Folio's input, growing with its content.\nimport * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nimport { fieldClass } from \"./input\"\n\nfunction Textarea({ className, ...props }: React.ComponentProps<\"textarea\">) {\n  return <textarea data-slot=\"textarea\" className={cn(fieldClass, \"flex field-sizing-content min-h-[88px] px-[12px] py-[9px] leading-[1.45]\", className)} {...props} />\n}\n\nexport { Textarea }\n"
+    }
+  ]
+}

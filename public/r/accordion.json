@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "type": "registry:ui",
+  "title": "accordion",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [
+    "@base-ui/react",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://dresscodeui.com/r/folio.json"
+  ],
+  "files": [
+    {
+      "path": "registry/folio/ui/accordion.tsx",
+      "type": "registry:ui",
+      "content": "// Folio restyle of shadcn/ui's accordion (Base UI): ruled sections with a Newsreader heading and a chevron that\n// turns when open. Same API as the stock component. Use `multiple` and `defaultValue` with every section's\n// value to start all open (a settings side panel); use single for FAQs.\nimport { Accordion as AccordionPrimitive } from \"@base-ui/react/accordion\"\nimport { cn } from \"@/lib/utils\"\nimport { ChevronDownIcon } from \"lucide-react\"\n\nfunction Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {\n  return <AccordionPrimitive.Root data-slot=\"accordion\" className={cn(\"flex w-full flex-col\", className)} {...props} />\n}\n\nfunction AccordionItem({ className, ...props }: AccordionPrimitive.Item.Props) {\n  return <AccordionPrimitive.Item data-slot=\"accordion-item\" className={cn(\"border-b border-hairline last:border-b-0\", className)} {...props} />\n}\n\nfunction AccordionTrigger({ className, children, ...props }: AccordionPrimitive.Trigger.Props) {\n  return (\n    <AccordionPrimitive.Header className=\"flex\">\n      <AccordionPrimitive.Trigger\n        data-slot=\"accordion-trigger\"\n        className={cn(\n          \"group/accordion-trigger flex flex-1 items-center justify-between gap-[12px] py-[12px] text-left font-serif text-[21px] leading-[1.15] font-bold tracking-[-0.02em] outline-none hover:text-ink-2 focus-visible:underline data-disabled:pointer-events-none data-disabled:opacity-50\",\n          className\n        )}\n        {...props}\n      >\n        {children}\n        <ChevronDownIcon data-slot=\"accordion-trigger-icon\" className=\"pointer-events-none size-[17px] shrink-0 text-foreground transition-transform group-aria-expanded/accordion-trigger:rotate-180 motion-reduce:transition-none\" strokeWidth={2.25} />\n      </AccordionPrimitive.Trigger>\n    </AccordionPrimitive.Header>\n  )\n}\n\nfunction AccordionContent({ className, children, ...props }: AccordionPrimitive.Panel.Props) {\n  return (\n    <AccordionPrimitive.Panel data-slot=\"accordion-content\" className=\"overflow-hidden text-[15px] data-open:animate-accordion-down data-closed:animate-accordion-up\" {...props}>\n      <div className={cn(\"h-(--accordion-panel-height) pb-[14px] data-ending-style:h-0 data-starting-style:h-0 [&_a]:text-press [&_a]:underline [&_a]:underline-offset-3\", className)}>{children}</div>\n    </AccordionPrimitive.Panel>\n  )\n}\n\nexport { Accordion, AccordionContent, AccordionItem, AccordionTrigger }\n"
+    }
+  ]
+}

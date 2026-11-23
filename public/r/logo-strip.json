@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "logo-strip",
+  "type": "registry:block",
+  "title": "logo-strip",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://dresscodeui.com/r/folio.json"
+  ],
+  "files": [
+    {
+      "path": "registry/folio/blocks/logo-strip.tsx",
+      "type": "registry:component",
+      "target": "components/folio/logo-strip.tsx",
+      "content": "// Placeholder customer logos. Replace with real ones — never ship invented brands.\nconst marks = [\n  <path key=\"a\" d=\"M6 30 16 6h9L15 30Zm13 0L29 6h9L28 30Z\" />,\n  <circle key=\"b\" cx=\"20\" cy=\"18\" r=\"13\" />,\n  <path key=\"c\" d=\"M5 5h7a13 13 0 0 1 0 26H5Zm14 0h4a13 13 0 0 1 0 26h-4Z\" />,\n  <path key=\"d\" d=\"M5 5h12v12H5Zm15 0h12v12H20ZM5 20h12v12H5Zm15 0h12v12H20Z\" />,\n  <path key=\"e\" d=\"m20 4 13 7.5v15L20 34 7 26.5v-15Z\" />,\n  <path key=\"f\" d=\"M5 8h30v5H5Zm0 9h30v5H5Zm0 9h30v5H5Z\" />,\n]\n\nexport function LogoStrip({ label = \"Read by subscribers at\", names = Array(6).fill(\"Logoipsum\") }: { label?: string; names?: string[] }) {\n  return (\n    <section className=\"mx-auto max-w-[1360px] px-5 md:px-[25px] xl:px-gutter\">\n      <p className=\"text-[17px] leading-[1.2] text-ink-2 xl:text-[21px]\">{label}</p>\n      <ul className=\"mt-[25px] grid grid-cols-2 items-center gap-y-5 md:grid-cols-3 xl:grid-cols-6 xl:gap-y-0\">\n        {names.map((name, i) => (\n          <li\n            key={i}\n            className=\"flex h-[42px] items-center gap-[10px] text-[19px] font-semibold tracking-[-0.01em] text-ink-2 xl:gap-[12px] xl:border-l xl:border-divider xl:px-[30px] xl:text-[23px] xl:first:border-l-0 xl:first:pl-[8px]\"\n          >\n            <svg viewBox=\"0 0 40 36\" className=\"h-[32px] w-[36px] shrink-0 fill-current\" aria-hidden>\n              {marks[i % marks.length]}\n            </svg>\n            {name}\n          </li>\n        ))}\n      </ul>\n      <div className=\"mt-[21px] h-[7px] border-t-2 border-b border-rule\" />\n    </section>\n  )\n}\n"
+    },
+    {
+      "path": "registry/folio/blocks/shared.tsx",
+      "type": "registry:component",
+      "target": "components/folio/shared.tsx",
+      "content": "// Shared Folio layout pieces. Breakpoints: base = phone, md = tablet / narrow desktop\n// (design images drawn at ~853px), xl = desktop (design images drawn at 1280px).\nimport type { ReactNode } from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport function Container({ className, children }: { className?: string; children: ReactNode }) {\n  return <div className={cn(\"mx-auto w-full max-w-[1360px] px-5 md:px-[25px] xl:px-gutter\", className)}>{children}</div>\n}\n\n/** The broadsheet double rule that opens every section. */\nexport function DoubleRule({ className }: { className?: string }) {\n  return <div className={cn(\"folio-double-rule\", className)} aria-hidden />\n}\n\nexport function SectionHeader({\n  title,\n  subtitle,\n  align = \"left\",\n  className,\n}: {\n  title: string\n  subtitle?: string\n  align?: \"left\" | \"center\"\n  className?: string\n}) {\n  return (\n    <div className={cn(align === \"center\" && \"text-center\", className)}>\n      <h2 className=\"font-serif text-[40px] leading-[1.02] font-bold tracking-[-0.03em] text-ink md:text-[60px] md:leading-[0.95] xl:text-h2 xl:leading-[1.05]\">\n        {title}\n      </h2>\n      {subtitle && (\n        <p className={cn(\"mt-3 text-[18px] leading-[1.4] text-ink-2 md:text-[22px]\", align === \"center\" && \"mx-auto max-w-[720px]\")}>\n          {subtitle}\n        </p>\n      )}\n    </div>\n  )\n}\n\n/** Folio button rule: primary actions are always ink; press red is reserved for highlights and danger. */\nexport function buttonClass(variant: \"primary\" | \"secondary\" | \"danger\" = \"primary\", size: \"md\" | \"lg\" = \"md\") {\n  return cn(\n    \"inline-flex items-center justify-center font-semibold whitespace-nowrap transition-colors\",\n    size === \"lg\" ? \"h-[46px] px-7 text-[17px] md:h-[54px] md:text-[20px]\" : \"h-[42px] px-5 text-[16px]\",\n    variant === \"primary\" && \"bg-ink text-paper hover:bg-ink-2\",\n    variant === \"secondary\" && \"border border-divider bg-paper text-ink hover:border-ink\",\n    variant === \"danger\" && \"bg-press text-paper hover:bg-ink\",\n  )\n}\n"
+    }
+  ]
+}

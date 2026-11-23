@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:ui",
+  "title": "skeleton",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://dresscodeui.com/r/folio.json"
+  ],
+  "files": [
+    {
+      "path": "registry/folio/ui/skeleton.tsx",
+      "type": "registry:ui",
+      "content": "// Folio restyle of shadcn/ui's skeleton: a flat hairline-grey block with 2px corners that pulses while data loads.\n// Size it like the text it stands in for (a 13px table cell is about h-[12px]); never round it into pills.\nimport { cn } from \"@/lib/utils\"\n\nfunction Skeleton({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div data-slot=\"skeleton\" className={cn(\"animate-pulse rounded-[2px] bg-hairline motion-reduce:animate-none\", className)} {...props} />\n}\n\nexport { Skeleton }\n"
+    }
+  ]
+}
