@@ -1,7 +1,7 @@
 # Third-party notices
 
-The components in `registry/folio/ui` are restyled from [shadcn/ui](https://github.com/shadcn-ui/ui), used under the
-MIT License:
+The themes and templates are built for [shadcn/ui](https://github.com/shadcn-ui/ui) and use its components and
+variable names, which are under the MIT License:
 
 ```
 MIT License
@@ -27,7 +27,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-Newsreader and DM Sans are loaded from Google Fonts with next/font and are licensed under the SIL Open Font
-License 1.1. So are the families a tuned theme can pick: Fraunces, Source Serif 4, Inter, IBM Plex Sans and Geist,
-and the families the nine DressCode themes use: Geist, Geist Mono, Inter, Inter Tight, Fraunces, Instrument Sans,
-Instrument Serif, Manrope, Bricolage Grotesque, DM Sans, Plus Jakarta Sans, Barlow and Barlow Condensed.
+The fonts the themes load come from Google Fonts with next/font and are licensed under the SIL Open Font License
+1.1: Geist, Geist Mono, Inter, Inter Tight, Fraunces, Instrument Sans, Instrument Serif, Manrope, Bricolage
+Grotesque, DM Sans, Plus Jakarta Sans, Barlow and Barlow Condensed.
