@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "font-heading-instrument-serif",
+  "type": "registry:font",
+  "title": "Instrument Serif (heading)",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "font": {
+    "family": "'Instrument Serif', Georgia, serif",
+    "provider": "google",
+    "import": "Instrument_Serif",
+    "variable": "--font-heading",
+    "subsets": [
+      "latin"
+    ],
+    "weight": [
+      "400"
+    ],
+    "dependency": "@fontsource/instrument-serif"
+  }
+}

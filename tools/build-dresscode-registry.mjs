@@ -1,0 +1,457 @@
+#!/usr/bin/env node
+// Builds the DressCode shadcn registry from the sources, so `shadcn add` installs exactly what the demos
+// render. Runs before `next dev` and `next build` (package.json predev / prebuild), after build-docs.
+//
+//   public/r/dresscode/<theme-id>.json        a theme: both modes' colors, fonts, corners and the dc-* CSS
+//       npx shadcn@latest add https://dresscodeui.com/r/dresscode/cobalt.json
+//   public/r/dresscode/font-<role>-<family>.json  the next/font families a theme pulls in (registry:font)
+//   public/r/dresscode/orbit-landing.json     the Orbit landing template's blocks and an /orbit page
+//       npx shadcn@latest add https://dresscodeui.com/r/dresscode/orbit-landing.json
+//   public/r/dresscode/orbit-app.json         the Orbit app dashboard: its screens and /orbit-app/<screen> pages
+//       npx shadcn@latest add https://dresscodeui.com/r/dresscode/orbit-app.json
+//   public/r/dresscode/registry.json          the index
+//
+// Every theme must pass tools/dresscode-contrast.mjs in both modes, and every item must parse with
+// shadcn's own registry-item schema, or nothing is written.
+//
+// Usage: node tools/build-dresscode-registry.mjs [--base https://dresscodeui.com]
+//   --base sets the host written into URLs (http://localhost:3700 to test installs locally).
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { dirname, join, resolve } from "node:path"
+import { fileURLToPath } from "node:url"
+
+import { registryItemSchema, registrySchema } from "shadcn/schema"
+
+import { FONT_SPECS, MODELESS_VARS, THEMES, themeVars } from "../registry/dresscode/themes.ts"
+import { check } from "./dresscode-contrast.mjs"
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
+const argv = process.argv.slice(2)
+const BASE = (argv.includes("--base") ? argv[argv.indexOf("--base") + 1] : process.env.REGISTRY_BASE) || "https://dresscodeui.com"
+const OUT = "public/r/dresscode"
+const AUTHOR = "DressCode UI <https://dresscodeui.com>"
+const SCHEMA = "https://ui.shadcn.com/schema/registry-item.json"
+const url = (name) => `${BASE}/r/dresscode/${name}.json`
+
+const read = (p) => readFileSync(join(root, p), "utf8").replace(/\r\n/g, "\n")
+// Only touch files whose content changed (the dev server reloads on every write), and remember what
+// this run produced so stale files can be removed at the end.
+const written = new Set()
+const outputs = []
+const write = (p, s) => {
+  const full = join(root, p)
+  written.add(full)
+  if (existsSync(full) && readFileSync(full, "utf8") === s) return
+  mkdirSync(dirname(full), { recursive: true })
+  writeFileSync(full, s)
+}
+const json = (o) => JSON.stringify(o, null, 2) + "\n"
+const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").replace(/_/g, "-").toLowerCase()
+
+// ---------------------------------------------------------------------------------------------
+// Contrast: refuse to publish a theme with a failing pair (template-side warnings are printed only).
+
+const rows = check()
+const failing = rows.filter((r) => r.ratio < r.min && !r.template)
+if (failing.length) {
+  for (const r of failing) console.error(`[dresscode] contrast ${r.theme} ${r.mode} ${r.what}: ${r.ratio.toFixed(2)} < ${r.min} (${r.fg} on ${r.bg})`)
+  throw new Error(`${failing.length} theme color pairs fail contrast; run node tools/dresscode-contrast.mjs`)
+}
+
+// ---------------------------------------------------------------------------------------------
+// dresscode.css as the registry's `css` object: { "@layer components": { ".dc-card": { ... } }, ... }.
+
+function cssToObject(src) {
+  src = src.replace(/\/\*[\s\S]*?\*\//g, "")
+  let i = 0
+  const block = () => {
+    const out = {}
+    while (i < src.length) {
+      while (/\s/.test(src[i] ?? "")) i++
+      if (i >= src.length) break
+      if (src[i] === "}") {
+        i++
+        break
+      }
+      let j = i
+      while (j < src.length && !";{}".includes(src[j])) j++
+      const head = src.slice(i, j).replace(/\s+/g, " ").trim()
+      if (src[j] === "{") {
+        i = j + 1
+        const inner = block()
+        out[head] = { ...(out[head] ?? {}), ...inner }
+      } else {
+        const colon = head.indexOf(":")
+        if (colon > 0) out[head.slice(0, colon).trim()] = head.slice(colon + 1).trim()
+        i = src[j] === ";" ? j + 1 : j
+      }
+    }
+    return out
+  }
+  return block()
+}
+const dcCss = cssToObject(read("registry/dresscode/dresscode.css"))
+if (!dcCss["@layer components"]?.[".dc-card"]) throw new Error("dresscode.css: could not read .dc-card")
+
+// ---------------------------------------------------------------------------------------------
+// Fonts: one registry:font item per family and role. The CLI adds the next/font call to
+// app/layout.tsx and the variable to <html>; the theme's variables read --font-sans, --font-heading
+// and --font-mono.
+
+const fontItems = new Map()
+function fontItem(key, variable) {
+  const spec = FONT_SPECS[key]
+  const role = variable.replace("--font-", "")
+  const name = `font-${role}-${kebab(key)}`
+  if (fontItems.has(name)) return name
+  const weight = spec.options?.weight
+  const isStatic = Boolean(weight)
+  const slug = kebab(spec.name.replace(/ /g, "-"))
+  fontItems.set(name, {
+    $schema: SCHEMA,
+    name,
+    type: "registry:font",
+    title: `${spec.name} (${role})`,
+    author: AUTHOR,
+    font: {
+      family: `'${spec.name}${isStatic ? "" : " Variable"}', ${spec.fallback}`,
+      provider: "google",
+      import: spec.loader,
+      variable,
+      subsets: ["latin"],
+      ...(weight ? { weight: Array.isArray(weight) ? weight : [weight] } : {}),
+      // The number face is not the page's code font: it goes on .dc-num only, not on <html>.
+      ...(variable === "--font-mono" ? { selector: ".dc-num" } : {}),
+      // Outside Next.js the CLI installs the family from Fontsource instead.
+      dependency: `${isStatic ? "@fontsource" : "@fontsource-variable"}/${slug}`,
+    },
+  })
+  return name
+}
+
+/** next/font options the CLI's font items cannot carry (italic styles, optical-size axes), as a docs note. */
+function extraFontOptions(roles) {
+  const notes = [...roles.keys()].flatMap((k) => {
+    const { weight, ...rest } = FONT_SPECS[k].options ?? {}
+    if (!Object.keys(rest).length) return []
+    const opts = Object.entries(rest).map(([o, v]) => `${o}: ${JSON.stringify(v)}`).join(", ")
+    return [`add ${opts} to the ${FONT_SPECS[k].loader}(...) call`]
+  })
+  return notes.length ? ` For an exact match with the demo (true italics, optical sizes), ${notes.join(" and ")} in app/layout.tsx.` : ""
+}
+
+/** Which CSS variable carries each of a theme's families: text, then headings, then figures. */
+function fontRoles(t) {
+  const roles = new Map([[t.fonts.body, "--font-sans"]])
+  if (!roles.has(t.fonts.heading)) roles.set(t.fonts.heading, "--font-heading")
+  if (t.fonts.num && !roles.has(t.fonts.num)) roles.set(t.fonts.num, "--font-mono")
+  return roles
+}
+
+// ---------------------------------------------------------------------------------------------
+// Themes.
+
+const TS = (o, indent = "  ") =>
+  "{\n" + Object.entries(o).map(([k, v]) => `${indent}  ${k}: ${typeof v === "object" ? TS(v, indent + "  ") : JSON.stringify(v)},`).join("\n") + `\n${indent}}`
+
+function themeItem(t) {
+  const roles = fontRoles(t)
+  const font = (k) => `var(${roles.get(k)}), ${FONT_SPECS[k].fallback}`
+  const strip = (vars) => Object.fromEntries(Object.entries(vars).map(([k, v]) => [k.replace(/^--/, ""), v]))
+  // --font-sans is the next/font variable itself (set on <html>), so it never goes in :root.
+  const light = strip(Object.fromEntries(Object.entries(themeVars(t, font, "light")).filter(([k]) => k !== "--font-sans")))
+  const dark = strip(Object.fromEntries(Object.entries(themeVars(t, font, "dark")).filter(([k]) => !MODELESS_VARS.includes(k))))
+  const fontDeps = [...roles].map(([key, variable]) => fontItem(key, variable))
+  const fontNames = [...roles].map(([key, variable]) => `${FONT_SPECS[key].name} (${variable})`).join(", ")
+  const other = t.mode === "dark" ? "light" : "dark"
+  const themeFile = [
+    `// The DressCode theme this project wears: ${t.name}. Written by`,
+    `//   npx shadcn@latest add ${url(t.id)}`,
+    "// Its colors (light in :root, dark in .dark), fonts and corners are CSS variables in your globals.css.",
+    "// These are the layout choices that come with it; the Orbit templates read them.",
+    `// ${t.name} was designed ${t.mode} (mode). ${t.mode === "dark" ? 'Put className="dark" on <html> for it, or use next-themes with defaultTheme="dark".' : 'Put className="dark" on <html> (or use next-themes) for its dark version.'}`,
+    `export const dresscode = ${TS({
+      theme: t.id,
+      name: t.name,
+      mode: t.mode,
+      layout: { bandAt: t.bandAt, mark: t.mark, glow: Boolean(t.glow), brutal: Boolean(t.brutal) },
+    }, "")} as const`,
+    "",
+  ].join("\n")
+
+  return {
+    $schema: SCHEMA,
+    name: t.id,
+    type: "registry:theme",
+    title: `DressCode ${t.name}`,
+    description: `${t.blurb} Light and dark, ${roles.size === 1 ? FONT_SPECS[t.fonts.body].name : [...roles.keys()].map((k) => FONT_SPECS[k].name).join(" and ")}, ${t.radius.control}px controls and ${t.radius.card}px cards.`,
+    author: AUTHOR,
+    registryDependencies: fontDeps.map(url),
+    cssVars: {
+      theme: {
+        ...Object.fromEntries([...roles.values()].map((v) => [v.slice(2), `var(${v})`])),
+        "radius-card": "var(--dc-radius-card)",
+      },
+      light,
+      dark,
+    },
+    css: {
+      "@layer base": { ":root": { "color-scheme": "light" }, ".dark": { "color-scheme": "dark" } },
+      ...dcCss,
+    },
+    files: [{ path: "registry/dresscode/lib/dresscode-theme.ts", type: "registry:lib", content: themeFile }],
+    docs: [
+      `DressCode ${t.name} is installed: both modes' colors in globals.css (:root is light, .dark is dark), the dc-* classes, and lib/dresscode-theme.ts.`,
+      `Fonts: ${fontNames}. The CLI added the next/font calls to app/layout.tsx and their variables to <html>; outside Next.js it installs them from Fontsource.${extraFontOptions(roles)}`,
+      `${t.name} was designed ${t.mode}: ${t.mode === "dark" ? 'put className="dark" on <html> for it' : `add className="dark" on <html> for its ${other} version`} (or use next-themes).`,
+      `Templates: npx shadcn@latest add ${url("orbit-landing")} (landing page) and ${url("orbit-app")} (app dashboard)`,
+    ].join("\n"),
+  }
+}
+
+// ---------------------------------------------------------------------------------------------
+// Blocks: a template's files from registry/dresscode/blocks/<dir>, the shadcn/ui components and npm
+// packages they import, and a page that renders it.
+
+const ORBIT_APP_LAYOUT = [
+  "// The Orbit app in your DressCode theme (lib/dresscode-theme.ts, written by the theme install).",
+  "// Pop's ink outlines come from the dc-brutal class; light or dark follows <html class=\"dark\">.",
+  'import type { Metadata } from "next"',
+  'import type { ReactNode } from "react"',
+  "",
+  'import { dresscode } from "@/lib/dresscode-theme"',
+  "",
+  'export const metadata: Metadata = { title: "Orbit" }',
+  "",
+  "export default function OrbitAppLayout({ children }: { children: ReactNode }) {",
+  '  return <div className={dresscode.layout.brutal ? "dc-theme dc-brutal min-h-svh" : "dc-theme min-h-svh"}>{children}</div>',
+  "}",
+  "",
+].join("\n")
+
+const ORBIT_APP_INDEX = [
+  'import { redirect } from "next/navigation"',
+  "",
+  "export default function OrbitAppIndex() {",
+  '  redirect("/orbit-app/overview")',
+  "}",
+  "",
+].join("\n")
+
+const ORBIT_APP_SCREEN = [
+  "// Every screen of the Orbit app: /orbit-app/overview, /orbit-app/invoices, /orbit-app/settings and so on.",
+  "// Swap the sample data in components/orbit-app/data.ts for your own as you wire it up.",
+  'import type { Metadata } from "next"',
+  'import { notFound } from "next/navigation"',
+  'import type { ReactNode } from "react"',
+  "",
+  'import { SignInScreen, SignUpScreen } from "@/components/orbit-app/auth"',
+  'import { ClientDetailScreen, ClientsScreen } from "@/components/orbit-app/clients"',
+  'import { InvoiceDetailScreen } from "@/components/orbit-app/invoice-detail"',
+  'import { InvoiceEditorScreen } from "@/components/orbit-app/invoice-editor"',
+  'import { InvoicesScreen } from "@/components/orbit-app/invoices"',
+  'import { OverviewScreen } from "@/components/orbit-app/overview"',
+  'import { PaymentsScreen } from "@/components/orbit-app/payments"',
+  'import { ReportsScreen } from "@/components/orbit-app/reports"',
+  'import { SCREENS, SCREEN_IDS, isScreen, type Screen } from "@/components/orbit-app/screens"',
+  'import { SettingsScreen } from "@/components/orbit-app/settings"',
+  'import { AppShell, StandaloneShell } from "@/components/orbit-app/shell"',
+  'import { NotFoundScreen, RecurringScreen } from "@/components/orbit-app/states"',
+  'import { dresscode } from "@/lib/dresscode-theme"',
+  "",
+  "export const dynamicParams = false",
+  "",
+  "export function generateStaticParams() {",
+  "  return SCREEN_IDS.map((screen) => ({ screen }))",
+  "}",
+  "",
+  "type Params = { params: Promise<{ screen: string }> }",
+  "",
+  "export async function generateMetadata({ params }: Params): Promise<Metadata> {",
+  "  const { screen } = await params",
+  '  return { title: isScreen(screen) ? `${SCREENS[screen].label} · Orbit` : "Orbit" }',
+  "}",
+  "",
+  "const VIEWS: Record<Screen, () => ReactNode> = {",
+  "  overview: () => <OverviewScreen />,",
+  "  invoices: () => <InvoicesScreen />,",
+  "  invoice: () => <InvoiceDetailScreen />,",
+  '  "invoice-new": () => <InvoiceEditorScreen />,',
+  "  recurring: () => <RecurringScreen />,",
+  "  clients: () => <ClientsScreen />,",
+  "  client: () => <ClientDetailScreen />,",
+  "  payments: () => <PaymentsScreen />,",
+  "  reports: () => <ReportsScreen />,",
+  "  settings: () => <SettingsScreen />,",
+  '  "sign-in": () => <SignInScreen />,',
+  '  "sign-up": () => <SignUpScreen />,',
+  '  "not-found": () => <NotFoundScreen />,',
+  "}",
+  "",
+  "export default async function OrbitAppScreen({ params }: Params) {",
+  "  const { screen } = await params",
+  "  if (!isScreen(screen)) notFound()",
+  '  const base = "/orbit-app"',
+  "  const view = VIEWS[screen]()",
+  "  return SCREENS[screen].inShell ? (",
+  "    <AppShell base={base} screen={screen} defaultMode={dresscode.mode}>",
+  "      {view}",
+  "    </AppShell>",
+  "  ) : (",
+  "    <StandaloneShell base={base} screen={screen} defaultMode={dresscode.mode}>",
+  "      {view}",
+  "    </StandaloneShell>",
+  "  )",
+  "}",
+  "",
+].join("\n")
+
+const BLOCKS = [
+  {
+    name: "orbit-landing",
+    title: "Orbit landing page",
+    description: "A SaaS landing page in 18 modules (navbar, hero with product shot, logos, features, use cases, bento, steps, stats, testimonials, integrations, pricing, plan comparison, FAQ, blog, closing call, footer) for a made-up invoicing product. Wears whichever DressCode theme is installed.",
+    dir: "registry/dresscode/blocks/orbit",
+    target: "components/orbit",
+    exclude: ["theme-switcher.tsx"], // the demo's floating picker, not part of the template
+    page: {
+      target: "app/orbit/page.tsx",
+      content: [
+        "// The Orbit landing page in your DressCode theme (lib/dresscode-theme.ts, written by the theme install).",
+        'import type { Metadata } from "next"',
+        "",
+        'import { OrbitLanding } from "@/components/orbit/landing"',
+        'import { dresscode } from "@/lib/dresscode-theme"',
+        "",
+        'export const metadata: Metadata = { title: "Orbit" }',
+        "",
+        "export default function OrbitPage() {",
+        "  return <OrbitLanding {...dresscode.layout} />",
+        "}",
+        "",
+      ].join("\n"),
+    },
+  },
+  {
+    name: "orbit-app",
+    title: "Orbit app dashboard",
+    description:
+      "The app behind the Orbit landing page: a shell with sidebar, command palette, notifications and user menu, and 13 screens (overview, invoices, invoice detail and editor, recurring, clients and client detail, payments, reports, settings, sign in, sign up, not found). Wears whichever DressCode theme is installed, in light and dark.",
+    dir: "registry/dresscode/blocks/orbit-app",
+    target: "components/orbit-app",
+    exts: [".tsx", ".ts"],
+    exclude: ["theme-switcher.tsx"], // the demo's floating picker, not part of the template
+    // The two landing-page pieces the app reuses (its logo, status pills and product chart).
+    extra: [
+      { path: "registry/dresscode/blocks/orbit/shared.tsx", target: "components/orbit/shared.tsx" },
+      { path: "registry/dresscode/blocks/orbit/product-preview.tsx", target: "components/orbit/product-preview.tsx" },
+    ],
+    // The demo takes the mode type from the theme data; in a project it is just light or dark.
+    rewrite: [['import type { Mode } from "@/registry/dresscode/themes"\n\nexport type { Mode }', 'export type Mode = "light" | "dark"']],
+    pages: [
+      { name: "layout.tsx", target: "app/orbit-app/layout.tsx", content: ORBIT_APP_LAYOUT },
+      { name: "page.tsx", target: "app/orbit-app/page.tsx", content: ORBIT_APP_INDEX },
+      { name: "screen-page.tsx", target: "app/orbit-app/[screen]/page.tsx", content: ORBIT_APP_SCREEN },
+    ],
+    docs: [
+      "Orbit app dashboard: the screens are in components/orbit-app/ and the routes are /orbit-app/<screen> (start at /orbit-app/overview).",
+      "Sample data lives in components/orbit-app/data.ts; replace it with your own as you wire the screens to your backend.",
+    ],
+  },
+]
+
+const IGNORED_PACKAGES = new Set(["react", "react-dom", "next"])
+function importsOf(src) {
+  const npm = new Set()
+  const ui = new Set()
+  for (const [, spec] of src.matchAll(/from "([^"]+)"/g)) {
+    let m
+    if ((m = /^@\/components\/ui\/([\w-]+)$/.exec(spec))) ui.add(m[1])
+    else if (!spec.startsWith(".") && !spec.startsWith("@/")) {
+      const parts = spec.split("/")
+      const name = spec.startsWith("@") ? parts.slice(0, 2).join("/") : parts[0]
+      if (!IGNORED_PACKAGES.has(name)) npm.add(name)
+    }
+    if (spec.startsWith("@/") && !/^@\/(components\/ui|lib\/utils)\b/.test(spec) && !spec.startsWith("@/registry/dresscode/blocks/"))
+      throw new Error(`block import ${spec} would not resolve in a user's project`)
+  }
+  return { npm, ui }
+}
+
+// Imports between template folders become imports between the installed folders.
+const toProject = (src) => BLOCKS.reduce((s, x) => s.replaceAll(`@/${x.dir}/`, `@/${x.target}/`), src)
+
+function blockItem(b) {
+  const exts = b.exts ?? [".tsx"]
+  const files = readdirSync(join(root, b.dir))
+    .filter((f) => exts.some((e) => f.endsWith(e)) && !b.exclude.includes(f))
+    .sort()
+  const sources = [...files.map((f) => ({ path: `${b.dir}/${f}`, target: `${b.target}/${f}` })), ...(b.extra ?? [])]
+  const npm = new Set()
+  const ui = new Set()
+  const out = sources.map(({ path, target }) => {
+    let src = read(path)
+    for (const [from, to] of b.rewrite ?? []) if (src.includes(from)) src = src.replace(from, to)
+    const deps = importsOf(src)
+    deps.npm.forEach((x) => npm.add(x))
+    deps.ui.forEach((x) => ui.add(x))
+    return { path, type: "registry:component", target, content: toProject(src) }
+  })
+  const pages = b.pages
+    ? b.pages.map((p) => ({ path: `${b.dir}/pages/${p.name}`, type: "registry:page", target: p.target, content: p.content }))
+    : [{ path: `${b.dir}/page.tsx`, type: "registry:page", target: b.page.target, content: b.page.content }]
+  return {
+    $schema: SCHEMA,
+    name: b.name,
+    type: "registry:block",
+    title: b.title,
+    description: b.description,
+    author: AUTHOR,
+    dependencies: [...npm].sort(),
+    registryDependencies: [...ui].sort(),
+    files: [...out, ...pages],
+    docs: [
+      ...(b.docs ?? [`${b.title}: the blocks are in ${b.target}/ and the page is at /${b.page.target.replace(/^app\//, "").replace(/\/page\.tsx$/, "")}.`]),
+      `It reads lib/dresscode-theme.ts, so install a DressCode theme first (any of the nine), e.g. npx shadcn@latest add ${url("mono")}`,
+      "Built on shadcn/ui with Base UI (components.json style base-*): the menus and sheet use Base UI's render prop.",
+    ].join("\n"),
+  }
+}
+
+// ---------------------------------------------------------------------------------------------
+
+const index = []
+for (const t of THEMES) {
+  const item = themeItem(t)
+  outputs.push(item)
+  index.push({ name: item.name, type: item.type, title: item.title, description: item.description })
+}
+for (const b of BLOCKS) {
+  const item = blockItem(b)
+  outputs.push(item)
+  index.push({ name: item.name, type: item.type, title: item.title, description: item.description })
+}
+for (const item of fontItems.values()) {
+  outputs.push(item)
+  index.push({ name: item.name, type: item.type, title: item.title, font: item.font })
+}
+
+// shadcn's own schema, so a CLI upgrade that tightens it shows up here first.
+for (const item of outputs) {
+  const r = registryItemSchema.safeParse(item)
+  if (!r.success) throw new Error(`${item.name}: ${r.error.issues.map((x) => `${x.path.join(".")}: ${x.message}`).join("; ")}`)
+}
+const registry = { $schema: "https://ui.shadcn.com/schema/registry.json", name: "dresscode", homepage: "https://dresscodeui.com", items: index }
+const reg = registrySchema.safeParse(registry)
+if (!reg.success) throw new Error(`registry.json: ${reg.error.issues.map((x) => `${x.path.join(".")}: ${x.message}`).join("; ")}`)
+
+for (const item of outputs) write(`${OUT}/${item.name}.json`, json(item))
+write(`${OUT}/registry.json`, json(registry))
+
+const dir = join(root, OUT)
+for (const f of readdirSync(dir)) if (!written.has(join(dir, f))) rmSync(join(dir, f))
+
+const warns = rows.filter((r) => r.ratio < r.min && r.template).length
+console.log(
+  `[dresscode] ${THEMES.length} themes (light + dark, ${rows.length} contrast pairs ok${warns ? `, ${warns} template warnings` : ""}), ${BLOCKS.length} blocks, ${fontItems.size} fonts -> ${OUT} (base ${BASE})`,
+)

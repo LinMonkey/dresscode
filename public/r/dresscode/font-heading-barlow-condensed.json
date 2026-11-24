@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "font-heading-barlow-condensed",
+  "type": "registry:font",
+  "title": "Barlow Condensed (heading)",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "font": {
+    "family": "'Barlow Condensed', ui-sans-serif, system-ui, sans-serif",
+    "provider": "google",
+    "import": "Barlow_Condensed",
+    "variable": "--font-heading",
+    "subsets": [
+      "latin"
+    ],
+    "weight": [
+      "500",
+      "600",
+      "700"
+    ],
+    "dependency": "@fontsource/barlow-condensed"
+  }
+}

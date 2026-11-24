@@ -1,0 +1,271 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "midnight",
+  "type": "registry:theme",
+  "title": "DressCode Midnight",
+  "description": "Midnight black and silver, violet only where you act. Light and dark, Geist and Geist Mono, 8px controls and 12px cards.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "registryDependencies": [
+    "https://dresscodeui.com/r/dresscode/font-sans-geist.json",
+    "https://dresscodeui.com/r/dresscode/font-mono-geist-mono.json"
+  ],
+  "cssVars": {
+    "theme": {
+      "font-sans": "var(--font-sans)",
+      "font-mono": "var(--font-mono)",
+      "radius-card": "var(--dc-radius-card)"
+    },
+    "light": {
+      "background": "#F7F7FA",
+      "foreground": "#0E0E16",
+      "card": "#FFFFFF",
+      "card-foreground": "#0E0E16",
+      "popover": "#FFFFFF",
+      "popover-foreground": "#0E0E16",
+      "primary": "#715CB2",
+      "primary-foreground": "#FFFFFF",
+      "secondary": "#E7E7EA",
+      "secondary-foreground": "#0E0E16",
+      "muted": "#E9EAED",
+      "muted-foreground": "#5D5D6E",
+      "accent": "#E7E7EA",
+      "accent-foreground": "#0E0E16",
+      "destructive": "#D0344F",
+      "border": "#E3E3EA",
+      "input": "#8D8E96",
+      "ring": "#5A46A6",
+      "chart-1": "#5A46A6",
+      "chart-2": "#BBB8DF",
+      "chart-3": "#1B1830",
+      "chart-4": "#5D5D6E",
+      "chart-5": "#ECE8FA",
+      "radius": "8px",
+      "sidebar": "#FFFFFF",
+      "sidebar-foreground": "#0E0E16",
+      "sidebar-primary": "#715CB2",
+      "sidebar-primary-foreground": "#FFFFFF",
+      "sidebar-accent": "#EEEEEF",
+      "sidebar-accent-foreground": "#0E0E16",
+      "sidebar-border": "#E3E3EA",
+      "sidebar-ring": "#5A46A6",
+      "dc-page": "#F7F7FA",
+      "dc-surface": "#FFFFFF",
+      "dc-ink": "#0E0E16",
+      "dc-muted": "#5D5D6E",
+      "dc-line": "#E3E3EA",
+      "dc-input": "#8D8E96",
+      "dc-primary": "#715CB2",
+      "dc-primary-fg": "#FFFFFF",
+      "dc-accent": "#5A46A6",
+      "dc-highlight": "#ECE8FA",
+      "dc-highlight-fg": "#4B3A9C",
+      "dc-danger": "#D0344F",
+      "dc-band": "#1B1830",
+      "dc-band-fg": "#EDEDF0",
+      "dc-band-muted": "#B9B9C2",
+      "dc-band-line": "#3B394F",
+      "dc-band-edge": "#676578",
+      "dc-band-primary": "#715CB2",
+      "dc-band-primary-fg": "#FFFFFF",
+      "dc-radius-card": "12px",
+      "dc-bw": "1px",
+      "dc-card-border": "#E3E3EA",
+      "dc-outline": "#0E0E16",
+      "dc-shadow": "0 1px 2px rgb(16 24 40 / 0.04), 0 10px 28px -14px rgb(16 24 40 / 0.12)",
+      "dc-font-heading": "var(--font-sans), ui-sans-serif, system-ui, sans-serif",
+      "dc-font-body": "var(--font-sans), ui-sans-serif, system-ui, sans-serif",
+      "dc-font-num": "var(--font-mono), ui-monospace, monospace",
+      "dc-heading-weight": "600",
+      "dc-heading-tracking": "-0.035em"
+    },
+    "dark": {
+      "background": "#0E0E16",
+      "foreground": "#EDEDF0",
+      "card": "#15151F",
+      "card-foreground": "#EDEDF0",
+      "popover": "#24242E",
+      "popover-foreground": "#EDEDF0",
+      "primary": "#715CB2",
+      "primary-foreground": "#FFFFFF",
+      "secondary": "#181821",
+      "secondary-foreground": "#EDEDF0",
+      "muted": "#17171F",
+      "muted-foreground": "#9696A8",
+      "accent": "#181821",
+      "accent-foreground": "#EDEDF0",
+      "destructive": "#F0607A",
+      "border": "#262634",
+      "input": "#63636F",
+      "ring": "#A897E6",
+      "chart-1": "#A897E6",
+      "chart-2": "#3E3956",
+      "chart-3": "#1B1830",
+      "chart-4": "#9696A8",
+      "chart-5": "#251F3D",
+      "sidebar": "#15151F",
+      "sidebar-foreground": "#EDEDF0",
+      "sidebar-primary": "#715CB2",
+      "sidebar-primary-foreground": "#FFFFFF",
+      "sidebar-accent": "#1F1F29",
+      "sidebar-accent-foreground": "#EDEDF0",
+      "sidebar-border": "#262634",
+      "sidebar-ring": "#A897E6",
+      "dc-page": "#0E0E16",
+      "dc-surface": "#15151F",
+      "dc-ink": "#EDEDF0",
+      "dc-muted": "#9696A8",
+      "dc-line": "#262634",
+      "dc-input": "#63636F",
+      "dc-primary": "#715CB2",
+      "dc-primary-fg": "#FFFFFF",
+      "dc-accent": "#A897E6",
+      "dc-highlight": "#251F3D",
+      "dc-highlight-fg": "#C9BEF2",
+      "dc-danger": "#F0607A",
+      "dc-band": "#1B1830",
+      "dc-band-fg": "#EDEDF0",
+      "dc-band-muted": "#B9B9C2",
+      "dc-band-line": "#3B394F",
+      "dc-band-edge": "#676578",
+      "dc-band-primary": "#715CB2",
+      "dc-band-primary-fg": "#FFFFFF",
+      "dc-card-border": "#262634",
+      "dc-outline": "#EDEDF0",
+      "dc-shadow": "inset 0 1px 0 rgb(255 255 255 / 0.04)"
+    }
+  },
+  "css": {
+    "@layer base": {
+      ":root": {
+        "color-scheme": "light"
+      },
+      ".dark": {
+        "color-scheme": "dark"
+      }
+    },
+    "@layer components": {
+      ".dc-theme": {
+        "background": "var(--background)",
+        "color": "var(--foreground)",
+        "font-family": "var(--dc-font-body)",
+        "-webkit-font-smoothing": "antialiased",
+        "text-rendering": "optimizeLegibility"
+      },
+      ".dc-h": {
+        "font-family": "var(--dc-font-heading)",
+        "font-weight": "var(--dc-heading-weight)",
+        "letter-spacing": "var(--dc-heading-tracking)",
+        "text-wrap": "balance"
+      },
+      ".dc-num": {
+        "font-family": "var(--dc-font-num)",
+        "font-variant-numeric": "tabular-nums"
+      },
+      ".dc-card": {
+        "--foreground": "var(--dc-ink)",
+        "--muted-foreground": "var(--dc-muted)",
+        "--primary": "var(--dc-primary)",
+        "--primary-foreground": "var(--dc-primary-fg)",
+        "--border": "var(--dc-line)",
+        "--input": "var(--dc-input)",
+        "--dc-outline": "var(--dc-ink)",
+        "background": "var(--card)",
+        "color": "var(--foreground)",
+        "border": "var(--dc-bw) solid var(--dc-card-border)",
+        "border-radius": "var(--dc-radius-card)",
+        "box-shadow": "var(--dc-shadow)"
+      },
+      ".dc-band": {
+        "--foreground": "var(--dc-band-fg)",
+        "--muted-foreground": "var(--dc-band-muted)",
+        "--primary": "var(--dc-band-primary)",
+        "--primary-foreground": "var(--dc-band-primary-fg)",
+        "--border": "var(--dc-band-line)",
+        "--input": "var(--dc-band-edge)",
+        "--dc-outline": "var(--dc-band-fg)",
+        "background": "var(--dc-band)",
+        "color": "var(--foreground)"
+      },
+      ".dc-mark-highlighter": {
+        "background": "linear-gradient(transparent 58%, var(--dc-highlight) 58% 92%, transparent 92%)",
+        "padding": "0 0.05em",
+        "margin": "0 -0.05em",
+        "box-decoration-break": "clone"
+      },
+      ".dark .dc-mark-highlighter": {
+        "background": "var(--dc-highlight)",
+        "color": "var(--dc-highlight-fg)",
+        "padding": "0 0.1em",
+        "margin": "0 0.02em",
+        "border-radius": "0.08em"
+      },
+      ".dc-mark-accent": {
+        "color": "var(--dc-accent)"
+      },
+      ".dc-mark-muted": {
+        "color": "var(--muted-foreground)"
+      },
+      ".dc-mark-italic": {
+        "font-style": "italic"
+      },
+      ".dc-pill": {
+        "display": "inline-flex",
+        "align-items": "center",
+        "gap": "0.25rem",
+        "height": "1.375rem",
+        "padding": "0 0.5rem",
+        "border-radius": "999px",
+        "font-size": "0.75rem",
+        "font-weight": "600",
+        "white-space": "nowrap"
+      },
+      ".dc-pill-hl": {
+        "background": "var(--dc-highlight)",
+        "color": "var(--dc-highlight-fg)"
+      },
+      ".dc-pill-danger": {
+        "background": "color-mix(in oklab, var(--dc-danger) 13%, var(--card))",
+        "color": "color-mix(in oklab, var(--dc-danger) 78%, var(--dc-ink))"
+      },
+      ".dc-pill-muted": {
+        "background": "var(--muted)",
+        "color": "var(--muted-foreground)"
+      },
+      ".dc-pill-line": {
+        "box-shadow": "inset 0 0 0 1px var(--border)",
+        "color": "var(--foreground)"
+      },
+      ".dc-icon": {
+        "display": "inline-grid",
+        "place-items": "center",
+        "width": "2.25rem",
+        "height": "2.25rem",
+        "border-radius": "calc(var(--radius) + 2px)",
+        "color": "var(--dc-accent)",
+        "background": "color-mix(in oklab, var(--dc-accent) 11%, transparent)"
+      }
+    },
+    ".dc-theme [data-slot=\"button\"].border-border": {
+      "border-color": "var(--input)"
+    },
+    ".dc-band [data-slot=\"button\"].border-border:not(:hover)": {
+      "background-color": "transparent"
+    },
+    ".dc-brutal [data-slot=\"button\"]:not(.dc-flat)": {
+      "border-color": "var(--dc-outline)",
+      "border-width": "1.5px",
+      "box-shadow": "2px 2px 0 var(--dc-outline)"
+    },
+    ".dc-brutal .dc-icon": {
+      "border": "1.5px solid var(--dc-outline)"
+    }
+  },
+  "files": [
+    {
+      "path": "registry/dresscode/lib/dresscode-theme.ts",
+      "type": "registry:lib",
+      "content": "// The DressCode theme this project wears: Midnight. Written by\n//   npx shadcn@latest add https://dresscodeui.com/r/dresscode/midnight.json\n// Its colors (light in :root, dark in .dark), fonts and corners are CSS variables in your globals.css.\n// These are the layout choices that come with it; the Orbit templates read them.\n// Midnight was designed dark (mode). Put className=\"dark\" on <html> for it, or use next-themes with defaultTheme=\"dark\".\nexport const dresscode = {\n  theme: \"midnight\",\n  name: \"Midnight\",\n  mode: \"dark\",\n  layout: {\n    bandAt: \"feature\",\n    mark: \"accent\",\n    glow: true,\n    brutal: false,\n  },\n} as const\n"
+    }
+  ],
+  "docs": "DressCode Midnight is installed: both modes' colors in globals.css (:root is light, .dark is dark), the dc-* classes, and lib/dresscode-theme.ts.\nFonts: Geist (--font-sans), Geist Mono (--font-mono). The CLI added the next/font calls to app/layout.tsx and their variables to <html>; outside Next.js it installs them from Fontsource.\nMidnight was designed dark: put className=\"dark\" on <html> for it (or use next-themes).\nTemplates: npx shadcn@latest add https://dresscodeui.com/r/dresscode/orbit-landing.json (landing page) and https://dresscodeui.com/r/dresscode/orbit-app.json (app dashboard)"
+}

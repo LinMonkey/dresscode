@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "font-heading-fraunces",
+  "type": "registry:font",
+  "title": "Fraunces (heading)",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "font": {
+    "family": "'Fraunces Variable', Georgia, serif",
+    "provider": "google",
+    "import": "Fraunces",
+    "variable": "--font-heading",
+    "subsets": [
+      "latin"
+    ],
+    "dependency": "@fontsource-variable/fraunces"
+  }
+}

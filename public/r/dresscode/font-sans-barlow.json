@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "font-sans-barlow",
+  "type": "registry:font",
+  "title": "Barlow (sans)",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "font": {
+    "family": "'Barlow', ui-sans-serif, system-ui, sans-serif",
+    "provider": "google",
+    "import": "Barlow",
+    "variable": "--font-sans",
+    "subsets": [
+      "latin"
+    ],
+    "weight": [
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "dependency": "@fontsource/barlow"
+  }
+}

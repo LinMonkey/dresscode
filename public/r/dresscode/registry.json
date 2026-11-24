@@ -1,0 +1,283 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "dresscode",
+  "homepage": "https://dresscodeui.com",
+  "items": [
+    {
+      "name": "mono",
+      "type": "registry:theme",
+      "title": "DressCode Mono",
+      "description": "No color at all. Type and the product carry the page. Light and dark, Geist and Geist Mono, 10px controls and 14px cards."
+    },
+    {
+      "name": "cobalt",
+      "type": "registry:theme",
+      "title": "DressCode Cobalt",
+      "description": "White and navy ink, cobalt for every action, a yellow highlighter. Light and dark, Inter and Inter Tight, 8px controls and 12px cards."
+    },
+    {
+      "name": "matcha",
+      "type": "registry:theme",
+      "title": "DressCode Matcha",
+      "description": "Parchment paper, book-black ink and one band of matcha green. Light and dark, Instrument Sans and Fraunces, 10px controls and 16px cards."
+    },
+    {
+      "name": "harbor",
+      "type": "registry:theme",
+      "title": "DressCode Harbor",
+      "description": "A deep indigo night where the tangerine button is the only warm thing. Light and dark, Manrope, 10px controls and 14px cards."
+    },
+    {
+      "name": "pop",
+      "type": "registry:theme",
+      "title": "DressCode Pop",
+      "description": "Ink outlines and hard shadows, pink buttons, a lemon highlighter. Light and dark, DM Sans and Bricolage Grotesque, 10px controls and 14px cards."
+    },
+    {
+      "name": "midnight",
+      "type": "registry:theme",
+      "title": "DressCode Midnight",
+      "description": "Midnight black and silver, violet only where you act. Light and dark, Geist and Geist Mono, 8px controls and 12px cards."
+    },
+    {
+      "name": "klein",
+      "type": "registry:theme",
+      "title": "DressCode Klein",
+      "description": "A gallery: warm apricot paper, Klein blue for actions and big numbers. Light and dark, DM Sans and Instrument Serif, 6px controls and 10px cards."
+    },
+    {
+      "name": "sorbet",
+      "type": "registry:theme",
+      "title": "DressCode Sorbet",
+      "description": "One big lilac hero with a sunset-orange button, then white. Light and dark, Plus Jakarta Sans, 12px controls and 18px cards."
+    },
+    {
+      "name": "hivis",
+      "type": "registry:theme",
+      "title": "DressCode Hi-Vis",
+      "description": "A sunflower-yellow hero, cream and carbon, orange-red for alerts. Light and dark, Barlow and Barlow Condensed, 4px controls and 8px cards."
+    },
+    {
+      "name": "orbit-landing",
+      "type": "registry:block",
+      "title": "Orbit landing page",
+      "description": "A SaaS landing page in 18 modules (navbar, hero with product shot, logos, features, use cases, bento, steps, stats, testimonials, integrations, pricing, plan comparison, FAQ, blog, closing call, footer) for a made-up invoicing product. Wears whichever DressCode theme is installed."
+    },
+    {
+      "name": "orbit-app",
+      "type": "registry:block",
+      "title": "Orbit app dashboard",
+      "description": "The app behind the Orbit landing page: a shell with sidebar, command palette, notifications and user menu, and 13 screens (overview, invoices, invoice detail and editor, recurring, clients and client detail, payments, reports, settings, sign in, sign up, not found). Wears whichever DressCode theme is installed, in light and dark."
+    },
+    {
+      "name": "font-sans-geist",
+      "type": "registry:font",
+      "title": "Geist (sans)",
+      "font": {
+        "family": "'Geist Variable', ui-sans-serif, system-ui, sans-serif",
+        "provider": "google",
+        "import": "Geist",
+        "variable": "--font-sans",
+        "subsets": [
+          "latin"
+        ],
+        "dependency": "@fontsource-variable/geist"
+      }
+    },
+    {
+      "name": "font-mono-geist-mono",
+      "type": "registry:font",
+      "title": "Geist Mono (mono)",
+      "font": {
+        "family": "'Geist Mono Variable', ui-monospace, monospace",
+        "provider": "google",
+        "import": "Geist_Mono",
+        "variable": "--font-mono",
+        "subsets": [
+          "latin"
+        ],
+        "selector": ".dc-num",
+        "dependency": "@fontsource-variable/geist-mono"
+      }
+    },
+    {
+      "name": "font-sans-inter",
+      "type": "registry:font",
+      "title": "Inter (sans)",
+      "font": {
+        "family": "'Inter Variable', ui-sans-serif, system-ui, sans-serif",
+        "provider": "google",
+        "import": "Inter",
+        "variable": "--font-sans",
+        "subsets": [
+          "latin"
+        ],
+        "dependency": "@fontsource-variable/inter"
+      }
+    },
+    {
+      "name": "font-heading-inter-tight",
+      "type": "registry:font",
+      "title": "Inter Tight (heading)",
+      "font": {
+        "family": "'Inter Tight Variable', ui-sans-serif, system-ui, sans-serif",
+        "provider": "google",
+        "import": "Inter_Tight",
+        "variable": "--font-heading",
+        "subsets": [
+          "latin"
+        ],
+        "dependency": "@fontsource-variable/inter-tight"
+      }
+    },
+    {
+      "name": "font-sans-instrument-sans",
+      "type": "registry:font",
+      "title": "Instrument Sans (sans)",
+      "font": {
+        "family": "'Instrument Sans Variable', ui-sans-serif, system-ui, sans-serif",
+        "provider": "google",
+        "import": "Instrument_Sans",
+        "variable": "--font-sans",
+        "subsets": [
+          "latin"
+        ],
+        "dependency": "@fontsource-variable/instrument-sans"
+      }
+    },
+    {
+      "name": "font-heading-fraunces",
+      "type": "registry:font",
+      "title": "Fraunces (heading)",
+      "font": {
+        "family": "'Fraunces Variable', Georgia, serif",
+        "provider": "google",
+        "import": "Fraunces",
+        "variable": "--font-heading",
+        "subsets": [
+          "latin"
+        ],
+        "dependency": "@fontsource-variable/fraunces"
+      }
+    },
+    {
+      "name": "font-sans-manrope",
+      "type": "registry:font",
+      "title": "Manrope (sans)",
+      "font": {
+        "family": "'Manrope Variable', ui-sans-serif, system-ui, sans-serif",
+        "provider": "google",
+        "import": "Manrope",
+        "variable": "--font-sans",
+        "subsets": [
+          "latin"
+        ],
+        "dependency": "@fontsource-variable/manrope"
+      }
+    },
+    {
+      "name": "font-sans-dm-sans",
+      "type": "registry:font",
+      "title": "DM Sans (sans)",
+      "font": {
+        "family": "'DM Sans Variable', ui-sans-serif, system-ui, sans-serif",
+        "provider": "google",
+        "import": "DM_Sans",
+        "variable": "--font-sans",
+        "subsets": [
+          "latin"
+        ],
+        "dependency": "@fontsource-variable/dm-sans"
+      }
+    },
+    {
+      "name": "font-heading-bricolage",
+      "type": "registry:font",
+      "title": "Bricolage Grotesque (heading)",
+      "font": {
+        "family": "'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif",
+        "provider": "google",
+        "import": "Bricolage_Grotesque",
+        "variable": "--font-heading",
+        "subsets": [
+          "latin"
+        ],
+        "dependency": "@fontsource-variable/bricolage-grotesque"
+      }
+    },
+    {
+      "name": "font-heading-instrument-serif",
+      "type": "registry:font",
+      "title": "Instrument Serif (heading)",
+      "font": {
+        "family": "'Instrument Serif', Georgia, serif",
+        "provider": "google",
+        "import": "Instrument_Serif",
+        "variable": "--font-heading",
+        "subsets": [
+          "latin"
+        ],
+        "weight": [
+          "400"
+        ],
+        "dependency": "@fontsource/instrument-serif"
+      }
+    },
+    {
+      "name": "font-sans-jakarta",
+      "type": "registry:font",
+      "title": "Plus Jakarta Sans (sans)",
+      "font": {
+        "family": "'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif",
+        "provider": "google",
+        "import": "Plus_Jakarta_Sans",
+        "variable": "--font-sans",
+        "subsets": [
+          "latin"
+        ],
+        "dependency": "@fontsource-variable/plus-jakarta-sans"
+      }
+    },
+    {
+      "name": "font-sans-barlow",
+      "type": "registry:font",
+      "title": "Barlow (sans)",
+      "font": {
+        "family": "'Barlow', ui-sans-serif, system-ui, sans-serif",
+        "provider": "google",
+        "import": "Barlow",
+        "variable": "--font-sans",
+        "subsets": [
+          "latin"
+        ],
+        "weight": [
+          "400",
+          "500",
+          "600",
+          "700"
+        ],
+        "dependency": "@fontsource/barlow"
+      }
+    },
+    {
+      "name": "font-heading-barlow-condensed",
+      "type": "registry:font",
+      "title": "Barlow Condensed (heading)",
+      "font": {
+        "family": "'Barlow Condensed', ui-sans-serif, system-ui, sans-serif",
+        "provider": "google",
+        "import": "Barlow_Condensed",
+        "variable": "--font-heading",
+        "subsets": [
+          "latin"
+        ],
+        "weight": [
+          "500",
+          "600",
+          "700"
+        ],
+        "dependency": "@fontsource/barlow-condensed"
+      }
+    }
+  ]
+}

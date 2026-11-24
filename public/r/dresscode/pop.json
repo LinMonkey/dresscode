@@ -1,0 +1,271 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pop",
+  "type": "registry:theme",
+  "title": "DressCode Pop",
+  "description": "Ink outlines and hard shadows, pink buttons, a lemon highlighter. Light and dark, DM Sans and Bricolage Grotesque, 10px controls and 14px cards.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "registryDependencies": [
+    "https://dresscodeui.com/r/dresscode/font-sans-dm-sans.json",
+    "https://dresscodeui.com/r/dresscode/font-heading-bricolage.json"
+  ],
+  "cssVars": {
+    "theme": {
+      "font-sans": "var(--font-sans)",
+      "font-heading": "var(--font-heading)",
+      "radius-card": "var(--dc-radius-card)"
+    },
+    "light": {
+      "background": "#F6F5EF",
+      "foreground": "#0F0F0F",
+      "card": "#FFFFFF",
+      "card-foreground": "#0F0F0F",
+      "popover": "#FFFFFF",
+      "popover-foreground": "#0F0F0F",
+      "primary": "#FD6ECB",
+      "primary-foreground": "#0F0F0F",
+      "secondary": "#E6E5DF",
+      "secondary-foreground": "#0F0F0F",
+      "muted": "#E9E8E2",
+      "muted-foreground": "#55554C",
+      "accent": "#E6E5DF",
+      "accent-foreground": "#0F0F0F",
+      "destructive": "#C9261A",
+      "border": "#E4E3DA",
+      "input": "#8C8C87",
+      "ring": "#2F7A12",
+      "chart-1": "#2F7A12",
+      "chart-2": "#B1CAA5",
+      "chart-3": "#FD6ECB",
+      "chart-4": "#55554C",
+      "chart-5": "#FEEE01",
+      "radius": "10px",
+      "sidebar": "#FFFFFF",
+      "sidebar-foreground": "#0F0F0F",
+      "sidebar-primary": "#FD6ECB",
+      "sidebar-primary-foreground": "#0F0F0F",
+      "sidebar-accent": "#EEEEEE",
+      "sidebar-accent-foreground": "#0F0F0F",
+      "sidebar-border": "#E4E3DA",
+      "sidebar-ring": "#2F7A12",
+      "dc-page": "#F6F5EF",
+      "dc-surface": "#FFFFFF",
+      "dc-ink": "#0F0F0F",
+      "dc-muted": "#55554C",
+      "dc-line": "#E4E3DA",
+      "dc-input": "#8C8C87",
+      "dc-primary": "#FD6ECB",
+      "dc-primary-fg": "#0F0F0F",
+      "dc-accent": "#2F7A12",
+      "dc-highlight": "#FEEE01",
+      "dc-highlight-fg": "#0F0F0F",
+      "dc-danger": "#C9261A",
+      "dc-band": "#FD6ECB",
+      "dc-band-fg": "#0F0F0F",
+      "dc-band-muted": "#3C2332",
+      "dc-band-line": "#CD5CA5",
+      "dc-band-edge": "#7C3D65",
+      "dc-band-primary": "#0F0F0F",
+      "dc-band-primary-fg": "#FFFFFF",
+      "dc-radius-card": "14px",
+      "dc-bw": "1.5px",
+      "dc-card-border": "#0F0F0F",
+      "dc-outline": "#0F0F0F",
+      "dc-shadow": "3px 3px 0 #0F0F0F",
+      "dc-font-heading": "var(--font-heading), ui-sans-serif, system-ui, sans-serif",
+      "dc-font-body": "var(--font-sans), ui-sans-serif, system-ui, sans-serif",
+      "dc-font-num": "var(--font-sans), ui-sans-serif, system-ui, sans-serif",
+      "dc-heading-weight": "800",
+      "dc-heading-tracking": "-0.04em"
+    },
+    "dark": {
+      "background": "#11110F",
+      "foreground": "#F6F5EF",
+      "card": "#1A1A17",
+      "card-foreground": "#F6F5EF",
+      "popover": "#292926",
+      "popover-foreground": "#F6F5EF",
+      "primary": "#FD6ECB",
+      "primary-foreground": "#0F0F0F",
+      "secondary": "#1C1C19",
+      "secondary-foreground": "#F6F5EF",
+      "muted": "#1A1A18",
+      "muted-foreground": "#B3B2A7",
+      "accent": "#1C1C19",
+      "accent-foreground": "#F6F5EF",
+      "destructive": "#FF6E5E",
+      "border": "#33332D",
+      "input": "#686861",
+      "ring": "#6FD13F",
+      "chart-1": "#6FD13F",
+      "chart-2": "#314D24",
+      "chart-3": "#FD6ECB",
+      "chart-4": "#B3B2A7",
+      "chart-5": "#FEEE01",
+      "sidebar": "#1A1A17",
+      "sidebar-foreground": "#F6F5EF",
+      "sidebar-primary": "#FD6ECB",
+      "sidebar-primary-foreground": "#0F0F0F",
+      "sidebar-accent": "#252521",
+      "sidebar-accent-foreground": "#F6F5EF",
+      "sidebar-border": "#33332D",
+      "sidebar-ring": "#6FD13F",
+      "dc-page": "#11110F",
+      "dc-surface": "#1A1A17",
+      "dc-ink": "#F6F5EF",
+      "dc-muted": "#B3B2A7",
+      "dc-line": "#33332D",
+      "dc-input": "#686861",
+      "dc-primary": "#FD6ECB",
+      "dc-primary-fg": "#0F0F0F",
+      "dc-accent": "#6FD13F",
+      "dc-highlight": "#FEEE01",
+      "dc-highlight-fg": "#0F0F0F",
+      "dc-danger": "#FF6E5E",
+      "dc-band": "#FD6ECB",
+      "dc-band-fg": "#0F0F0F",
+      "dc-band-muted": "#3C2332",
+      "dc-band-line": "#CD5CA5",
+      "dc-band-edge": "#7C3D65",
+      "dc-band-primary": "#0F0F0F",
+      "dc-band-primary-fg": "#FFFFFF",
+      "dc-card-border": "#F6F5EF",
+      "dc-outline": "#F6F5EF",
+      "dc-shadow": "3px 3px 0 #F6F5EF"
+    }
+  },
+  "css": {
+    "@layer base": {
+      ":root": {
+        "color-scheme": "light"
+      },
+      ".dark": {
+        "color-scheme": "dark"
+      }
+    },
+    "@layer components": {
+      ".dc-theme": {
+        "background": "var(--background)",
+        "color": "var(--foreground)",
+        "font-family": "var(--dc-font-body)",
+        "-webkit-font-smoothing": "antialiased",
+        "text-rendering": "optimizeLegibility"
+      },
+      ".dc-h": {
+        "font-family": "var(--dc-font-heading)",
+        "font-weight": "var(--dc-heading-weight)",
+        "letter-spacing": "var(--dc-heading-tracking)",
+        "text-wrap": "balance"
+      },
+      ".dc-num": {
+        "font-family": "var(--dc-font-num)",
+        "font-variant-numeric": "tabular-nums"
+      },
+      ".dc-card": {
+        "--foreground": "var(--dc-ink)",
+        "--muted-foreground": "var(--dc-muted)",
+        "--primary": "var(--dc-primary)",
+        "--primary-foreground": "var(--dc-primary-fg)",
+        "--border": "var(--dc-line)",
+        "--input": "var(--dc-input)",
+        "--dc-outline": "var(--dc-ink)",
+        "background": "var(--card)",
+        "color": "var(--foreground)",
+        "border": "var(--dc-bw) solid var(--dc-card-border)",
+        "border-radius": "var(--dc-radius-card)",
+        "box-shadow": "var(--dc-shadow)"
+      },
+      ".dc-band": {
+        "--foreground": "var(--dc-band-fg)",
+        "--muted-foreground": "var(--dc-band-muted)",
+        "--primary": "var(--dc-band-primary)",
+        "--primary-foreground": "var(--dc-band-primary-fg)",
+        "--border": "var(--dc-band-line)",
+        "--input": "var(--dc-band-edge)",
+        "--dc-outline": "var(--dc-band-fg)",
+        "background": "var(--dc-band)",
+        "color": "var(--foreground)"
+      },
+      ".dc-mark-highlighter": {
+        "background": "linear-gradient(transparent 58%, var(--dc-highlight) 58% 92%, transparent 92%)",
+        "padding": "0 0.05em",
+        "margin": "0 -0.05em",
+        "box-decoration-break": "clone"
+      },
+      ".dark .dc-mark-highlighter": {
+        "background": "var(--dc-highlight)",
+        "color": "var(--dc-highlight-fg)",
+        "padding": "0 0.1em",
+        "margin": "0 0.02em",
+        "border-radius": "0.08em"
+      },
+      ".dc-mark-accent": {
+        "color": "var(--dc-accent)"
+      },
+      ".dc-mark-muted": {
+        "color": "var(--muted-foreground)"
+      },
+      ".dc-mark-italic": {
+        "font-style": "italic"
+      },
+      ".dc-pill": {
+        "display": "inline-flex",
+        "align-items": "center",
+        "gap": "0.25rem",
+        "height": "1.375rem",
+        "padding": "0 0.5rem",
+        "border-radius": "999px",
+        "font-size": "0.75rem",
+        "font-weight": "600",
+        "white-space": "nowrap"
+      },
+      ".dc-pill-hl": {
+        "background": "var(--dc-highlight)",
+        "color": "var(--dc-highlight-fg)"
+      },
+      ".dc-pill-danger": {
+        "background": "color-mix(in oklab, var(--dc-danger) 13%, var(--card))",
+        "color": "color-mix(in oklab, var(--dc-danger) 78%, var(--dc-ink))"
+      },
+      ".dc-pill-muted": {
+        "background": "var(--muted)",
+        "color": "var(--muted-foreground)"
+      },
+      ".dc-pill-line": {
+        "box-shadow": "inset 0 0 0 1px var(--border)",
+        "color": "var(--foreground)"
+      },
+      ".dc-icon": {
+        "display": "inline-grid",
+        "place-items": "center",
+        "width": "2.25rem",
+        "height": "2.25rem",
+        "border-radius": "calc(var(--radius) + 2px)",
+        "color": "var(--dc-accent)",
+        "background": "color-mix(in oklab, var(--dc-accent) 11%, transparent)"
+      }
+    },
+    ".dc-theme [data-slot=\"button\"].border-border": {
+      "border-color": "var(--input)"
+    },
+    ".dc-band [data-slot=\"button\"].border-border:not(:hover)": {
+      "background-color": "transparent"
+    },
+    ".dc-brutal [data-slot=\"button\"]:not(.dc-flat)": {
+      "border-color": "var(--dc-outline)",
+      "border-width": "1.5px",
+      "box-shadow": "2px 2px 0 var(--dc-outline)"
+    },
+    ".dc-brutal .dc-icon": {
+      "border": "1.5px solid var(--dc-outline)"
+    }
+  },
+  "files": [
+    {
+      "path": "registry/dresscode/lib/dresscode-theme.ts",
+      "type": "registry:lib",
+      "content": "// The DressCode theme this project wears: Pop. Written by\n//   npx shadcn@latest add https://dresscodeui.com/r/dresscode/pop.json\n// Its colors (light in :root, dark in .dark), fonts and corners are CSS variables in your globals.css.\n// These are the layout choices that come with it; the Orbit templates read them.\n// Pop was designed light (mode). Put className=\"dark\" on <html> (or use next-themes) for its dark version.\nexport const dresscode = {\n  theme: \"pop\",\n  name: \"Pop\",\n  mode: \"light\",\n  layout: {\n    bandAt: \"feature\",\n    mark: \"highlighter\",\n    glow: false,\n    brutal: true,\n  },\n} as const\n"
+    }
+  ],
+  "docs": "DressCode Pop is installed: both modes' colors in globals.css (:root is light, .dark is dark), the dc-* classes, and lib/dresscode-theme.ts.\nFonts: DM Sans (--font-sans), Bricolage Grotesque (--font-heading). The CLI added the next/font calls to app/layout.tsx and their variables to <html>; outside Next.js it installs them from Fontsource. For an exact match with the demo (true italics, optical sizes), add axes: [\"opsz\"] to the Bricolage_Grotesque(...) call in app/layout.tsx.\nPop was designed light: add className=\"dark\" on <html> for its dark version (or use next-themes).\nTemplates: npx shadcn@latest add https://dresscodeui.com/r/dresscode/orbit-landing.json (landing page) and https://dresscodeui.com/r/dresscode/orbit-app.json (app dashboard)"
+}

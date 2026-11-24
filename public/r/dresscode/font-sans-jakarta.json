@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "font-sans-jakarta",
+  "type": "registry:font",
+  "title": "Plus Jakarta Sans (sans)",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "font": {
+    "family": "'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif",
+    "provider": "google",
+    "import": "Plus_Jakarta_Sans",
+    "variable": "--font-sans",
+    "subsets": [
+      "latin"
+    ],
+    "dependency": "@fontsource-variable/plus-jakarta-sans"
+  }
+}

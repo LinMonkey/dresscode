@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "font-heading-inter-tight",
+  "type": "registry:font",
+  "title": "Inter Tight (heading)",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "font": {
+    "family": "'Inter Tight Variable', ui-sans-serif, system-ui, sans-serif",
+    "provider": "google",
+    "import": "Inter_Tight",
+    "variable": "--font-heading",
+    "subsets": [
+      "latin"
+    ],
+    "dependency": "@fontsource-variable/inter-tight"
+  }
+}

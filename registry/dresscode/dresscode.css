@@ -1,0 +1,132 @@
+/*
+ * DressCode themes: the few classes the Orbit template needs beyond stock shadcn/ui.
+ * A theme sets the --dc-* variables (registry/dresscode/themes.ts), in :root for light and in .dark
+ * for dark; these classes read them. In @layer components so a Tailwind utility on the same element
+ * still wins.
+ */
+@layer components {
+  .dc-theme {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--dc-font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Headings in the theme's display face. */
+  .dc-h {
+    font-family: var(--dc-font-heading);
+    font-weight: var(--dc-heading-weight);
+    letter-spacing: var(--dc-heading-tracking);
+    text-wrap: balance;
+  }
+
+  /* Figures: the theme's number face (a mono where it has one), tabular. */
+  .dc-num {
+    font-family: var(--dc-font-num);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* A card: surface fill, hairline (ink outline in Pop), the theme's soft (or hard) shadow.
+     It restores the page's text and button colors, so a card inside the band reads normally. */
+  .dc-card {
+    --foreground: var(--dc-ink);
+    --muted-foreground: var(--dc-muted);
+    --primary: var(--dc-primary);
+    --primary-foreground: var(--dc-primary-fg);
+    --border: var(--dc-line);
+    --input: var(--dc-input);
+    --dc-outline: var(--dc-ink);
+    background: var(--card);
+    color: var(--foreground);
+    border: var(--dc-bw) solid var(--dc-card-border);
+    border-radius: var(--dc-radius-card);
+    box-shadow: var(--dc-shadow);
+  }
+
+  /* The one colored band of the page. Text and the primary button switch to the band's pair. */
+  .dc-band {
+    --foreground: var(--dc-band-fg);
+    --muted-foreground: var(--dc-band-muted);
+    --primary: var(--dc-band-primary);
+    --primary-foreground: var(--dc-band-primary-fg);
+    --border: var(--dc-band-line);
+    --input: var(--dc-band-edge);
+    --dc-outline: var(--dc-band-fg);
+    background: var(--dc-band);
+    color: var(--foreground);
+  }
+
+  /* Headline marks. */
+  .dc-mark-highlighter {
+    background: linear-gradient(transparent 58%, var(--dc-highlight) 58% 92%, transparent 92%);
+    padding: 0 0.05em;
+    margin: 0 -0.05em;
+    box-decoration-break: clone;
+  }
+  /* On a dark page a half-height stripe would sit under light letters, so the highlighter becomes a
+     solid marker box with the highlight's own ink. */
+  .dark .dc-mark-highlighter {
+    background: var(--dc-highlight);
+    color: var(--dc-highlight-fg);
+    padding: 0 0.1em;
+    margin: 0 0.02em;
+    border-radius: 0.08em;
+  }
+  .dc-mark-accent { color: var(--dc-accent); }
+  .dc-mark-muted { color: var(--muted-foreground); }
+  .dc-mark-italic { font-style: italic; }
+
+  /* Small status pills. */
+  .dc-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    height: 1.375rem;
+    padding: 0 0.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .dc-pill-hl { background: var(--dc-highlight); color: var(--dc-highlight-fg); }
+  .dc-pill-danger {
+    background: color-mix(in oklab, var(--dc-danger) 13%, var(--card));
+    color: color-mix(in oklab, var(--dc-danger) 78%, var(--dc-ink));
+  }
+  .dc-pill-muted { background: var(--muted); color: var(--muted-foreground); }
+  .dc-pill-line { box-shadow: inset 0 0 0 1px var(--border); color: var(--foreground); }
+
+  /* An icon in a soft accent square. */
+  .dc-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: calc(var(--radius) + 2px);
+    color: var(--dc-accent);
+    background: color-mix(in oklab, var(--dc-accent) 11%, transparent);
+  }
+}
+
+/* Outline buttons: the 3:1 control edge (--input, which the band and cards set to their own) instead
+   of the hairline stock shadcn/ui gives them. */
+.dc-theme [data-slot="button"].border-border {
+  border-color: var(--input);
+}
+/* On the band an outline button stays see-through in dark mode too (stock shadcn/ui fills outline
+   buttons with --input at 30% there, which on the band reads as a muddy second fill). */
+.dc-band [data-slot="button"].border-border:not(:hover) {
+  background-color: transparent;
+}
+
+/* Pop: every button that has a fill or an outline wears the ink outline and a small hard shadow, in
+   the band's ink on the band. */
+.dc-brutal [data-slot="button"]:not(.dc-flat) {
+  border-color: var(--dc-outline);
+  border-width: 1.5px;
+  box-shadow: 2px 2px 0 var(--dc-outline);
+}
+.dc-brutal .dc-icon {
+  border: 1.5px solid var(--dc-outline);
+}

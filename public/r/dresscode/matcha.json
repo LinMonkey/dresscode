@@ -1,0 +1,271 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "matcha",
+  "type": "registry:theme",
+  "title": "DressCode Matcha",
+  "description": "Parchment paper, book-black ink and one band of matcha green. Light and dark, Instrument Sans and Fraunces, 10px controls and 16px cards.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "registryDependencies": [
+    "https://dresscodeui.com/r/dresscode/font-sans-instrument-sans.json",
+    "https://dresscodeui.com/r/dresscode/font-heading-fraunces.json"
+  ],
+  "cssVars": {
+    "theme": {
+      "font-sans": "var(--font-sans)",
+      "font-heading": "var(--font-heading)",
+      "radius-card": "var(--dc-radius-card)"
+    },
+    "light": {
+      "background": "#F5F1E6",
+      "foreground": "#141414",
+      "card": "#FBF9F3",
+      "card-foreground": "#141414",
+      "popover": "#FBF9F3",
+      "popover-foreground": "#141414",
+      "primary": "#141414",
+      "primary-foreground": "#F5F1E6",
+      "secondary": "#E5E2D8",
+      "secondary-foreground": "#141414",
+      "muted": "#E8E4DA",
+      "muted-foreground": "#5E5848",
+      "accent": "#E5E2D8",
+      "accent-foreground": "#141414",
+      "destructive": "#B3362B",
+      "border": "#E3DCC8",
+      "input": "#8E8A7F",
+      "ring": "#497213",
+      "chart-1": "#497213",
+      "chart-2": "#B6C49F",
+      "chart-3": "#A4CE46",
+      "chart-4": "#5E5848",
+      "chart-5": "#A4CE46",
+      "radius": "10px",
+      "sidebar": "#FBF9F3",
+      "sidebar-foreground": "#141414",
+      "sidebar-primary": "#141414",
+      "sidebar-primary-foreground": "#F5F1E6",
+      "sidebar-accent": "#EBE9E4",
+      "sidebar-accent-foreground": "#141414",
+      "sidebar-border": "#E3DCC8",
+      "sidebar-ring": "#497213",
+      "dc-page": "#F5F1E6",
+      "dc-surface": "#FBF9F3",
+      "dc-ink": "#141414",
+      "dc-muted": "#5E5848",
+      "dc-line": "#E3DCC8",
+      "dc-input": "#8E8A7F",
+      "dc-primary": "#141414",
+      "dc-primary-fg": "#F5F1E6",
+      "dc-accent": "#497213",
+      "dc-highlight": "#A4CE46",
+      "dc-highlight-fg": "#141414",
+      "dc-danger": "#B3362B",
+      "dc-band": "#A4CE46",
+      "dc-band-fg": "#141414",
+      "dc-band-muted": "#303722",
+      "dc-band-line": "#87A840",
+      "dc-band-edge": "#5B6F33",
+      "dc-band-primary": "#141414",
+      "dc-band-primary-fg": "#F5F1E6",
+      "dc-radius-card": "16px",
+      "dc-bw": "1px",
+      "dc-card-border": "#E3DCC8",
+      "dc-outline": "#141414",
+      "dc-shadow": "0 1px 2px rgb(16 24 40 / 0.04), 0 10px 28px -14px rgb(16 24 40 / 0.12)",
+      "dc-font-heading": "var(--font-heading), Georgia, serif",
+      "dc-font-body": "var(--font-sans), ui-sans-serif, system-ui, sans-serif",
+      "dc-font-num": "var(--font-sans), ui-sans-serif, system-ui, sans-serif",
+      "dc-heading-weight": "560",
+      "dc-heading-tracking": "-0.02em"
+    },
+    "dark": {
+      "background": "#13130F",
+      "foreground": "#EFEADB",
+      "card": "#1B1B16",
+      "card-foreground": "#EFEADB",
+      "popover": "#2A2A25",
+      "popover-foreground": "#EFEADB",
+      "primary": "#EFEADB",
+      "primary-foreground": "#141414",
+      "secondary": "#1D1D19",
+      "secondary-foreground": "#EFEADB",
+      "muted": "#1C1B17",
+      "muted-foreground": "#A8A291",
+      "accent": "#1D1D19",
+      "accent-foreground": "#EFEADB",
+      "destructive": "#F0705F",
+      "border": "#2C2B23",
+      "input": "#6A685D",
+      "ring": "#A4CE46",
+      "chart-1": "#A4CE46",
+      "chart-2": "#404D25",
+      "chart-3": "#A4CE46",
+      "chart-4": "#A8A291",
+      "chart-5": "#A4CE46",
+      "sidebar": "#1B1B16",
+      "sidebar-foreground": "#EFEADB",
+      "sidebar-primary": "#EFEADB",
+      "sidebar-primary-foreground": "#141414",
+      "sidebar-accent": "#252520",
+      "sidebar-accent-foreground": "#EFEADB",
+      "sidebar-border": "#2C2B23",
+      "sidebar-ring": "#A4CE46",
+      "dc-page": "#13130F",
+      "dc-surface": "#1B1B16",
+      "dc-ink": "#EFEADB",
+      "dc-muted": "#A8A291",
+      "dc-line": "#2C2B23",
+      "dc-input": "#6A685D",
+      "dc-primary": "#EFEADB",
+      "dc-primary-fg": "#141414",
+      "dc-accent": "#A4CE46",
+      "dc-highlight": "#A4CE46",
+      "dc-highlight-fg": "#141414",
+      "dc-danger": "#F0705F",
+      "dc-band": "#A4CE46",
+      "dc-band-fg": "#141414",
+      "dc-band-muted": "#303722",
+      "dc-band-line": "#87A840",
+      "dc-band-edge": "#5B6F33",
+      "dc-band-primary": "#141414",
+      "dc-band-primary-fg": "#F5F1E6",
+      "dc-card-border": "#2C2B23",
+      "dc-outline": "#EFEADB",
+      "dc-shadow": "inset 0 1px 0 rgb(255 255 255 / 0.04)"
+    }
+  },
+  "css": {
+    "@layer base": {
+      ":root": {
+        "color-scheme": "light"
+      },
+      ".dark": {
+        "color-scheme": "dark"
+      }
+    },
+    "@layer components": {
+      ".dc-theme": {
+        "background": "var(--background)",
+        "color": "var(--foreground)",
+        "font-family": "var(--dc-font-body)",
+        "-webkit-font-smoothing": "antialiased",
+        "text-rendering": "optimizeLegibility"
+      },
+      ".dc-h": {
+        "font-family": "var(--dc-font-heading)",
+        "font-weight": "var(--dc-heading-weight)",
+        "letter-spacing": "var(--dc-heading-tracking)",
+        "text-wrap": "balance"
+      },
+      ".dc-num": {
+        "font-family": "var(--dc-font-num)",
+        "font-variant-numeric": "tabular-nums"
+      },
+      ".dc-card": {
+        "--foreground": "var(--dc-ink)",
+        "--muted-foreground": "var(--dc-muted)",
+        "--primary": "var(--dc-primary)",
+        "--primary-foreground": "var(--dc-primary-fg)",
+        "--border": "var(--dc-line)",
+        "--input": "var(--dc-input)",
+        "--dc-outline": "var(--dc-ink)",
+        "background": "var(--card)",
+        "color": "var(--foreground)",
+        "border": "var(--dc-bw) solid var(--dc-card-border)",
+        "border-radius": "var(--dc-radius-card)",
+        "box-shadow": "var(--dc-shadow)"
+      },
+      ".dc-band": {
+        "--foreground": "var(--dc-band-fg)",
+        "--muted-foreground": "var(--dc-band-muted)",
+        "--primary": "var(--dc-band-primary)",
+        "--primary-foreground": "var(--dc-band-primary-fg)",
+        "--border": "var(--dc-band-line)",
+        "--input": "var(--dc-band-edge)",
+        "--dc-outline": "var(--dc-band-fg)",
+        "background": "var(--dc-band)",
+        "color": "var(--foreground)"
+      },
+      ".dc-mark-highlighter": {
+        "background": "linear-gradient(transparent 58%, var(--dc-highlight) 58% 92%, transparent 92%)",
+        "padding": "0 0.05em",
+        "margin": "0 -0.05em",
+        "box-decoration-break": "clone"
+      },
+      ".dark .dc-mark-highlighter": {
+        "background": "var(--dc-highlight)",
+        "color": "var(--dc-highlight-fg)",
+        "padding": "0 0.1em",
+        "margin": "0 0.02em",
+        "border-radius": "0.08em"
+      },
+      ".dc-mark-accent": {
+        "color": "var(--dc-accent)"
+      },
+      ".dc-mark-muted": {
+        "color": "var(--muted-foreground)"
+      },
+      ".dc-mark-italic": {
+        "font-style": "italic"
+      },
+      ".dc-pill": {
+        "display": "inline-flex",
+        "align-items": "center",
+        "gap": "0.25rem",
+        "height": "1.375rem",
+        "padding": "0 0.5rem",
+        "border-radius": "999px",
+        "font-size": "0.75rem",
+        "font-weight": "600",
+        "white-space": "nowrap"
+      },
+      ".dc-pill-hl": {
+        "background": "var(--dc-highlight)",
+        "color": "var(--dc-highlight-fg)"
+      },
+      ".dc-pill-danger": {
+        "background": "color-mix(in oklab, var(--dc-danger) 13%, var(--card))",
+        "color": "color-mix(in oklab, var(--dc-danger) 78%, var(--dc-ink))"
+      },
+      ".dc-pill-muted": {
+        "background": "var(--muted)",
+        "color": "var(--muted-foreground)"
+      },
+      ".dc-pill-line": {
+        "box-shadow": "inset 0 0 0 1px var(--border)",
+        "color": "var(--foreground)"
+      },
+      ".dc-icon": {
+        "display": "inline-grid",
+        "place-items": "center",
+        "width": "2.25rem",
+        "height": "2.25rem",
+        "border-radius": "calc(var(--radius) + 2px)",
+        "color": "var(--dc-accent)",
+        "background": "color-mix(in oklab, var(--dc-accent) 11%, transparent)"
+      }
+    },
+    ".dc-theme [data-slot=\"button\"].border-border": {
+      "border-color": "var(--input)"
+    },
+    ".dc-band [data-slot=\"button\"].border-border:not(:hover)": {
+      "background-color": "transparent"
+    },
+    ".dc-brutal [data-slot=\"button\"]:not(.dc-flat)": {
+      "border-color": "var(--dc-outline)",
+      "border-width": "1.5px",
+      "box-shadow": "2px 2px 0 var(--dc-outline)"
+    },
+    ".dc-brutal .dc-icon": {
+      "border": "1.5px solid var(--dc-outline)"
+    }
+  },
+  "files": [
+    {
+      "path": "registry/dresscode/lib/dresscode-theme.ts",
+      "type": "registry:lib",
+      "content": "// The DressCode theme this project wears: Matcha. Written by\n//   npx shadcn@latest add https://dresscodeui.com/r/dresscode/matcha.json\n// Its colors (light in :root, dark in .dark), fonts and corners are CSS variables in your globals.css.\n// These are the layout choices that come with it; the Orbit templates read them.\n// Matcha was designed light (mode). Put className=\"dark\" on <html> (or use next-themes) for its dark version.\nexport const dresscode = {\n  theme: \"matcha\",\n  name: \"Matcha\",\n  mode: \"light\",\n  layout: {\n    bandAt: \"feature\",\n    mark: \"none\",\n    glow: false,\n    brutal: false,\n  },\n} as const\n"
+    }
+  ],
+  "docs": "DressCode Matcha is installed: both modes' colors in globals.css (:root is light, .dark is dark), the dc-* classes, and lib/dresscode-theme.ts.\nFonts: Instrument Sans (--font-sans), Fraunces (--font-heading). The CLI added the next/font calls to app/layout.tsx and their variables to <html>; outside Next.js it installs them from Fontsource. For an exact match with the demo (true italics, optical sizes), add style: [\"normal\",\"italic\"], axes: [\"opsz\"] to the Fraunces(...) call in app/layout.tsx.\nMatcha was designed light: add className=\"dark\" on <html> for its dark version (or use next-themes).\nTemplates: npx shadcn@latest add https://dresscodeui.com/r/dresscode/orbit-landing.json (landing page) and https://dresscodeui.com/r/dresscode/orbit-app.json (app dashboard)"
+}
