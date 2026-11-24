@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats-row",
+  "type": "registry:block",
+  "title": "Stats: Row of figures",
+  "description": "Four results in a hairline grid, each a big figure in the accent color with one line on what it means.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "categories": [
+    "stats"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/dresscode/sections/stats/row.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/stats-row.tsx",
+      "content": "// Stats, row: four results in a hairline grid, each a big figure in the accent color and one line on\n// what it means. It sits well under a hero or a logo cloud; the heading is there for screen readers.\n// From the Orbit landing template. The numbers are sample content; replace them with your own.\nconst STATS = [\n  { value: \"11 days\", label: \"average time to get paid, down from 26\" },\n  { value: \"3×\", label: \"fewer invoices paid late after the first month\" },\n  { value: \"2 hours\", label: \"saved every week on chasing and bookkeeping\" },\n  { value: \"30\", label: \"currencies, with payouts in your own\" },\n]\n\nexport default function StatsRow() {\n  return (\n    <section aria-labelledby=\"stats-row-title\" className=\"py-16 sm:py-24\">\n      <div className=\"mx-auto w-full max-w-[1200px] px-5 sm:px-8\">\n        <h2 id=\"stats-row-title\" className=\"sr-only\">\n          Orbit in numbers\n        </h2>\n        <dl className=\"grid gap-px overflow-hidden rounded-[var(--dc-radius-card)] border border-border bg-border sm:grid-cols-2 lg:grid-cols-4\">\n          {STATS.map((s) => (\n            <div key={s.value} className=\"flex flex-col-reverse justify-end bg-background p-7\">\n              <dt className=\"mt-3 text-[15px] leading-snug text-muted-foreground\">{s.label}</dt>\n              <dd className=\"dc-h dc-num text-[44px] leading-none text-[color:var(--dc-accent)]\">{s.value}</dd>\n            </div>\n          ))}\n        </dl>\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "docs": "The block is in components/dresscode/stats-row.tsx; render it in any page.\nIt wears your DressCode theme (its colors, fonts and corners, and the dc-* classes the theme adds). Pick one at https://dresscodeui.com/themes, e.g. npx shadcn@latest add https://dresscodeui.com/r/dresscode/mono.json"
+}

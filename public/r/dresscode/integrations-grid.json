@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "integrations-grid",
+  "type": "registry:block",
+  "title": "Integrations: Grid beside the pitch",
+  "description": "The pitch on the left and eight integration tiles on the right, each a kind of tool with an icon and one line on what it does.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "categories": [
+    "integrations"
+  ],
+  "dependencies": [
+    "lucide-react@^1.73.0"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/sections/integrations/grid.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/integrations-grid.tsx",
+      "content": "// Integrations, grid beside the pitch: the heading and a line of copy on the left, eight integration\n// tiles on the right. The tiles are kinds of tool (card payments, accounting, team chat) with an icon,\n// not real brands; put your partners' names and logos in their place. From the Orbit landing template.\nimport { ArrowRight, Calculator, CalendarDays, CreditCard, Landmark, Mail, MessageSquare, Sheet, Webhook } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\n\nconst INTEGRATIONS = [\n  { icon: CreditCard, name: \"Card payments\", body: \"Cards and digital wallets\" },\n  { icon: Landmark, name: \"Bank transfer\", body: \"Local transfers in 30 currencies\" },\n  { icon: Calculator, name: \"Accounting\", body: \"Sync invoices and payments\" },\n  { icon: Sheet, name: \"Spreadsheets\", body: \"Export or live-sync to a sheet\" },\n  { icon: Mail, name: \"Email\", body: \"Send from your own address\" },\n  { icon: MessageSquare, name: \"Team chat\", body: \"A ping when an invoice is paid\" },\n  { icon: CalendarDays, name: \"Calendar\", body: \"Due dates on your calendar\" },\n  { icon: Webhook, name: \"Webhooks and API\", body: \"Build anything on top of Orbit\" },\n]\n\nexport default function IntegrationsGrid() {\n  return (\n    <section aria-labelledby=\"integrations-grid-title\" className=\"py-16 sm:py-24\">\n      <div className=\"mx-auto grid w-full max-w-[1200px] gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_1.5fr] lg:items-center\">\n        <div className=\"max-w-[560px]\">\n          <p className=\"text-sm font-semibold text-[color:var(--dc-accent)]\">Integrations</p>\n          <h2 id=\"integrations-grid-title\" className=\"dc-h mt-3 text-[32px] leading-[1.1] sm:text-[42px]\">\n            Works with the tools you already pay for\n          </h2>\n          <p className=\"mt-4 text-[17px] leading-relaxed text-muted-foreground\">\n            Connect payments, accounting and your inbox in a couple of clicks. Everything else talks to Orbit through webhooks and a tidy API.\n          </p>\n          <Button variant=\"link\" className=\"dc-flat mt-5 h-auto px-0 text-[15px] font-semibold text-foreground\" nativeButton={false} render={<a href=\"#integrations\" />}>\n            See every integration <ArrowRight className=\"size-4\" aria-hidden=\"true\" />\n          </Button>\n        </div>\n        <ul className=\"grid grid-cols-2 gap-3 sm:grid-cols-4\">\n          {INTEGRATIONS.map(({ icon: Icon, name, body }) => (\n            <li key={name} className=\"dc-card p-4\">\n              <span className=\"dc-icon size-9\">\n                <Icon className=\"size-[18px]\" aria-hidden=\"true\" />\n              </span>\n              <p className=\"mt-3 text-[15px] font-semibold\">{name}</p>\n              <p className=\"mt-0.5 text-[13px] leading-snug text-muted-foreground\">{body}</p>\n            </li>\n          ))}\n        </ul>\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "docs": "The block is in components/dresscode/integrations-grid.tsx; render it in any page.\nIt wears your DressCode theme (its colors, fonts and corners, and the dc-* classes the theme adds). Pick one at https://dresscodeui.com/themes, e.g. npx shadcn@latest add https://dresscodeui.com/r/dresscode/mono.json"
+}

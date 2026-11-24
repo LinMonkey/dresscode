@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hero-aurora",
+  "type": "registry:block",
+  "title": "Hero: Aurora background",
+  "description": "Slow, soft color drifting behind a large headline, made from the theme's own colors. It stands still for people who turn motion off.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "categories": [
+    "hero"
+  ],
+  "dependencies": [
+    "lucide-react@^1.73.0"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/sections/hero/aurora.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/hero-aurora.tsx",
+      "content": "// Hero, aurora background: three soft glows in the theme's accent, highlight and primary colors drift\n// slowly behind a large headline and fade into the page (in dark mode they add light, mix-blend-mode\n// screen, instead of muddying the page). The motion is CSS only and stops for people who ask for reduced\n// motion. The keyframes ship with the block (React hoists the <style> once).\nimport { ArrowRight, Sparkles } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\n\nconst KEYFRAMES = `\n@keyframes dc-aurora-a { from { transform: translate3d(-8%, -6%, 0) scale(1) } to { transform: translate3d(12%, 10%, 0) scale(1.2) } }\n@keyframes dc-aurora-b { from { transform: translate3d(10%, 4%, 0) scale(1.1) } to { transform: translate3d(-12%, -8%, 0) scale(0.9) } }\n@keyframes dc-aurora-c { from { transform: translate3d(0, 8%, 0) scale(0.9) } to { transform: translate3d(6%, -10%, 0) scale(1.15) } }\n`\n\nconst glow = (color: string, strength: number) => ({\n  background: `radial-gradient(closest-side, color-mix(in oklab, ${color} ${strength}%, transparent), transparent)`,\n})\n\nexport default function HeroAurora() {\n  return (\n    <section aria-labelledby=\"hero-aurora-title\" className=\"relative isolate overflow-hidden bg-background py-24 sm:py-32\">\n      <style href=\"dc-aurora\" precedence=\"default\">\n        {KEYFRAMES}\n      </style>\n      <div aria-hidden=\"true\" className=\"pointer-events-none absolute inset-x-0 top-0 -z-10 h-[620px] [mask-image:linear-gradient(to_bottom,black_45%,transparent)] dark:mix-blend-screen\">\n        <div\n          className=\"absolute top-[-180px] left-[2%] size-[560px] animate-[dc-aurora-a_19s_ease-in-out_infinite_alternate] rounded-full blur-2xl motion-reduce:animate-none\"\n          style={glow(\"var(--dc-accent)\", 55)}\n        />\n        <div\n          className=\"absolute top-[-120px] right-[0%] size-[520px] animate-[dc-aurora-b_23s_ease-in-out_infinite_alternate] rounded-full blur-2xl motion-reduce:animate-none\"\n          style={glow(\"var(--dc-highlight)\", 70)}\n        />\n        <div\n          className=\"absolute top-[40px] left-[30%] size-[480px] animate-[dc-aurora-c_17s_ease-in-out_infinite_alternate] rounded-full blur-3xl motion-reduce:animate-none\"\n          style={glow(\"var(--primary)\", 35)}\n        />\n      </div>\n\n      <div className=\"mx-auto flex w-full max-w-[1200px] flex-col items-center px-5 text-center sm:px-8\">\n        <a\n          href=\"#whats-new\"\n          className=\"inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-[13px] font-medium backdrop-blur outline-none transition-colors hover:border-input focus-visible:ring-3 focus-visible:ring-ring/50\"\n        >\n          <Sparkles className=\"size-3.5 text-[color:var(--dc-accent)]\" aria-hidden=\"true\" />\n          Orbit 3.0: reports your accountant will like\n          <ArrowRight className=\"size-3.5\" aria-hidden=\"true\" />\n        </a>\n        <h1 id=\"hero-aurora-title\" className=\"dc-h mt-7 max-w-[960px] text-[44px] leading-[1.02] sm:text-[68px] lg:text-[84px]\">\n          The calm way to run the money side of your studio.\n        </h1>\n        <p className=\"mt-7 max-w-[620px] text-[17px] leading-relaxed text-muted-foreground sm:text-[19px]\">\n          Invoices, reminders, payments and the numbers that follow them, in one quiet place.\n        </p>\n        <div className=\"mt-9 flex flex-wrap justify-center gap-3\">\n          <Button size=\"lg\" className=\"h-12 px-6 text-[16px] font-semibold\" nativeButton={false} render={<a href=\"#start\" />}>\n            Start free <ArrowRight className=\"size-4\" aria-hidden=\"true\" />\n          </Button>\n          <Button size=\"lg\" variant=\"outline\" className=\"h-12 bg-background/70 px-6 text-[16px] font-semibold backdrop-blur\" nativeButton={false} render={<a href=\"#pricing\" />}>\n            See pricing\n          </Button>\n        </div>\n        <p className=\"mt-6 text-[14px] text-muted-foreground\">Free for your first three clients. No card needed.</p>\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "docs": "The block is in components/dresscode/hero-aurora.tsx; render it in any page.\nIt wears your DressCode theme (its colors, fonts and corners, and the dc-* classes the theme adds). Pick one at https://dresscodeui.com/themes, e.g. npx shadcn@latest add https://dresscodeui.com/r/dresscode/mono.json"
+}

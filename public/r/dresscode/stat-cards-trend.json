@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stat-cards-trend",
+  "type": "registry:block",
+  "title": "Stat cards: With trend badges",
+  "description": "Four figures for the month in one card split four ways, each with its change on last month as an up or down badge and a line of context.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "categories": [
+    "stat-cards"
+  ],
+  "dependencies": [
+    "lucide-react@^1.73.0"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/sections/stat-cards/trend.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/stat-cards-trend.tsx",
+      "content": "// Stat cards with trend badges: four figures for the month so far, in one card split by hairlines. Each\n// badge shows the change against the same days of last month; its color says whether the move is good\n// for that figure (outstanding going up is bad news), and its arrow says which way it went. Screen\n// readers get the change as a sentence.\nimport { ArrowDownRight, ArrowRight, ArrowUpRight, CircleDollarSign, Clock3, FileText, Users } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { cn } from \"@/lib/utils\"\n\nconst STATS = [\n  {\n    label: \"Revenue\",\n    value: \"$48,210\",\n    change: \"12.4%\",\n    up: true,\n    good: true,\n    icon: CircleDollarSign,\n    context: \"Up from $42,880 in October\",\n  },\n  {\n    label: \"Outstanding\",\n    value: \"$9,860\",\n    change: \"17.1%\",\n    up: true,\n    good: false,\n    icon: FileText,\n    context: \"5 open invoices, 2 of them late\",\n  },\n  {\n    label: \"Clients\",\n    value: \"64\",\n    change: \"6\",\n    up: true,\n    good: true,\n    icon: Users,\n    context: \"6 new this month, none lost\",\n  },\n  {\n    label: \"Days to get paid\",\n    value: \"11\",\n    change: \"3 days\",\n    up: false,\n    good: true,\n    icon: Clock3,\n    context: \"Your terms are 14 days\",\n  },\n]\n\n// One card split into four: stacked on phones, two by two on tablets, a row on desktops.\nconst DIVIDERS = [\"\", \"border-t sm:border-t-0 sm:border-l\", \"border-t lg:border-t-0 lg:border-l\", \"border-t sm:border-l lg:border-t-0\"]\n\nexport default function StatCardsTrend() {\n  return (\n    <section aria-labelledby=\"stat-cards-trend-title\" className=\"mx-auto w-full max-w-[1200px] px-5 py-10 sm:px-8\">\n      <div className=\"flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between\">\n        <div>\n          <h2 id=\"stat-cards-trend-title\" className=\"dc-h text-[24px] leading-tight sm:text-[28px]\">\n            November so far\n          </h2>\n          <p className=\"mt-1.5 text-[15px] text-muted-foreground\">Nov 1 to 24, against the same days of October.</p>\n        </div>\n        <Button variant=\"outline\" className=\"self-start sm:self-auto\" nativeButton={false} render={<a href=\"#reports\" />}>\n          Full report <ArrowRight aria-hidden=\"true\" />\n        </Button>\n      </div>\n\n      <dl className=\"dc-card mt-6 grid overflow-hidden sm:grid-cols-2 lg:grid-cols-4\">\n        {STATS.map((s, i) => {\n          const Arrow = s.up ? ArrowUpRight : ArrowDownRight\n          return (\n            <div key={s.label} className={cn(\"flex flex-col border-border p-5 sm:p-6\", DIVIDERS[i])}>\n              <dt className=\"flex items-center justify-between gap-3 text-[14px] font-medium text-muted-foreground\">\n                {s.label}\n                <span className=\"dc-icon size-8\" aria-hidden=\"true\">\n                  <s.icon className=\"size-4\" />\n                </span>\n              </dt>\n              <dd className=\"mt-3 mb-5 flex flex-wrap items-center gap-x-2.5 gap-y-2\">\n                <span className=\"dc-num text-[32px] leading-none font-semibold tracking-tight\">{s.value}</span>\n                <span className={cn(\"dc-pill\", s.good ? \"dc-pill-hl\" : \"dc-pill-danger\")} aria-hidden=\"true\">\n                  <Arrow className=\"size-3.5\" />\n                  <span className=\"dc-num\">\n                    {s.up ? \"+\" : \"−\"}\n                    {s.change}\n                  </span>\n                </span>\n                <span className=\"sr-only\">\n                  , {s.up ? \"up\" : \"down\"} {s.change} on October, {s.good ? \"a good change\" : \"a change for the worse\"}.\n                </span>\n              </dd>\n              <dd className=\"mt-auto text-[13px] leading-snug text-muted-foreground\">{s.context}</dd>\n            </div>\n          )\n        })}\n      </dl>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "docs": "The block is in components/dresscode/stat-cards-trend.tsx; render it in any page.\nIt wears your DressCode theme (its colors, fonts and corners, and the dc-* classes the theme adds). Pick one at https://dresscodeui.com/themes, e.g. npx shadcn@latest add https://dresscodeui.com/r/dresscode/mono.json"
+}

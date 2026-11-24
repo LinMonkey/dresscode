@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "steps-numbered",
+  "type": "registry:block",
+  "title": "Steps: Numbered cards",
+  "description": "Three steps in three cards, each with a big number, a short title and one line of help.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "categories": [
+    "steps"
+  ],
+  "dependencies": [
+    "lucide-react@^1.73.0"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/sections/steps/numbered.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/steps-numbered.tsx",
+      "content": "// Steps, numbered cards: how it works in three steps, each in a card with its number, a short title and\n// one line of help, then the action that starts step one. From the Orbit landing template.\nimport { ArrowRight } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\n\nconst STEPS = [\n  { title: \"Add your clients\", body: \"Import a CSV or type them in. Orbit remembers addresses, currencies and tax.\" },\n  { title: \"Send the first invoice\", body: \"Use your logo and terms once; every invoice after that takes a minute.\" },\n  { title: \"Let Orbit follow up\", body: \"Pick a reminder plan. Orbit chases, records the payment and sends the receipt.\" },\n]\n\nexport default function StepsNumbered() {\n  return (\n    <section aria-labelledby=\"steps-numbered-title\" className=\"py-16 sm:py-24\">\n      <div className=\"mx-auto w-full max-w-[1200px] px-5 sm:px-8\">\n        <div className=\"mx-auto max-w-[640px] text-center\">\n          <p className=\"text-sm font-semibold text-[color:var(--dc-accent)]\">How it works</p>\n          <h2 id=\"steps-numbered-title\" className=\"dc-h mt-3 text-[32px] leading-[1.1] sm:text-[42px]\">\n            Set up in ten minutes, paid sooner every month\n          </h2>\n          <p className=\"mt-4 text-[17px] leading-relaxed text-muted-foreground\">\n            Three steps from a list of clients to money in the bank. You do the first two once.\n          </p>\n        </div>\n        <ol className=\"mt-14 grid gap-4 md:grid-cols-3\">\n          {STEPS.map((s, i) => (\n            <li key={s.title} className=\"dc-card p-6\">\n              <span className=\"dc-num grid size-9 place-items-center rounded-full bg-primary text-[15px] font-semibold text-primary-foreground\">\n                <span className=\"sr-only\">Step </span>\n                {i + 1}\n              </span>\n              <h3 className=\"dc-h mt-5 text-[21px]\">{s.title}</h3>\n              <p className=\"mt-2 leading-relaxed text-muted-foreground\">{s.body}</p>\n            </li>\n          ))}\n        </ol>\n        <div className=\"mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center\">\n          <Button size=\"lg\" className=\"h-11 px-5 text-[15px] font-semibold\" nativeButton={false} render={<a href=\"#start\" />}>\n            Start free <ArrowRight className=\"size-4\" aria-hidden=\"true\" />\n          </Button>\n          <p className=\"text-[14px] text-muted-foreground\">Free for your first three clients. No card needed.</p>\n        </div>\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "docs": "The block is in components/dresscode/steps-numbered.tsx; render it in any page.\nIt wears your DressCode theme (its colors, fonts and corners, and the dc-* classes the theme adds). Pick one at https://dresscodeui.com/themes, e.g. npx shadcn@latest add https://dresscodeui.com/r/dresscode/mono.json"
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-card",
+  "type": "registry:block",
+  "title": "Call to action: Centered card",
+  "description": "A raised card on the page with a heading, a line, two actions and three small reassurances under them.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "categories": [
+    "cta"
+  ],
+  "dependencies": [
+    "lucide-react@^1.73.0"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/sections/cta/card.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/cta-card.tsx",
+      "content": "// Call to action in a centered card: a raised card on the page background with a kicker, a heading, a\n// line, two actions and three small reassurances. A faint glow in the theme's accent sits behind the top\n// of the card; it is decoration only.\nimport { ArrowRight, Check } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\n\nconst REASSURANCES = [\"Free for your first three clients\", \"No card needed\", \"Cancel any time\"]\n\nexport default function CtaCard() {\n  return (\n    <section aria-labelledby=\"cta-card-title\" className=\"py-16 sm:py-24\">\n      <div className=\"mx-auto w-full max-w-[1200px] px-5 sm:px-8\">\n        <div className=\"dc-card relative isolate mx-auto max-w-[880px] overflow-hidden px-6 py-12 text-center sm:px-12 sm:py-16\">\n          <div\n            aria-hidden=\"true\"\n            className=\"pointer-events-none absolute inset-x-0 top-0 -z-10 h-[280px]\"\n            style={{ background: \"radial-gradient(60% 100% at 50% 0%, color-mix(in oklab, var(--dc-accent) 13%, transparent), transparent)\" }}\n          />\n          <p className=\"text-sm font-semibold text-[color:var(--dc-accent)]\">Ready when you are</p>\n          <h2 id=\"cta-card-title\" className=\"dc-h mx-auto mt-3 max-w-[640px] text-[32px] leading-[1.1] sm:text-[44px]\">\n            Let your next invoice chase itself.\n          </h2>\n          <p className=\"mx-auto mt-4 max-w-[540px] text-[17px] leading-relaxed text-muted-foreground\">\n            Send it in a minute. Orbit writes the reminders in your tone and tells you the moment the money lands.\n          </p>\n          <div className=\"mt-8 flex flex-wrap justify-center gap-3\">\n            <Button size=\"lg\" className=\"h-12 px-6 text-[16px] font-semibold\" nativeButton={false} render={<a href=\"#start\" />}>\n              Start free <ArrowRight className=\"size-4\" aria-hidden=\"true\" />\n            </Button>\n            <Button size=\"lg\" variant=\"outline\" className=\"h-12 px-6 text-[16px] font-semibold\" nativeButton={false} render={<a href=\"#pricing\" />}>\n              See pricing\n            </Button>\n          </div>\n          <ul className=\"mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[14px] text-muted-foreground\">\n            {REASSURANCES.map((t) => (\n              <li key={t} className=\"inline-flex items-center gap-1.5\">\n                <Check className=\"size-4 text-[color:var(--dc-accent)]\" aria-hidden=\"true\" />\n                {t}\n              </li>\n            ))}\n          </ul>\n        </div>\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "docs": "The block is in components/dresscode/cta-card.tsx; render it in any page.\nIt wears your DressCode theme (its colors, fonts and corners, and the dc-* classes the theme adds). Pick one at https://dresscodeui.com/themes, e.g. npx shadcn@latest add https://dresscodeui.com/r/dresscode/mono.json"
+}

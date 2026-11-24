@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "features-grid",
+  "type": "registry:block",
+  "title": "Features: Six-feature grid",
+  "description": "A centered heading over six features in three columns, each an icon in a soft accent square, a title and a line or two.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "categories": [
+    "features"
+  ],
+  "dependencies": [
+    "lucide-react@^1.73.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/dresscode/sections/features/grid.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/features-grid.tsx",
+      "content": "// Features, grid: a centered heading and six features in three columns, each an icon in the theme's soft\n// accent square, a short title and a line or two of text. Two columns on tablets, one on phones.\nimport { BellRing, ChartColumn, CreditCard, FileSpreadsheet, Repeat, Send } from \"lucide-react\"\n\nconst FEATURES = [\n  { icon: Send, title: \"Send in a minute\", body: \"Pick a client, add the lines, press send. Orbit fills in your details, terms and payment link.\" },\n  { icon: BellRing, title: \"Reminders that sound like you\", body: \"Friendly follow-ups go out before and after the due date, written in your tone.\" },\n  { icon: ChartColumn, title: \"Know what is coming in\", body: \"See what is paid, what is due and what is at risk this month, at a glance.\" },\n  { icon: CreditCard, title: \"Get paid your way\", body: \"Cards, bank transfer and payment links, with the fees shown up front.\" },\n  { icon: Repeat, title: \"Retainers on autopilot\", body: \"Recurring invoices bill every month and stop when the contract ends.\" },\n  { icon: FileSpreadsheet, title: \"Ready for tax time\", body: \"Export every invoice and payment to a tidy CSV your accountant will like.\" },\n]\n\nexport default function FeaturesGrid() {\n  return (\n    <section aria-labelledby=\"features-grid-title\" className=\"py-16 sm:py-24\">\n      <div className=\"mx-auto w-full max-w-[1200px] px-5 sm:px-8\">\n        <div className=\"mx-auto max-w-[640px] text-center\">\n          <p className=\"text-sm font-semibold text-[color:var(--dc-accent)]\">Features</p>\n          <h2 id=\"features-grid-title\" className=\"dc-h mt-3 text-[32px] leading-[1.1] sm:text-[42px]\">\n            Everything between the job and the payment\n          </h2>\n          <p className=\"mt-4 text-[17px] leading-relaxed text-muted-foreground\">\n            Orbit covers the boring middle: the invoice, the chasing and the bookkeeping that follows.\n          </p>\n        </div>\n        <ul className=\"mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-12\">\n          {FEATURES.map(({ icon: Icon, title, body }) => (\n            <li key={title}>\n              <span className=\"dc-icon\">\n                <Icon className=\"size-[18px]\" aria-hidden=\"true\" />\n              </span>\n              <h3 className=\"dc-h mt-4 text-[20px] leading-snug\">{title}</h3>\n              <p className=\"mt-2 leading-relaxed text-muted-foreground\">{body}</p>\n            </li>\n          ))}\n        </ul>\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "docs": "The block is in components/dresscode/features-grid.tsx; render it in any page.\nIt wears your DressCode theme (its colors, fonts and corners, and the dc-* classes the theme adds). Pick one at https://dresscodeui.com/themes, e.g. npx shadcn@latest add https://dresscodeui.com/r/dresscode/mono.json"
+}

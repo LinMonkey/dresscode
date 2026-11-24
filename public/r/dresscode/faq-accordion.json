@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq-accordion",
+  "type": "registry:block",
+  "title": "FAQ: Accordion",
+  "description": "A centered heading over the questions as a column of cards that open one at a time.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "categories": [
+    "faq"
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "accordion"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/sections/faq/accordion.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/faq-accordion.tsx",
+      "content": "// FAQ, accordion: a centered heading over the questions, each one its own card that opens in place. One\n// answer is open at a time and the first starts open, so the section never looks empty.\nimport { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from \"@/components/ui/accordion\"\n\nconst FAQS = [\n  [\"Is Orbit really free for three clients?\", \"Yes. The Free plan has no time limit and no card on file. You only pay when you add a fourth client or want the Studio features.\"],\n  [\"What does it cost to get paid?\", \"Card payments cost 2.9% + 30¢ and bank transfers 0.8%, capped at $5. Fees are shown on every invoice before you send it, and you can pass them on to the client.\"],\n  [\"Will my clients need an account?\", \"No. They get an email with a link to the invoice and pay in a minute. They can come back to the same link to download receipts.\"],\n  [\"Can reminders really sound like me?\", \"You write the first reminder, or pick a tone, and Orbit keeps that voice for the others. You can read every reminder before it goes out.\"],\n  [\"Can I import my clients and old invoices?\", \"Yes. Import a CSV from your spreadsheet or your old tool, and Orbit keeps the invoice numbers going from where you left off.\"],\n  [\"Is my data safe?\", \"Data is encrypted in transit and at rest, sign-in supports two-step codes, and every change is logged. You can export or delete everything at any time.\"],\n  [\"Can I cancel any time?\", \"Yes. Cancel from settings and you drop to the Free plan at the end of the period. Your invoices stay where they are.\"],\n]\n\nconst link = \"rounded-sm font-semibold text-foreground underline underline-offset-4 outline-none hover:text-[color:var(--dc-accent)] focus-visible:ring-3 focus-visible:ring-ring/50\"\n\nexport default function FaqAccordion() {\n  return (\n    <section aria-labelledby=\"faq-accordion-title\" className=\"py-16 sm:py-24\">\n      <div className=\"mx-auto w-full max-w-[1200px] px-5 sm:px-8\">\n        <div className=\"mx-auto max-w-[640px] text-center\">\n          <p className=\"text-sm font-semibold text-[color:var(--dc-accent)]\">FAQ</p>\n          <h2 id=\"faq-accordion-title\" className=\"dc-h mt-3 text-[32px] leading-[1.1] sm:text-[42px]\">\n            Questions, answered\n          </h2>\n          <p className=\"mt-4 text-[17px] leading-relaxed text-muted-foreground\">The things people ask most before they send their first invoice with Orbit.</p>\n        </div>\n\n        <Accordion defaultValue={[\"0\"]} className=\"mx-auto mt-12 max-w-[780px] gap-3\">\n          {FAQS.map(([q, a], i) => (\n            <AccordionItem key={q} value={String(i)} className=\"dc-card px-5 not-last:border-b-[length:var(--dc-bw)] sm:px-6\">\n              <AccordionTrigger className=\"py-5 text-[17px] leading-6 font-semibold hover:no-underline **:data-[slot=accordion-trigger-icon]:mt-1\">{q}</AccordionTrigger>\n              <AccordionContent className=\"pb-5 text-[16px] leading-relaxed text-muted-foreground\">{a}</AccordionContent>\n            </AccordionItem>\n          ))}\n        </Accordion>\n\n        <p className=\"mt-10 text-center text-[15px] text-muted-foreground\">\n          Still unsure? Browse the{\" \"}\n          <a href=\"#help\" className={link}>\n            help center\n          </a>{\" \"}\n          or{\" \"}\n          <a href=\"#contact\" className={link}>\n            write to us\n          </a>\n          .\n        </p>\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "docs": "The block is in components/dresscode/faq-accordion.tsx; render it in any page.\nIt wears your DressCode theme (its colors, fonts and corners, and the dc-* classes the theme adds). Pick one at https://dresscodeui.com/themes, e.g. npx shadcn@latest add https://dresscodeui.com/r/dresscode/mono.json"
+}

@@ -448,6 +448,681 @@
       "description": "A horizontal timeline of milestones that scrolls sideways on phones."
     },
     {
+      "name": "bento-grid-product",
+      "type": "registry:block",
+      "title": "Bento grid: Product features",
+      "description": "Six cells of mixed spans, one wide, one tall and one wide again, each a feature with a small picture of it working.",
+      "categories": [
+        "bento-grid"
+      ]
+    },
+    {
+      "name": "bento-grid-metrics",
+      "type": "registry:block",
+      "title": "Bento grid: Metrics and charts",
+      "description": "Five cells built around one big number each, backed by a tiny chart: monthly bars, a progress ring, a sparkline, a split bar and weekday bars.",
+      "categories": [
+        "bento-grid"
+      ]
+    },
+    {
+      "name": "bento-grid-showcase",
+      "type": "registry:block",
+      "title": "Bento grid: Showcase cell",
+      "description": "One large cell with a rich picture of the product that runs off its edges, beside four smaller cells with a small picture each.",
+      "categories": [
+        "bento-grid"
+      ]
+    },
+    {
+      "name": "bento-grid-three-up",
+      "type": "registry:block",
+      "title": "Bento grid: Three-up",
+      "description": "One wide and two narrow cells in a row, each an inset panel with a picture of the product above a short title and a line.",
+      "categories": [
+        "bento-grid"
+      ]
+    },
+    {
+      "name": "blog-cards",
+      "type": "registry:block",
+      "title": "Blog: Post cards",
+      "description": "Three recent posts as cards, each with its own typographic cover, under a heading with a link to every article.",
+      "categories": [
+        "blog"
+      ]
+    },
+    {
+      "name": "blog-featured",
+      "type": "registry:block",
+      "title": "Blog: Featured post",
+      "description": "One large featured post with a big-number cover beside a list of three more.",
+      "categories": [
+        "blog"
+      ]
+    },
+    {
+      "name": "blog-list",
+      "type": "registry:block",
+      "title": "Blog: List with topic filter",
+      "description": "A compact list of posts with date, topic and reading time, filtered by topic.",
+      "categories": [
+        "blog"
+      ]
+    },
+    {
+      "name": "contact-form",
+      "type": "registry:block",
+      "title": "Contact: Contact form",
+      "description": "Name, email, topic and message, checked as you leave each field and on send, with the other ways to reach the team beside it.",
+      "categories": [
+        "contact"
+      ]
+    },
+    {
+      "name": "contact-options",
+      "type": "registry:block",
+      "title": "Contact: Support channels",
+      "description": "Chat, email, the help center and sales in four cards, each with what it is for, how fast it answers and an action.",
+      "categories": [
+        "contact"
+      ]
+    },
+    {
+      "name": "contact-sales",
+      "type": "registry:block",
+      "title": "Contact: Book a demo",
+      "description": "A short pitch with three benefits next to a form for work email, company, team size and a preferred time.",
+      "categories": [
+        "contact"
+      ]
+    },
+    {
+      "name": "cta-band",
+      "type": "registry:block",
+      "title": "Call to action: On the colored band",
+      "description": "The closing promise and two actions on the theme's band color, the way the Orbit template ends its page.",
+      "categories": [
+        "cta"
+      ]
+    },
+    {
+      "name": "cta-card",
+      "type": "registry:block",
+      "title": "Call to action: Centered card",
+      "description": "A raised card on the page with a heading, a line, two actions and three small reassurances under them.",
+      "categories": [
+        "cta"
+      ]
+    },
+    {
+      "name": "cta-signup",
+      "type": "registry:block",
+      "title": "Call to action: Split with email sign-up",
+      "description": "The promise on the left and an email form on the right that checks the address and says thank you when it is sent.",
+      "categories": [
+        "cta"
+      ]
+    },
+    {
+      "name": "cta-product",
+      "type": "registry:block",
+      "title": "Call to action: With a product picture",
+      "description": "Copy and actions beside a small picture of the product, drawn in markup, inside one large rounded panel.",
+      "categories": [
+        "cta"
+      ]
+    },
+    {
+      "name": "faq-accordion",
+      "type": "registry:block",
+      "title": "FAQ: Accordion",
+      "description": "A centered heading over the questions as a column of cards that open one at a time.",
+      "categories": [
+        "faq"
+      ]
+    },
+    {
+      "name": "faq-two-column",
+      "type": "registry:block",
+      "title": "FAQ: Two columns, all open",
+      "description": "Every question and answer visible at once in a two-column grid, for short answers people should not have to click for.",
+      "categories": [
+        "faq"
+      ]
+    },
+    {
+      "name": "faq-with-contact",
+      "type": "registry:block",
+      "title": "FAQ: With a contact card",
+      "description": "The heading and a card for people who still have a question on the left, the accordion on the right.",
+      "categories": [
+        "faq"
+      ]
+    },
+    {
+      "name": "faq-categories",
+      "type": "registry:block",
+      "title": "FAQ: Grouped by topic",
+      "description": "Questions sorted into billing, payments, account and security, with a topic list beside an accordion for the chosen topic.",
+      "categories": [
+        "faq"
+      ]
+    },
+    {
+      "name": "features-grid",
+      "type": "registry:block",
+      "title": "Features: Six-feature grid",
+      "description": "A centered heading over six features in three columns, each an icon in a soft accent square, a title and a line or two.",
+      "categories": [
+        "features"
+      ]
+    },
+    {
+      "name": "features-rows",
+      "type": "registry:block",
+      "title": "Features: Alternating rows",
+      "description": "Three features down the page, each a heading, a line and three points beside a small picture of the product, switching sides row by row.",
+      "categories": [
+        "features"
+      ]
+    },
+    {
+      "name": "features-tabs",
+      "type": "registry:block",
+      "title": "Features: Tabs per job",
+      "description": "A tab for each job the product does, keyboard-friendly, each swapping in a picture of the product doing it.",
+      "categories": [
+        "features"
+      ]
+    },
+    {
+      "name": "features-checklist",
+      "type": "registry:block",
+      "title": "Features: Checklist with product",
+      "description": "A heading and six checked points with a short line each, beside the client portal they add up to.",
+      "categories": [
+        "features"
+      ]
+    },
+    {
+      "name": "features-cards",
+      "type": "registry:block",
+      "title": "Features: Three cards",
+      "description": "Three cards of equal height in a row, each a small picture of the feature over a title, a line and a link.",
+      "categories": [
+        "features"
+      ]
+    },
+    {
+      "name": "features-comparison",
+      "type": "registry:block",
+      "title": "Features: Comparison",
+      "description": "The product against spreadsheets and email: the same six jobs in two columns, crosses against checks, the product's column raised.",
+      "categories": [
+        "features"
+      ]
+    },
+    {
+      "name": "footer-columns",
+      "type": "registry:block",
+      "title": "Footer: Link columns",
+      "description": "The logo and a line beside four columns of links, with the copyright and the social links in a bar underneath.",
+      "categories": [
+        "footer"
+      ]
+    },
+    {
+      "name": "footer-newsletter",
+      "type": "registry:block",
+      "title": "Footer: With a newsletter",
+      "description": "An email sign-up across the top that checks the address and says thank you, then five link columns and the bottom bar.",
+      "categories": [
+        "footer"
+      ]
+    },
+    {
+      "name": "footer-simple",
+      "type": "registry:block",
+      "title": "Footer: One compact row",
+      "description": "The logo, a few links, social icons and the copyright in a single row that wraps neatly on phones.",
+      "categories": [
+        "footer"
+      ]
+    },
+    {
+      "name": "footer-wordmark",
+      "type": "registry:block",
+      "title": "Footer: Large wordmark",
+      "description": "Links and a call to action above, and the Orbit wordmark set very large across the bottom edge.",
+      "categories": [
+        "footer"
+      ]
+    },
+    {
+      "name": "hero-centered",
+      "type": "registry:block",
+      "title": "Hero: Centered with product shot",
+      "description": "A headline, two actions and three reassurances over a picture of the product, drawn in markup so it wears the theme.",
+      "categories": [
+        "hero"
+      ]
+    },
+    {
+      "name": "hero-split",
+      "type": "registry:block",
+      "title": "Hero: Split with product cards",
+      "description": "Copy and actions on the left, the invoice, the payment and the reminder it sends stacked on the right.",
+      "categories": [
+        "hero"
+      ]
+    },
+    {
+      "name": "hero-signup",
+      "type": "registry:block",
+      "title": "Hero: Email sign-up",
+      "description": "A centered promise with the sign-up form in the hero itself, checked as you type, and a thank-you when it is sent.",
+      "categories": [
+        "hero"
+      ]
+    },
+    {
+      "name": "hero-aurora",
+      "type": "registry:block",
+      "title": "Hero: Aurora background",
+      "description": "Slow, soft color drifting behind a large headline, made from the theme's own colors. It stands still for people who turn motion off.",
+      "categories": [
+        "hero"
+      ]
+    },
+    {
+      "name": "hero-band",
+      "type": "registry:block",
+      "title": "Hero: On the colored band",
+      "description": "The copy on the theme's band color, with the product overlapping the band's lower edge.",
+      "categories": [
+        "hero"
+      ]
+    },
+    {
+      "name": "hero-developer",
+      "type": "registry:block",
+      "title": "Hero: With a code sample",
+      "description": "For an API or developer tool: the pitch on the left and a request in three languages, with a copy button, on the right.",
+      "categories": [
+        "hero"
+      ]
+    },
+    {
+      "name": "integrations-grid",
+      "type": "registry:block",
+      "title": "Integrations: Grid beside the pitch",
+      "description": "The pitch on the left and eight integration tiles on the right, each a kind of tool with an icon and one line on what it does.",
+      "categories": [
+        "integrations"
+      ]
+    },
+    {
+      "name": "integrations-hub",
+      "type": "registry:block",
+      "title": "Integrations: Hub",
+      "description": "The Orbit mark in the middle with eight integration tiles around it, joined by lines; on phones it becomes a plain grid.",
+      "categories": [
+        "integrations"
+      ]
+    },
+    {
+      "name": "integrations-list",
+      "type": "registry:block",
+      "title": "Integrations: Grouped list with search",
+      "description": "Every integration grouped by kind, with a search field that filters them as you type and an empty state when nothing matches.",
+      "categories": [
+        "integrations"
+      ]
+    },
+    {
+      "name": "login-card",
+      "type": "registry:block",
+      "title": "Login: Centered card",
+      "description": "Email and password with a show toggle, remember me, a forgot-password link, Google and GitHub, and a spinner, then a signed-in state.",
+      "categories": [
+        "login"
+      ]
+    },
+    {
+      "name": "login-split",
+      "type": "registry:block",
+      "title": "Login: Split with the band",
+      "description": "The form open on the page and, beside it on the theme's band, what Orbit does, two figures and a customer's words. The band steps aside on phones.",
+      "categories": [
+        "login"
+      ]
+    },
+    {
+      "name": "login-social",
+      "type": "registry:block",
+      "title": "Login: Providers first",
+      "description": "Google, GitHub, Apple and single sign-on on one side, then email on the other; single sign-on turns the email side into a company lookup.",
+      "categories": [
+        "login"
+      ]
+    },
+    {
+      "name": "login-magic-link",
+      "type": "registry:block",
+      "title": "Login: Magic link",
+      "description": "Email only. After sending, it says where the link went, with a resend button that counts down and a way to change the address.",
+      "categories": [
+        "login"
+      ]
+    },
+    {
+      "name": "login-two-factor",
+      "type": "registry:block",
+      "title": "Login: Two-step code",
+      "description": "A six-digit code that checks itself when the last digit is in, an error for a wrong one, resend and a backup code. In the demo, 123456 is right.",
+      "categories": [
+        "login"
+      ]
+    },
+    {
+      "name": "logo-cloud-row",
+      "type": "registry:block",
+      "title": "Logo cloud: Row of wordmarks",
+      "description": "One line of copy over a single row of customer wordmarks, each in its own type treatment, that wraps to two or three across on smaller screens.",
+      "categories": [
+        "logo-cloud"
+      ]
+    },
+    {
+      "name": "logo-cloud-grid",
+      "type": "registry:block",
+      "title": "Logo cloud: Bordered grid",
+      "description": "A short heading, a line of copy and a link beside a grid of equal cells, one wordmark in each, three across on desktop and two on phones.",
+      "categories": [
+        "logo-cloud"
+      ]
+    },
+    {
+      "name": "logo-cloud-marquee",
+      "type": "registry:block",
+      "title": "Logo cloud: Scrolling marquee",
+      "description": "Wordmarks that scroll sideways forever with faded edges. They pause under the pointer and stand still in a tidy grid on keyboard focus or for people who turn motion off.",
+      "categories": [
+        "logo-cloud"
+      ]
+    },
+    {
+      "name": "pricing-tiers",
+      "type": "registry:block",
+      "title": "Pricing: Three plans",
+      "description": "Three plans with the middle one recommended and a monthly or yearly switch that changes the prices and says what yearly saves.",
+      "categories": [
+        "pricing"
+      ]
+    },
+    {
+      "name": "pricing-compare",
+      "type": "registry:block",
+      "title": "Pricing: Comparison table",
+      "description": "Every feature of every plan in one table. On phones it scrolls sideways inside its own box while the feature names stay put.",
+      "categories": [
+        "pricing"
+      ]
+    },
+    {
+      "name": "pricing-single",
+      "type": "registry:block",
+      "title": "Pricing: Single plan",
+      "description": "One plan and one price, everything it includes as a two-column checklist, a single action and a line of reassurance.",
+      "categories": [
+        "pricing"
+      ]
+    },
+    {
+      "name": "pricing-calculator",
+      "type": "registry:block",
+      "title": "Pricing: Usage calculator",
+      "description": "Usage pricing with a slider for invoices a month: the price, the plan it falls in and the cost per invoice follow as you drag.",
+      "categories": [
+        "pricing"
+      ]
+    },
+    {
+      "name": "pricing-two-plans",
+      "type": "registry:block",
+      "title": "Pricing: Free and Pro",
+      "description": "Two plans side by side, Free and Pro, with what changes when you upgrade said in plain words.",
+      "categories": [
+        "pricing"
+      ]
+    },
+    {
+      "name": "settings-profile",
+      "type": "registry:block",
+      "title": "Settings: Profile form",
+      "description": "Photo from initials, name, email, business name, time zone and a short bio, checked as you go, with a save bar that appears only when something changed.",
+      "categories": [
+        "settings"
+      ]
+    },
+    {
+      "name": "settings-notifications",
+      "type": "registry:block",
+      "title": "Settings: Notifications",
+      "description": "Email and push switches for each event, in groups for invoices, payments, clients and product news, with a pause-all control and a reset to the defaults.",
+      "categories": [
+        "settings"
+      ]
+    },
+    {
+      "name": "settings-billing",
+      "type": "registry:block",
+      "title": "Settings: Plan and billing",
+      "description": "The current plan with its renewal date and a plan change dialog, usage meters, the card on file and a history of bills to download.",
+      "categories": [
+        "settings"
+      ]
+    },
+    {
+      "name": "settings-team",
+      "type": "registry:block",
+      "title": "Settings: Team and invites",
+      "description": "Members with their roles, an invite form, pending invites to resend or revoke, removal behind a confirm dialog and the seat count.",
+      "categories": [
+        "settings"
+      ]
+    },
+    {
+      "name": "signup-card",
+      "type": "registry:block",
+      "title": "Sign-up: Card with password rules",
+      "description": "Name, work email and a password with a strength meter and the rules it still misses, the terms, and a spinner, then a confirm-your-email state.",
+      "categories": [
+        "signup"
+      ]
+    },
+    {
+      "name": "signup-split",
+      "type": "registry:block",
+      "title": "Sign-up: Split with the free plan",
+      "description": "The form beside a panel listing what the free plan includes and a customer's words. On phones the form comes first.",
+      "categories": [
+        "signup"
+      ]
+    },
+    {
+      "name": "signup-invite",
+      "type": "registry:block",
+      "title": "Sign-up: Team invite",
+      "description": "Who invited you to which workspace, your role and who is already there, then your name and a password and one button to join.",
+      "categories": [
+        "signup"
+      ]
+    },
+    {
+      "name": "stat-cards-trend",
+      "type": "registry:block",
+      "title": "Stat cards: With trend badges",
+      "description": "Four figures for the month in one card split four ways, each with its change on last month as an up or down badge and a line of context.",
+      "categories": [
+        "stat-cards"
+      ]
+    },
+    {
+      "name": "stat-cards-sparkline",
+      "type": "registry:block",
+      "title": "Stat cards: With small charts",
+      "description": "Four wide cards, each pairing a figure with its own small chart: a running total, weekly bars, a line against your terms and a stepped balance.",
+      "categories": [
+        "stat-cards"
+      ]
+    },
+    {
+      "name": "stat-cards-progress",
+      "type": "registry:block",
+      "title": "Stat cards: Goals with progress",
+      "description": "This month's targets: a ring for the revenue goal with what is left and the pace, and bars for the other goals.",
+      "categories": [
+        "stat-cards"
+      ]
+    },
+    {
+      "name": "stat-cards-comparison",
+      "type": "registry:block",
+      "title": "Stat cards: With a period switch",
+      "description": "Switch between this month, last month and this quarter; every figure, change and comparison bar follows.",
+      "categories": [
+        "stat-cards"
+      ]
+    },
+    {
+      "name": "states-empty",
+      "type": "registry:block",
+      "title": "Empty and error states: First-run empty list",
+      "description": "The invoice list before the first invoice: an icon, a line, the main action and two other ways to start, importing or a template.",
+      "categories": [
+        "states"
+      ]
+    },
+    {
+      "name": "states-no-results",
+      "type": "registry:block",
+      "title": "Empty and error states: No search results",
+      "description": "What was searched, the filters as chips you can remove, a clear-filters button and suggestions that say which filter hides the matches.",
+      "categories": [
+        "states"
+      ]
+    },
+    {
+      "name": "states-not-found",
+      "type": "registry:block",
+      "title": "Empty and error states: 404 page",
+      "description": "A big 404 in the theme's display face, a search that finds the page as you type, the way back home and a few useful places.",
+      "categories": [
+        "states"
+      ]
+    },
+    {
+      "name": "states-error",
+      "type": "registry:block",
+      "title": "Empty and error states: 500 page",
+      "description": "A plain apology, a retry that shows a spinner, a status page link and an error reference with a copy button.",
+      "categories": [
+        "states"
+      ]
+    },
+    {
+      "name": "stats-row",
+      "type": "registry:block",
+      "title": "Stats: Row of figures",
+      "description": "Four results in a hairline grid, each a big figure in the accent color with one line on what it means.",
+      "categories": [
+        "stats"
+      ]
+    },
+    {
+      "name": "stats-cards",
+      "type": "registry:block",
+      "title": "Stats: Cards with trends",
+      "description": "A heading and four stat cards, each with a short caption, the change on last year and a small bar strip of the months behind it.",
+      "categories": [
+        "stats"
+      ]
+    },
+    {
+      "name": "stats-band",
+      "type": "registry:block",
+      "title": "Stats: On the colored band",
+      "description": "Big numbers on the theme's band color beside a heading, a line of copy and a link to the full report.",
+      "categories": [
+        "stats"
+      ]
+    },
+    {
+      "name": "steps-numbered",
+      "type": "registry:block",
+      "title": "Steps: Numbered cards",
+      "description": "Three steps in three cards, each with a big number, a short title and one line of help.",
+      "categories": [
+        "steps"
+      ]
+    },
+    {
+      "name": "steps-timeline",
+      "type": "registry:block",
+      "title": "Steps: Timeline with pictures",
+      "description": "A vertical line with numbered dots; each step has a title, a line of text and a small picture of the product at that step.",
+      "categories": [
+        "steps"
+      ]
+    },
+    {
+      "name": "steps-cards",
+      "type": "registry:block",
+      "title": "Steps: Cards with connectors",
+      "description": "Four step cards in a row joined by arrows on desktop and stacked on phones, each with an icon and how long the step takes.",
+      "categories": [
+        "steps"
+      ]
+    },
+    {
+      "name": "testimonials-grid",
+      "type": "registry:block",
+      "title": "Testimonials: Lead quote and two more",
+      "description": "One large quote in a card beside two smaller ones with star ratings, each with the person's initials, name and role.",
+      "categories": [
+        "testimonials"
+      ]
+    },
+    {
+      "name": "testimonials-featured",
+      "type": "registry:block",
+      "title": "Testimonials: Featured story",
+      "description": "One large quote with the person, their role and their company's wordmark, and the result it brought beside it in big figures.",
+      "categories": [
+        "testimonials"
+      ]
+    },
+    {
+      "name": "testimonials-wall",
+      "type": "registry:block",
+      "title": "Testimonials: Wall of quotes",
+      "description": "A masonry wall of twelve short quotes of different lengths under a heading and an overall rating.",
+      "categories": [
+        "testimonials"
+      ]
+    },
+    {
+      "name": "testimonials-carousel",
+      "type": "registry:block",
+      "title": "Testimonials: Carousel",
+      "description": "One quote at a time with previous and next buttons and position dots. No autoplay, arrow keys work, and each change is announced politely.",
+      "categories": [
+        "testimonials"
+      ]
+    },
+    {
       "name": "font-sans-geist",
       "type": "registry:font",
       "title": "Geist (sans)",

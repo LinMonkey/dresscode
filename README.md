@@ -1,7 +1,8 @@
 # DressCode UI
 
-Ready-made themes for [shadcn/ui](https://ui.shadcn.com), and templates that wear all of them. Each theme has its
-own colors, fonts and corners, in light and dark, and installs with one shadcn command. Free and MIT.
+Ready-made themes for [shadcn/ui](https://ui.shadcn.com), and the templates, components and blocks that wear all of
+them. Each theme has its own colors, fonts and corners, in light and dark, and installs with one shadcn command.
+Free and MIT.
 
 See every theme live: **https://dresscodeui.com/themes**
 
@@ -46,6 +47,18 @@ npx shadcn@latest add https://dresscodeui.com/r/dresscode/data-table-filters.jso
 
 Every example live, in every theme: [dresscodeui.com/components](https://dresscodeui.com/components).
 
+## Blocks
+
+75 blocks in 19 categories, each one file: bento-grid, blog, contact, cta, faq, features, footer, hero, integrations, login, logo-cloud, pricing, settings, signup, stat-cards, states, stats, steps, testimonials. A block is a section of a
+landing page or an app (a hero, a pricing table, a sign-in page) built from shadcn/ui's components, and it wears
+the installed theme:
+
+```bash
+npx shadcn@latest add https://dresscodeui.com/r/dresscode/bento-grid-product.json
+```
+
+Every block live, in every theme, at desktop and phone width: [dresscodeui.com/blocks](https://dresscodeui.com/blocks).
+
 ## Short names
 
 ```bash
@@ -56,10 +69,12 @@ npx shadcn@latest add @dresscode/sorbet @dresscode/orbit-landing
 ## What's here
 
 - `registry/dresscode/themes.ts`: the 9 themes (every color role in both modes, fonts, corners) and how they map
-  onto shadcn's variables; `dresscode.css` holds the few classes the templates add; `fonts.ts` loads the families.
+  onto shadcn's variables; `dresscode.css` holds the few classes the templates and blocks use; `fonts.ts` loads the families.
 - `registry/dresscode/blocks/orbit` and `blocks/orbit-app`: the Orbit landing page and dashboard.
 - `registry/dresscode/components/<name>`: each component (`ui/`, installs to `components/ui`) and its examples
   (`examples/`, install to `components/dresscode/<name>-<example>.tsx`).
+- `registry/dresscode/sections/<category>`: the blocks, one file each (install to
+  `components/dresscode/<category>-<block>.tsx`), and the category's `meta.ts`.
 - `tools/build-dresscode-registry.mjs`: builds `public/r/dresscode` from those sources and refuses a theme that fails
   `tools/dresscode-contrast.mjs`.
 - `registry.json` and `public/r/dresscode`: the shadcn registry, exactly what https://dresscodeui.com/r/dresscode serves.

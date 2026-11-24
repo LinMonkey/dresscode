@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats-band",
+  "type": "registry:block",
+  "title": "Stats: On the colored band",
+  "description": "Big numbers on the theme's band color beside a heading, a line of copy and a link to the full report.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "categories": [
+    "stats"
+  ],
+  "dependencies": [
+    "lucide-react@^1.73.0"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/sections/stats/band.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/stats-band.tsx",
+      "content": "// Stats on the colored band: a heading, a line of copy and a link to the report on the left, four big\n// numbers on the right, all on the theme's band color (dc-band switches the text, the muted text, the\n// lines and the buttons to the band's own pair). The numbers are sample content; replace them with your own.\nimport { ArrowRight } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\n\nconst STATS = [\n  { value: \"4,000\", unit: \"\", label: \"studios and freelancers send their invoices with Orbit\" },\n  { value: \"$412\", unit: \"M\", label: \"paid to them through Orbit in 2025\" },\n  { value: \"11\", unit: \"days\", label: \"to get paid on average, down from 26\" },\n  { value: \"92\", unit: \"%\", label: \"of invoices paid on time with reminders on\" },\n]\n\nexport default function StatsBand() {\n  return (\n    <section aria-labelledby=\"stats-band-title\" className=\"dc-band py-16 sm:py-24\">\n      <div className=\"mx-auto grid w-full max-w-[1200px] gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-center lg:gap-20\">\n        <div className=\"max-w-[520px]\">\n          <p className=\"text-sm font-semibold opacity-80\">Orbit in numbers</p>\n          <h2 id=\"stats-band-title\" className=\"dc-h mt-3 text-[32px] leading-[1.1] sm:text-[42px]\">\n            Small studios, paid two weeks sooner\n          </h2>\n          <p className=\"mt-4 text-[17px] leading-relaxed text-muted-foreground\">\n            We looked at every invoice sent with Orbit last year. With reminders on, they were paid in half the time.\n          </p>\n          <Button\n            size=\"lg\"\n            variant=\"outline\"\n            className=\"mt-8 h-11 border-[color:var(--dc-band-edge)] bg-transparent px-5 text-[15px] font-semibold text-[color:var(--dc-band-fg)] hover:bg-[color:color-mix(in_oklab,var(--dc-band-fg)_12%,transparent)] hover:text-[color:var(--dc-band-fg)] dark:bg-transparent\"\n            nativeButton={false}\n            render={<a href=\"#report\" />}\n          >\n            Read the 2025 report <ArrowRight className=\"size-4\" aria-hidden=\"true\" />\n          </Button>\n        </div>\n        <dl className=\"grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-x-10 sm:gap-y-12\">\n          {STATS.map((s) => (\n            <div key={s.label} className=\"flex flex-col-reverse justify-end border-t border-border pt-5\">\n              <dt className=\"mt-3 text-[15px] leading-snug text-pretty text-muted-foreground\">{s.label}</dt>\n              <dd className=\"dc-h dc-num text-[44px] leading-none sm:text-[64px]\">\n                {s.value}\n                {s.unit ? <span className={s.unit.length > 1 ? \"ml-1.5 text-[0.45em]\" : \"text-[0.6em]\"}>{s.unit}</span> : null}\n              </dd>\n            </div>\n          ))}\n        </dl>\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "docs": "The block is in components/dresscode/stats-band.tsx; render it in any page.\nIt wears your DressCode theme (its colors, fonts and corners, and the dc-* classes the theme adds). Pick one at https://dresscodeui.com/themes, e.g. npx shadcn@latest add https://dresscodeui.com/r/dresscode/mono.json"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-simple",
+  "type": "registry:block",
+  "title": "Footer: One compact row",
+  "description": "The logo, a few links, social icons and the copyright in a single row that wraps neatly on phones.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "categories": [
+    "footer"
+  ],
+  "dependencies": [
+    "lucide-react@^1.73.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/dresscode/sections/footer/simple.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/footer-simple.tsx",
+      "content": "// A compact footer in one row: the logo and a few links on the left, social icons and the copyright on\n// the right. On phones it wraps into a centered stack. The icons are generic ones (swap in your own\n// brand marks); each link has a name for screen readers.\nimport { AtSign, MessagesSquare, PlayCircle, Rss } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst LINKS = [\"Pricing\", \"Help center\", \"Privacy\", \"Terms\"]\n\nconst SOCIAL = [\n  { icon: AtSign, label: \"Orbit on social media\", href: \"#social\" },\n  { icon: MessagesSquare, label: \"Community forum\", href: \"#community\" },\n  { icon: PlayCircle, label: \"Video tutorials\", href: \"#videos\" },\n  { icon: Rss, label: \"Blog feed\", href: \"#rss\" },\n]\n\nconst slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, \"-\")\nconst focus = \"outline-none focus-visible:ring-3 focus-visible:ring-ring/50\"\n\nfunction Logo({ className }: { className?: string }) {\n  return (\n    <span className={cn(\"inline-flex items-center gap-2 text-[17px] font-bold tracking-[-0.02em]\", className)}>\n      <svg width=\"20\" height=\"20\" viewBox=\"0 0 22 22\" aria-hidden=\"true\">\n        <circle cx=\"11\" cy=\"11\" r=\"8.5\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"3\" />\n        <circle cx=\"16.5\" cy=\"5.5\" r=\"3\" fill=\"var(--dc-accent)\" />\n      </svg>\n      <span className=\"dc-h\">Orbit</span>\n    </span>\n  )\n}\n\nexport default function FooterSimple() {\n  return (\n    <footer className=\"border-t border-border py-8\">\n      <div className=\"mx-auto flex w-full max-w-[1200px] flex-col items-center gap-6 px-5 sm:px-8 md:flex-row md:justify-between\">\n        <div className=\"flex flex-col items-center gap-5 md:flex-row md:gap-10\">\n          <a href=\"#top\" aria-label=\"Orbit home\" className={cn(\"inline-flex rounded-sm\", focus)}>\n            <Logo />\n          </a>\n          <nav aria-label=\"Footer\">\n            <ul className=\"flex flex-wrap justify-center gap-x-6 gap-y-2 text-[14px] text-muted-foreground\">\n              {LINKS.map((l) => (\n                <li key={l}>\n                  <a href={`#${slug(l)}`} className={cn(\"rounded-sm transition-colors hover:text-foreground\", focus)}>\n                    {l}\n                  </a>\n                </li>\n              ))}\n            </ul>\n          </nav>\n        </div>\n        <div className=\"flex flex-col items-center gap-4 sm:flex-row sm:gap-6\">\n          <ul aria-label=\"Follow Orbit\" className=\"flex items-center gap-1\">\n            {SOCIAL.map(({ icon: Icon, label, href }) => (\n              <li key={label}>\n                <a\n                  href={href}\n                  aria-label={label}\n                  className={cn(\"grid size-9 place-items-center rounded-[var(--radius)] text-muted-foreground transition-colors hover:bg-muted hover:text-foreground\", focus)}\n                >\n                  <Icon className=\"size-[18px]\" aria-hidden=\"true\" />\n                </a>\n              </li>\n            ))}\n          </ul>\n          <p className=\"text-[13px] text-muted-foreground\">© 2026 Orbit Labs</p>\n        </div>\n      </div>\n    </footer>\n  )\n}\n"
+    }
+  ],
+  "docs": "The block is in components/dresscode/footer-simple.tsx; render it in any page.\nIt wears your DressCode theme (its colors, fonts and corners, and the dc-* classes the theme adds). Pick one at https://dresscodeui.com/themes, e.g. npx shadcn@latest add https://dresscodeui.com/r/dresscode/mono.json"
+}

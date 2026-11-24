@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-columns",
+  "type": "registry:block",
+  "title": "Footer: Link columns",
+  "description": "The logo and a line beside four columns of links, with the copyright and the social links in a bar underneath.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "categories": [
+    "footer"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/dresscode/sections/footer/columns.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/footer-columns.tsx",
+      "content": "// Footer with link columns, ported from the Orbit template: the logo and a line on the left, four\n// columns of links on the right, and a bar underneath with the copyright and the social links. Each\n// column title names its list (aria-labelledby), so a screen reader hears \"Product, list, 5 items\".\nimport { cn } from \"@/lib/utils\"\n\nconst COLUMNS = [\n  { title: \"Product\", links: [\"Invoices\", \"Reminders\", \"Payments\", \"Recurring billing\", \"Pricing\"] },\n  { title: \"Resources\", links: [\"Blog\", \"Invoice templates\", \"Help center\", \"API docs\"] },\n  { title: \"Company\", links: [\"About\", \"Customers\", \"Careers\", \"Contact\"] },\n  { title: \"Legal\", links: [\"Terms\", \"Privacy\", \"Security\", \"Cookies\"] },\n]\n\nconst SOCIAL = [\"X\", \"LinkedIn\", \"YouTube\", \"Status\"]\n\nconst slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, \"-\")\n\nfunction Logo({ className }: { className?: string }) {\n  return (\n    <span className={cn(\"inline-flex items-center gap-2 text-[19px] font-bold tracking-[-0.02em]\", className)}>\n      <svg width=\"22\" height=\"22\" viewBox=\"0 0 22 22\" aria-hidden=\"true\">\n        <circle cx=\"11\" cy=\"11\" r=\"8.5\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"3\" />\n        <circle cx=\"16.5\" cy=\"5.5\" r=\"3\" fill=\"var(--dc-accent)\" />\n      </svg>\n      <span className=\"dc-h\">Orbit</span>\n    </span>\n  )\n}\n\nconst link = \"rounded-sm outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50\"\n\nexport default function FooterColumns() {\n  return (\n    <footer className=\"border-t border-border pt-16 pb-10\">\n      <div className=\"mx-auto w-full max-w-[1200px] px-5 sm:px-8\">\n        <div className=\"grid gap-12 lg:grid-cols-[1.3fr_2fr]\">\n          <div>\n            <a href=\"#top\" aria-label=\"Orbit home\" className={cn(link, \"inline-flex\")}>\n              <Logo />\n            </a>\n            <p className=\"mt-3 max-w-[320px] text-[15px] leading-relaxed text-muted-foreground\">\n              Invoicing for small studios and freelancers who would rather be doing the work.\n            </p>\n          </div>\n          <nav aria-label=\"Footer\" className=\"grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4\">\n            {COLUMNS.map((c) => (\n              <div key={c.title}>\n                <p id={`footer-columns-${slug(c.title)}`} className=\"text-[14px] font-semibold\">\n                  {c.title}\n                </p>\n                <ul aria-labelledby={`footer-columns-${slug(c.title)}`} className=\"mt-3 space-y-2.5 text-[14px] text-muted-foreground\">\n                  {c.links.map((l) => (\n                    <li key={l}>\n                      <a href={`#${slug(l)}`} className={link}>\n                        {l}\n                      </a>\n                    </li>\n                  ))}\n                </ul>\n              </div>\n            ))}\n          </nav>\n        </div>\n        <div className=\"mt-14 flex flex-col justify-between gap-3 border-t border-border pt-6 text-[13px] text-muted-foreground sm:flex-row sm:items-center\">\n          <p>© 2026 Orbit Labs. All rights reserved.</p>\n          <ul aria-label=\"Social and status\" className=\"flex flex-wrap gap-x-5 gap-y-2\">\n            {SOCIAL.map((s) => (\n              <li key={s}>\n                <a href={`#${slug(s)}`} className={link}>\n                  {s}\n                </a>\n              </li>\n            ))}\n          </ul>\n        </div>\n      </div>\n    </footer>\n  )\n}\n"
+    }
+  ],
+  "docs": "The block is in components/dresscode/footer-columns.tsx; render it in any page.\nIt wears your DressCode theme (its colors, fonts and corners, and the dc-* classes the theme adds). Pick one at https://dresscodeui.com/themes, e.g. npx shadcn@latest add https://dresscodeui.com/r/dresscode/mono.json"
+}

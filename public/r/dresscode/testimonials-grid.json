@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "testimonials-grid",
+  "type": "registry:block",
+  "title": "Testimonials: Lead quote and two more",
+  "description": "One large quote in a card beside two smaller ones with star ratings, each with the person's initials, name and role.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "categories": [
+    "testimonials"
+  ],
+  "dependencies": [
+    "lucide-react@^1.73.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/dresscode/sections/testimonials/grid.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/testimonials-grid.tsx",
+      "content": "// Testimonials, lead quote and two more: one large quote in a card beside two smaller ones with a star\n// rating. People are shown by their initials. From the Orbit landing template; the names and quotes are\n// sample content, replace them with your own.\nimport { Quote, Star } from \"lucide-react\"\n\nconst QUOTES = [\n  {\n    quote: \"I used to spend Friday afternoons chasing invoices. Now Orbit does it in a tone I would actually use, and clients pay faster.\",\n    name: \"Maya Lindqvist\",\n    role: \"Founder, Fernwood Studio\",\n    initials: \"ML\",\n  },\n  {\n    quote: \"The forecast alone is worth it. I know in the first week whether the month is fine.\",\n    name: \"Tom Okafor\",\n    role: \"Partner, Kato & Lee\",\n    initials: \"TO\",\n  },\n  {\n    quote: \"Setting it up took one coffee. Every invoice since has taken about a minute.\",\n    name: \"Priya Raman\",\n    role: \"Freelance product designer\",\n    initials: \"PR\",\n  },\n]\n\nfunction Initials({ initials }: { initials: string }) {\n  return (\n    <span aria-hidden=\"true\" className=\"inline-grid size-9 shrink-0 place-items-center rounded-full bg-[color:color-mix(in_oklab,var(--dc-accent)_14%,var(--card))] text-xs font-bold text-[color:var(--dc-accent)] ring-2 ring-[color:var(--card)]\">\n      {initials}\n    </span>\n  )\n}\n\nexport default function TestimonialsGrid() {\n  const [lead, ...rest] = QUOTES\n  return (\n    <section aria-labelledby=\"testimonials-grid-title\" className=\"py-16 sm:py-24\">\n      <div className=\"mx-auto w-full max-w-[1200px] px-5 sm:px-8\">\n        <div className=\"mx-auto max-w-[640px] text-center\">\n          <p className=\"text-sm font-semibold text-[color:var(--dc-accent)]\">Customers</p>\n          <h2 id=\"testimonials-grid-title\" className=\"dc-h mt-3 text-[32px] leading-[1.1] sm:text-[42px]\">\n            Fewer awkward emails, more paid invoices\n          </h2>\n        </div>\n        <div className=\"mt-14 grid gap-4 lg:grid-cols-[1.4fr_1fr]\">\n          <figure className=\"dc-card flex flex-col justify-between p-6 sm:p-8\">\n            <div>\n              <Quote className=\"size-8 text-[color:var(--dc-accent)]\" aria-hidden=\"true\" />\n              <blockquote className=\"dc-h mt-5 text-[24px] leading-snug sm:text-[28px]\">“{lead.quote}”</blockquote>\n            </div>\n            <figcaption className=\"mt-8 flex items-center gap-3\">\n              <Initials initials={lead.initials} />\n              <span>\n                <span className=\"block font-semibold\">{lead.name}</span>\n                <span className=\"block text-sm text-muted-foreground\">{lead.role}</span>\n              </span>\n            </figcaption>\n          </figure>\n          <div className=\"grid gap-4\">\n            {rest.map((q) => (\n              <figure key={q.name} className=\"dc-card p-6\">\n                <p className=\"flex gap-0.5 text-[color:var(--dc-accent)]\">\n                  <span className=\"sr-only\">Rated 5 out of 5</span>\n                  {Array.from({ length: 5 }, (_, i) => (\n                    <Star key={i} className=\"size-4 fill-current\" aria-hidden=\"true\" />\n                  ))}\n                </p>\n                <blockquote className=\"mt-3 text-[16px] leading-relaxed\">“{q.quote}”</blockquote>\n                <figcaption className=\"mt-5 flex items-center gap-3\">\n                  <Initials initials={q.initials} />\n                  <span>\n                    <span className=\"block font-semibold\">{q.name}</span>\n                    <span className=\"block text-sm text-muted-foreground\">{q.role}</span>\n                  </span>\n                </figcaption>\n              </figure>\n            ))}\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "docs": "The block is in components/dresscode/testimonials-grid.tsx; render it in any page.\nIt wears your DressCode theme (its colors, fonts and corners, and the dc-* classes the theme adds). Pick one at https://dresscodeui.com/themes, e.g. npx shadcn@latest add https://dresscodeui.com/r/dresscode/mono.json"
+}
