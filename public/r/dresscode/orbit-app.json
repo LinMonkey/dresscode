@@ -6,9 +6,9 @@
   "description": "The app behind the Orbit landing page: a shell with sidebar, command palette, notifications and user menu, and 13 screens (overview, invoices, invoice detail and editor, recurring, clients and client detail, payments, reports, settings, sign in, sign up, not found). Wears whichever DressCode theme is installed, in light and dark.",
   "author": "DressCode UI <https://dresscodeui.com>",
   "dependencies": [
-    "lucide-react",
-    "recharts",
-    "sonner"
+    "lucide-react@^1.73.0",
+    "recharts@^3.8.0",
+    "sonner@^2.0.8"
   ],
   "registryDependencies": [
     "alert-dialog",

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "timeline-milestones",
+  "type": "registry:block",
+  "title": "Timeline: Roadmap",
+  "description": "A horizontal timeline of milestones that scrolls sideways on phones.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [],
+  "registryDependencies": [
+    "badge",
+    "https://dresscodeui.com/r/dresscode/timeline.json"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/components/timeline/examples/milestones.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/timeline-milestones.tsx",
+      "content": "// A horizontal roadmap: milestones left to right, scrolling sideways on narrow screens.\nimport { Badge } from \"@/components/ui/badge\"\nimport {\n  Timeline,\n  TimelineContent,\n  TimelineDescription,\n  TimelineIndicator,\n  TimelineItem,\n  TimelineSeparator,\n  TimelineTime,\n  TimelineTitle,\n} from \"@/components/ui/timeline\"\n\nconst MILESTONES = [\n  { quarter: \"Q1 2026\", title: \"Invoices\", note: \"Send, track and get paid by card.\", status: \"done\" },\n  { quarter: \"Q2 2026\", title: \"Reminders\", note: \"Automatic follow-ups in your tone.\", status: \"done\" },\n  { quarter: \"Q3 2026\", title: \"Recurring billing\", note: \"Retainers that bill themselves.\", status: \"done\" },\n  { quarter: \"Q4 2026\", title: \"Multi-currency\", note: \"Bill in 30 currencies.\", status: \"current\" },\n  { quarter: \"Q1 2027\", title: \"Accounting sync\", note: \"Two-way sync with your books.\", status: \"upcoming\" },\n] as const\n\nexport default function TimelineMilestones() {\n  return (\n    <section aria-labelledby=\"roadmap\" className=\"w-full max-w-4xl\">\n      <div className=\"mb-6 flex items-center justify-between gap-4\">\n        <h2 id=\"roadmap\" className=\"text-base font-semibold\">\n          Roadmap\n        </h2>\n        <Badge variant=\"secondary\">Updated Nov 24</Badge>\n      </div>\n      <Timeline orientation=\"horizontal\">\n        {MILESTONES.map((m, i) => (\n          <TimelineItem key={m.title} status={m.status}>\n            <TimelineSeparator />\n            <TimelineIndicator>{i + 1}</TimelineIndicator>\n            <TimelineContent className=\"pt-0\">\n              <TimelineTime>{m.quarter}</TimelineTime>\n              <TimelineTitle className=\"mt-0.5\">{m.title}</TimelineTitle>\n              <TimelineDescription>{m.note}</TimelineDescription>\n            </TimelineContent>\n          </TimelineItem>\n        ))}\n      </Timeline>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "docs": "The example is in components/dresscode/timeline-milestones.tsx. Install a DressCode theme for its colors, fonts and corners: https://dresscodeui.com/themes"
+}

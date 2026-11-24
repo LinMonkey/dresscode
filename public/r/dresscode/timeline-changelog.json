@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "timeline-changelog",
+  "type": "registry:block",
+  "title": "Timeline: Changelog",
+  "description": "Releases with their date and version on the left and what changed on the right.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [],
+  "registryDependencies": [
+    "badge",
+    "https://dresscodeui.com/r/dresscode/timeline.json"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/components/timeline/examples/changelog.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/timeline-changelog.tsx",
+      "content": "// A changelog: one entry per release, the date and version on the left, what changed on the right.\nimport { Badge } from \"@/components/ui/badge\"\nimport { Timeline, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator, TimelineTitle } from \"@/components/ui/timeline\"\n\nconst RELEASES = [\n  {\n    version: \"2.4.0\",\n    date: \"Nov 24, 2026\",\n    title: \"Reminders in your own words\",\n    changes: [\n      { kind: \"New\", text: \"Write the first reminder yourself; the rest keep your tone.\" },\n      { kind: \"New\", text: \"Late fees, applied politely after the date you pick.\" },\n      { kind: \"Fixed\", text: \"Reminders no longer go out on public holidays.\" },\n    ],\n  },\n  {\n    version: \"2.3.0\",\n    date: \"Nov 10, 2026\",\n    title: \"Recurring invoices\",\n    changes: [\n      { kind: \"New\", text: \"Retainers that bill themselves every month and stop when the contract ends.\" },\n      { kind: \"Improved\", text: \"The invoice editor remembers your last tax rate per client.\" },\n    ],\n  },\n  {\n    version: \"2.2.1\",\n    date: \"Oct 28, 2026\",\n    title: \"Fixes\",\n    changes: [\n      { kind: \"Fixed\", text: \"PDF totals now round the same way as the screen.\" },\n      { kind: \"Fixed\", text: \"Search found archived clients twice.\" },\n    ],\n  },\n]\n\nconst TONE: Record<string, \"default\" | \"secondary\" | \"outline\"> = { New: \"default\", Improved: \"secondary\", Fixed: \"outline\" }\n\nexport default function TimelineChangelog() {\n  return (\n    <Timeline className=\"w-full max-w-2xl\">\n      {RELEASES.map((r, i) => (\n        <TimelineItem key={r.version} status={i === 0 ? \"current\" : \"done\"} className=\"sm:gap-6\">\n          <div className=\"hidden w-28 shrink-0 pt-1 text-right sm:block\">\n            <p className=\"text-sm font-medium\">{r.date}</p>\n            <p className=\"text-xs text-muted-foreground\">v{r.version}</p>\n          </div>\n          <TimelineSeparator className=\"sm:left-[calc(9.5rem-0.5px)]!\" />\n          <TimelineDot />\n          <TimelineContent className=\"pb-2\">\n            <p className=\"text-xs text-muted-foreground sm:hidden\">\n              {r.date} · v{r.version}\n            </p>\n            <TimelineTitle className=\"text-base\">{r.title}</TimelineTitle>\n            <ul className=\"mt-3 space-y-2\">\n              {r.changes.map((c) => (\n                <li key={c.text} className=\"flex items-start gap-2 text-sm\">\n                  <Badge variant={TONE[c.kind]} className=\"mt-0.5 w-[4.75rem] shrink-0 justify-center\">\n                    {c.kind}\n                  </Badge>\n                  <span className=\"text-muted-foreground\">{c.text}</span>\n                </li>\n              ))}\n            </ul>\n          </TimelineContent>\n        </TimelineItem>\n      ))}\n    </Timeline>\n  )\n}\n"
+    }
+  ],
+  "docs": "The example is in components/dresscode/timeline-changelog.tsx. Install a DressCode theme for its colors, fonts and corners: https://dresscodeui.com/themes"
+}

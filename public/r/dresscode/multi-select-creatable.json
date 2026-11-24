@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "multi-select-creatable",
+  "type": "registry:block",
+  "title": "Multi select: Creatable",
+  "description": "Find a tag or create one when nothing matches; new tags join the list.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [
+    "lucide-react@^1.73.0"
+  ],
+  "registryDependencies": [
+    "card",
+    "label",
+    "https://dresscodeui.com/r/dresscode/multi-select.json"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/components/multi-select/examples/creatable.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/multi-select-creatable.tsx",
+      "content": "\"use client\"\n\n// Invoice tags: find a tag or type a new one and pick \"Create “…”\" (or press Enter). New tags join the\n// workspace list, so they show up for the next invoice too.\nimport * as React from \"react\"\nimport { SparklesIcon } from \"lucide-react\"\n\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Label } from \"@/components/ui/label\"\nimport { MultiSelect, type MultiSelectOption } from \"@/components/ui/multi-select\"\n\nconst WORKSPACE_TAGS: MultiSelectOption[] = [\n  { value: \"retainer\", label: \"Retainer\", description: \"Used on 24 invoices\" },\n  { value: \"consulting\", label: \"Consulting\", description: \"Used on 18 invoices\" },\n  { value: \"design-sprint\", label: \"Design sprint\", description: \"Used on 9 invoices\" },\n  { value: \"recurring\", label: \"Recurring\", description: \"Used on 31 invoices\" },\n  { value: \"rush-job\", label: \"Rush job\", description: \"Used on 4 invoices\" },\n  { value: \"hardware\", label: \"Hardware\", description: \"Used on 6 invoices\" },\n  { value: \"software-licences\", label: \"Software licences\", description: \"Used on 11 invoices\" },\n  { value: \"travel\", label: \"Travel\", description: \"Used on 7 invoices\" },\n  { value: \"q4-2026\", label: \"Q4 2026\", description: \"Used on 15 invoices\" },\n]\n\nconst slug = (text: string) =>\n  text\n    .toLowerCase()\n    .replace(/[^a-z0-9]+/g, \"-\")\n    .replace(/^-|-$/g, \"\")\n\nexport default function MultiSelectCreatable() {\n  const [tags, setTags] = React.useState<MultiSelectOption[]>(WORKSPACE_TAGS)\n  const [picked, setPicked] = React.useState<string[]>([\"retainer\", \"q4-2026\"])\n  const [lastCreated, setLastCreated] = React.useState<string | null>(null)\n\n  const create = (text: string) => {\n    const label = text.charAt(0).toUpperCase() + text.slice(1)\n    const value = slug(label) || label\n    // \"Rush job!\" is the \"Rush job\" tag that already exists: pick that one instead of a twin.\n    const existing = tags.find((t) => t.value === value)\n    if (existing) return existing\n    const option = { value, label, description: \"New tag\" }\n    setTags((list) => [...list, option])\n    setLastCreated(label)\n    return option\n  }\n\n  return (\n    <Card className=\"mx-auto w-full max-w-lg\">\n      <CardHeader>\n        <CardTitle>Tags for INV-1043</CardTitle>\n        <CardDescription>Tags group invoices in reports. Type to find one, or create a new tag on the spot.</CardDescription>\n      </CardHeader>\n      <CardContent className=\"grid gap-2\">\n        <Label htmlFor=\"invoice-tags\">Tags</Label>\n        <MultiSelect\n          id=\"invoice-tags\"\n          aria-describedby=\"invoice-tags-hint\"\n          options={tags}\n          value={picked}\n          onValueChange={setPicked}\n          creatable\n          onCreate={create}\n          placeholder=\"Find or create a tag…\"\n          emptyMessage=\"Type a name to create your first tag.\"\n        />\n        <p id=\"invoice-tags-hint\" className=\"flex items-center gap-1.5 text-xs text-muted-foreground\" aria-live=\"polite\">\n          {lastCreated ? (\n            <>\n              <SparklesIcon aria-hidden=\"true\" className=\"size-3.5 text-primary\" />\n              Created “{lastCreated}”. It is in the workspace tag list now.\n            </>\n          ) : (\n            `${tags.length} tags in this workspace. Press Enter to create the one you typed.`\n          )}\n        </p>\n      </CardContent>\n    </Card>\n  )\n}\n"
+    }
+  ],
+  "docs": "The example is in components/dresscode/multi-select-creatable.tsx. Install a DressCode theme for its colors, fonts and corners: https://dresscodeui.com/themes"
+}

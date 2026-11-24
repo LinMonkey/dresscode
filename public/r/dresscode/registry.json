@@ -70,6 +70,384 @@
       "description": "The app behind the Orbit landing page: a shell with sidebar, command palette, notifications and user menu, and 13 screens (overview, invoices, invoice detail and editor, recurring, clients and client detail, payments, reports, settings, sign in, sign up, not found). Wears whichever DressCode theme is installed, in light and dark."
     },
     {
+      "name": "charts-area-interactive",
+      "type": "registry:block",
+      "title": "Charts: Area chart with time range",
+      "description": "Two gradient areas, invoiced and collected, with a 7 day, 30 day or 3 month range select."
+    },
+    {
+      "name": "charts-bar-stacked",
+      "type": "registry:block",
+      "title": "Charts: Stacked bars",
+      "description": "Billing by month stacked by kind of work, with a legend that filters and a tooltip with totals."
+    },
+    {
+      "name": "charts-line-comparison",
+      "type": "registry:block",
+      "title": "Charts: Year over year",
+      "description": "This year against last year and a dashed target, with dots on hover and a year-to-date view."
+    },
+    {
+      "name": "charts-donut",
+      "type": "registry:block",
+      "title": "Charts: Donut with legend",
+      "description": "Payment methods around the month's total, with each method's amount and share beside it."
+    },
+    {
+      "name": "charts-radial",
+      "type": "registry:block",
+      "title": "Charts: Radial goals",
+      "description": "Three quarter goals as progress rings, each named with its figure, target and pace."
+    },
+    {
+      "name": "charts-kpi-sparklines",
+      "type": "registry:block",
+      "title": "Charts: KPI cards with sparklines",
+      "description": "Four figures with a change badge that knows good from bad, and a 12-week sparkline each."
+    },
+    {
+      "name": "charts-bar-horizontal",
+      "type": "registry:block",
+      "title": "Charts: Horizontal bars",
+      "description": "Top clients by revenue with the amount at the end of each bar."
+    },
+    {
+      "name": "chat",
+      "type": "registry:ui",
+      "title": "Chat",
+      "description": "The parts of a chat UI: a message list that follows the newest message, messages with avatars, times and read receipts, bubbles for text, files, images and code, a typing indicator, quick replies and a composer that grows as you type. For AI assistants, support chats, inboxes and help widgets."
+    },
+    {
+      "name": "chat-ai-assistant",
+      "type": "registry:block",
+      "title": "Chat: AI assistant",
+      "description": "Suggestions when empty, answers that stream in word by word with lists and code, copy, regenerate and a model picker."
+    },
+    {
+      "name": "chat-support",
+      "type": "registry:block",
+      "title": "Chat: Support conversation",
+      "description": "A chat with a support agent: read receipts, an image you can open full size, typing, and a rating once it's solved."
+    },
+    {
+      "name": "chat-inbox",
+      "type": "registry:block",
+      "title": "Chat: Inbox",
+      "description": "Conversations with search, unread counts and online dots beside the open thread; separate screens on phones."
+    },
+    {
+      "name": "chat-floating-widget",
+      "type": "registry:block",
+      "title": "Chat: Floating widget",
+      "description": "A launcher in the corner that opens a compact chat with a greeting, office hours, quick replies and email follow-up."
+    },
+    {
+      "name": "chat-prompt-input",
+      "type": "registry:block",
+      "title": "Chat: Prompt input",
+      "description": "A composer on its own: files and images with progress and remove, a mode toggle, voice input, a character limit and stop."
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color picker",
+      "description": "A color picker with a saturation and brightness area, hue and alpha sliders, hex, RGB and HSL inputs, an eyedropper, preset swatches and recent colors. Keyboard and touch friendly, controlled or uncontrolled, no extra packages."
+    },
+    {
+      "name": "color-picker-popover",
+      "type": "registry:block",
+      "title": "Color picker: In a popover",
+      "description": "A swatch button in a settings form that opens the full picker for a brand color."
+    },
+    {
+      "name": "color-picker-inline",
+      "type": "registry:block",
+      "title": "Color picker: Inline panel",
+      "description": "The picker always open beside a live preview that uses the color."
+    },
+    {
+      "name": "color-picker-swatches",
+      "type": "registry:block",
+      "title": "Color picker: Swatch grid",
+      "description": "A compact grid of presets, with a Custom… button that opens the full picker."
+    },
+    {
+      "name": "color-picker-alpha",
+      "type": "registry:block",
+      "title": "Color picker: With alpha",
+      "description": "A translucent overlay color with an opacity slider, written out as rgba and 8-digit hex."
+    },
+    {
+      "name": "color-picker-theme-editor",
+      "type": "registry:block",
+      "title": "Color picker: Theme editor",
+      "description": "Three pickers restyle a button, a badge and a card, with a contrast check for each text pair."
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data table",
+      "description": "A shadcn/ui data table on TanStack Table: sortable columns, search and faceted filters, pagination, row selection with bulk actions, column visibility, expandable rows, inline editing, a sticky header and pinned columns."
+    },
+    {
+      "name": "data-table-sorting-pagination",
+      "type": "registry:block",
+      "title": "Data table: Sorting and pagination",
+      "description": "Sort menus on every header, money right-aligned with totals, page size and page controls, and loading rows."
+    },
+    {
+      "name": "data-table-filters",
+      "type": "registry:block",
+      "title": "Data table: Search and filters",
+      "description": "Search across columns, faceted status and client filters with counts, a reset button and a column visibility menu."
+    },
+    {
+      "name": "data-table-row-selection",
+      "type": "registry:block",
+      "title": "Data table: Row selection and bulk actions",
+      "description": "Checkboxes with select all and shift-click ranges, a bulk bar to remind, export or delete, and a menu on each row."
+    },
+    {
+      "name": "data-table-expandable-rows",
+      "type": "registry:block",
+      "title": "Data table: Expandable rows",
+      "description": "Rows that open in place to show an invoice's line items, totals and payment details."
+    },
+    {
+      "name": "data-table-editable-cells",
+      "type": "registry:block",
+      "title": "Data table: Editable cells",
+      "description": "Edit an email, terms or rate in place, with save and cancel, validation messages and undo."
+    },
+    {
+      "name": "data-table-sticky-columns",
+      "type": "registry:block",
+      "title": "Data table: Sticky header and pinned columns",
+      "description": "Twenty-one columns that scroll both ways inside the table, with the header, first column and actions held in place."
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date picker",
+      "description": "A date field that opens a calendar in a popover: a single date, or a range with presets and two months side by side. With min and max dates, disabled days, a clear button and hidden inputs for forms."
+    },
+    {
+      "name": "date-picker-single",
+      "type": "registry:block",
+      "title": "Date picker: Due date",
+      "description": "A single date field with a label, a hint, payment-term shortcuts and past days disabled."
+    },
+    {
+      "name": "date-picker-range-presets",
+      "type": "registry:block",
+      "title": "Date picker: Date range with presets",
+      "description": "A report period with presets beside a two-month calendar and an Apply step."
+    },
+    {
+      "name": "date-picker-date-time",
+      "type": "registry:block",
+      "title": "Date picker: Date and time",
+      "description": "A day plus a time in 15-minute steps for scheduling a reminder, with the result in words."
+    },
+    {
+      "name": "date-picker-month-year",
+      "type": "registry:block",
+      "title": "Date picker: Month and year dropdowns",
+      "description": "Month and year menus in the caption to jump to a birth date or a date years away."
+    },
+    {
+      "name": "date-picker-form-field",
+      "type": "registry:block",
+      "title": "Date picker: In a form",
+      "description": "Validation for required dates, dates in the past and an end before the start, with submit disabled until valid."
+    },
+    {
+      "name": "date-picker-inline-booking",
+      "type": "registry:block",
+      "title": "Date picker: Inline booking calendar",
+      "description": "A calendar without a popover beside the free time slots for the picked day."
+    },
+    {
+      "name": "multi-select",
+      "type": "registry:ui",
+      "title": "Multi select",
+      "description": "A field for picking several values from a searchable list: the picks show as removable chips, with groups, disabled options, a limit, an empty state and new values created on the spot. Full keyboard support, controlled or uncontrolled."
+    },
+    {
+      "name": "multi-select-tags",
+      "type": "registry:block",
+      "title": "Multi select: Labels",
+      "description": "Tag a project with colored labels, with a usage count per label and one-click suggestions."
+    },
+    {
+      "name": "multi-select-grouped",
+      "type": "registry:block",
+      "title": "Multi select: Grouped with search",
+      "description": "Countries grouped by region; search matches names, codes and other names, and long picks fold into “+N more”."
+    },
+    {
+      "name": "multi-select-creatable",
+      "type": "registry:block",
+      "title": "Multi select: Creatable",
+      "description": "Find a tag or create one when nothing matches; new tags join the list."
+    },
+    {
+      "name": "multi-select-max-count",
+      "type": "registry:block",
+      "title": "Multi select: Limit",
+      "description": "At most three picks: a meter and hint count them and the rest of the list is disabled once full."
+    },
+    {
+      "name": "multi-select-assignees",
+      "type": "registry:block",
+      "title": "Multi select: Assignees",
+      "description": "Pick teammates with avatars and roles, shown as avatar chips; the team loads when the list opens."
+    },
+    {
+      "name": "multi-select-form-field",
+      "type": "registry:block",
+      "title": "Multi select: In a form",
+      "description": "Label, hint, required validation on submit and the picks sent as plain form values."
+    },
+    {
+      "name": "navbar-simple",
+      "type": "registry:block",
+      "title": "Navbar: Simple",
+      "description": "Logo, four links, sign in and the main call to action, with the links in a sheet on phones."
+    },
+    {
+      "name": "navbar-mega-menu",
+      "type": "registry:block",
+      "title": "Navbar: Mega menu",
+      "description": "A Product menu that opens a wide panel of features in columns beside a highlighted card, plus a shorter Resources menu."
+    },
+    {
+      "name": "navbar-centered",
+      "type": "registry:block",
+      "title": "Navbar: Centered logo",
+      "description": "Links split left and right around a centered logo; the phone menu opens from the left."
+    },
+    {
+      "name": "navbar-search",
+      "type": "registry:block",
+      "title": "Navbar: With search",
+      "description": "A search button with a Ctrl K hint that opens a command dialog with grouped results and recent searches."
+    },
+    {
+      "name": "navbar-app-header",
+      "type": "registry:block",
+      "title": "Navbar: App header",
+      "description": "A product top bar: breadcrumb, search with suggestions, a notifications popover with unread counts, a user menu and section tabs."
+    },
+    {
+      "name": "navbar-announcement",
+      "type": "registry:block",
+      "title": "Navbar: Announcement bar",
+      "description": "A dismissible announcement above a sticky navbar that turns solid with a border once the page scrolls."
+    },
+    {
+      "name": "sidebar-icon-collapse",
+      "type": "registry:block",
+      "title": "Sidebar: Folds to icons",
+      "description": "Grouped links with counts and a user menu. Folded, it is a rail of icons with tooltips."
+    },
+    {
+      "name": "sidebar-floating",
+      "type": "registry:block",
+      "title": "Sidebar: Floating",
+      "description": "Floats off the edge, with a search that filters the links, project menus and a plan card."
+    },
+    {
+      "name": "sidebar-inset",
+      "type": "registry:block",
+      "title": "Sidebar: Inset",
+      "description": "The page sits in a rounded panel on the sidebar's color, here a dashboard with a chart."
+    },
+    {
+      "name": "sidebar-nested",
+      "type": "registry:block",
+      "title": "Sidebar: Nested docs tree",
+      "description": "Sections, pages and sub-pages that fold, four levels deep, with badges and a version menu."
+    },
+    {
+      "name": "sidebar-team-switcher",
+      "type": "registry:block",
+      "title": "Sidebar: Workspace switcher",
+      "description": "Switch workspaces from the header, create from a quick menu, and open the user menu at the foot."
+    },
+    {
+      "name": "sidebar-right-panel",
+      "type": "registry:block",
+      "title": "Sidebar: Right details panel",
+      "description": "A support inbox: nav on the left, the picked conversation's details in a sidebar on the right."
+    },
+    {
+      "name": "stepper",
+      "type": "registry:ui",
+      "title": "Stepper",
+      "description": "Numbered steps across the top or down the side, with done, current, loading and error states. Controlled or uncontrolled, linear or in any order, with arrow-key navigation. For checkouts, form wizards and onboarding."
+    },
+    {
+      "name": "stepper-horizontal",
+      "type": "registry:block",
+      "title": "Stepper: Checkout",
+      "description": "Steps across the top with titles and descriptions; collapses to “Step 2 of 4” on phones."
+    },
+    {
+      "name": "stepper-vertical",
+      "type": "registry:block",
+      "title": "Stepper: Onboarding checklist",
+      "description": "Steps down the side with the current step's form or action right under it."
+    },
+    {
+      "name": "stepper-form-wizard",
+      "type": "registry:block",
+      "title": "Stepper: Form wizard",
+      "description": "Create an invoice in four steps, with checks per step and a review that links back to each one."
+    },
+    {
+      "name": "stepper-progress",
+      "type": "registry:block",
+      "title": "Stepper: Progress bar",
+      "description": "A compact segmented bar with step labels under it, leading a short setup survey."
+    },
+    {
+      "name": "stepper-non-linear",
+      "type": "registry:block",
+      "title": "Stepper: Any order",
+      "description": "Sections you can fill in any order, each marked done or with what to fix; publish unlocks when all are done."
+    },
+    {
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Timeline",
+      "description": "A list of events joined by a line, vertical or horizontal, with a status for each step: done, in progress or still to come. For activity feeds, changelogs, order tracking and roadmaps."
+    },
+    {
+      "name": "timeline-activity",
+      "type": "registry:block",
+      "title": "Timeline: Activity feed",
+      "description": "Who did what and when, with an icon or avatar per event."
+    },
+    {
+      "name": "timeline-changelog",
+      "type": "registry:block",
+      "title": "Timeline: Changelog",
+      "description": "Releases with their date and version on the left and what changed on the right."
+    },
+    {
+      "name": "timeline-order-tracking",
+      "type": "registry:block",
+      "title": "Timeline: Order tracking",
+      "description": "Done, in progress and upcoming steps in a card, with overall progress."
+    },
+    {
+      "name": "timeline-milestones",
+      "type": "registry:block",
+      "title": "Timeline: Roadmap",
+      "description": "A horizontal timeline of milestones that scrolls sideways on phones."
+    },
+    {
       "name": "font-sans-geist",
       "type": "registry:font",
       "title": "Geist (sans)",

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "date-picker-single",
+  "type": "registry:block",
+  "title": "Date picker: Due date",
+  "description": "A single date field with a label, a hint, payment-term shortcuts and past days disabled.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [
+    "date-fns@^4.4.0",
+    "lucide-react@^1.73.0"
+  ],
+  "registryDependencies": [
+    "badge",
+    "button",
+    "card",
+    "label",
+    "toggle-group",
+    "https://dresscodeui.com/r/dresscode/date-picker.json"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/components/date-picker/examples/single.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/date-picker-single.tsx",
+      "content": "\"use client\"\n\n// A due-date field on an invoice: label, hint, payment-term shortcuts, past days disabled,\n// and a note when the date falls on a weekend.\nimport * as React from \"react\"\nimport { addDays, differenceInCalendarDays, format, isWeekend, startOfToday, subDays } from \"date-fns\"\nimport { Info } from \"lucide-react\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Label } from \"@/components/ui/label\"\nimport { ToggleGroup, ToggleGroupItem } from \"@/components/ui/toggle-group\"\nimport { DatePicker, useToday } from \"@/components/ui/date-picker\"\n\nconst TERMS = [7, 14, 30]\nconst REMIND_BEFORE = 3\n\nfunction dueHint(due: Date | undefined, today: Date | undefined) {\n  if (!due || !today) return `Fernwood Studio sees this date on the invoice. Orbit sends a reminder ${REMIND_BEFORE} days before it.`\n  const days = differenceInCalendarDays(due, today)\n  if (days === 0) return \"Due today, so no reminder goes out first.\"\n  if (days <= REMIND_BEFORE) return `Due in ${days} ${days === 1 ? \"day\" : \"days\"}, too soon for a reminder.`\n  return `Due in ${days} days. Orbit reminds Fernwood Studio on ${format(subDays(due, REMIND_BEFORE), \"EEE, MMM d\")}.`\n}\n\nexport default function DatePickerSingle() {\n  const id = React.useId()\n  const today = useToday()\n  const [due, setDue] = React.useState<Date | undefined>()\n  const term = due && today ? TERMS.find((t) => differenceInCalendarDays(due, today) === t) : undefined\n  const weekend = due && isWeekend(due)\n\n  return (\n    <Card className=\"w-full max-w-md\">\n      <CardHeader>\n        <CardTitle>Invoice INV-1043</CardTitle>\n        <CardDescription>Fernwood Studio · $4,200.00 · issued today</CardDescription>\n        <CardAction>\n          <Badge variant=\"secondary\">Draft</Badge>\n        </CardAction>\n      </CardHeader>\n      <CardContent className=\"grid gap-2\">\n        <div className=\"flex flex-wrap items-center justify-between gap-2\">\n          <Label id={`${id}-label`} htmlFor={id}>\n            Due date\n          </Label>\n          <ToggleGroup\n            aria-label=\"Payment terms\"\n            variant=\"outline\"\n            size=\"sm\"\n            spacing={1}\n            value={term ? [String(term)] : []}\n            onValueChange={(values: string[]) => {\n              if (values[0]) setDue(addDays(today ?? startOfToday(), Number(values[0])))\n            }}\n          >\n            {TERMS.map((t) => (\n              <ToggleGroupItem key={t} value={String(t)} className=\"px-2 text-xs\">\n                Net {t}\n              </ToggleGroupItem>\n            ))}\n          </ToggleGroup>\n        </div>\n        <DatePicker\n          id={id}\n          aria-labelledby={`${id}-label`}\n          aria-describedby={weekend ? `${id}-hint ${id}-weekend` : `${id}-hint`}\n          value={due}\n          onValueChange={setDue}\n          min={today}\n          placeholder=\"Pick a due date\"\n          displayFormat=\"EEE, MMM d, yyyy\"\n        />\n        <p id={`${id}-hint`} className=\"text-sm text-muted-foreground\">\n          {dueHint(due, today)}\n        </p>\n        {weekend ? (\n          <p id={`${id}-weekend`} className=\"flex gap-2 rounded-lg bg-muted px-3 py-2 text-sm\">\n            <Info aria-hidden=\"true\" className=\"mt-0.5 size-4 shrink-0 text-muted-foreground\" />\n            <span>\n              {format(due, \"MMM d\")} is a {format(due, \"EEEE\")}. Bank transfers sent that day usually land on Monday.\n            </span>\n          </p>\n        ) : null}\n      </CardContent>\n      <CardFooter className=\"justify-end gap-2\">\n        <Button variant=\"outline\">Save draft</Button>\n        <Button disabled={!due}>Send invoice</Button>\n      </CardFooter>\n    </Card>\n  )\n}\n"
+    }
+  ],
+  "docs": "The example is in components/dresscode/date-picker-single.tsx. Install a DressCode theme for its colors, fonts and corners: https://dresscodeui.com/themes"
+}

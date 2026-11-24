@@ -325,6 +325,29 @@ export function edge(from: string, toward: string, against: string[], min = 3): 
  * for the band, the highlight, card shape and type. `font` maps a FontKey to a font-family stack.
  * `mode` defaults to the theme's own.
  */
+/** How far apart two colors look (distance in OKLab). */
+function apart(x: string, y: string): number {
+  const [a, b] = [oklab(x), oklab(y)]
+  return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2])
+}
+
+/**
+ * Five chart colors that stay apart from each other and visible on a card. The accent and a lighter
+ * accent come first; then the band, the muted grey and the highlight, skipping any that would repeat an
+ * earlier color (Cobalt's band is its accent) or vanish into the card (Midnight's dark highlight, a
+ * yellow on white, which a thin line in it would need).
+ */
+function chartColors(c: DcColors): string[] {
+  const picks = [c.accent, mix(c.accent, 35, c.page)]
+  const candidates = [c.band, c.muted, c.highlight, mix(c.accent, 55, c.ink), mix(c.ink, 75, c.page), mix(c.highlight, 60, c.ink)]
+  for (const x of candidates) {
+    if (picks.length === 5) break
+    if (apart(x, c.surface) > 0.12 && contrast(x, c.surface) >= 1.8 && picks.every((p) => apart(p, x) > 0.09)) picks.push(x)
+  }
+  for (let pct = 40; picks.length < 5; pct += 15) picks.push(mix(c.ink, pct, c.page))
+  return picks
+}
+
 export function themeVars(t: DcTheme, font: (k: FontKey) => string, mode: Mode = t.mode): Record<string, string> {
   const c = t.modes[mode]
   const dark = mode === "dark"
@@ -336,6 +359,7 @@ export function themeVars(t: DcTheme, font: (k: FontKey) => string, mode: Mode =
   // Inputs, checkboxes, switches and outline buttons: an edge that stands 3:1 on the page and on cards.
   const input = edge(c.line, c.ink, [c.page, c.surface])
   const bandLine = mix(c.bandInk, 18, c.band)
+  const charts = chartColors(c)
   return {
     "--background": c.page,
     "--foreground": c.ink,
@@ -355,11 +379,11 @@ export function themeVars(t: DcTheme, font: (k: FontKey) => string, mode: Mode =
     "--border": c.line,
     "--input": input,
     "--ring": c.accent,
-    "--chart-1": c.accent,
-    "--chart-2": mix(c.accent, 35, c.page),
-    "--chart-3": c.band,
-    "--chart-4": c.muted,
-    "--chart-5": c.highlight,
+    "--chart-1": charts[0],
+    "--chart-2": charts[1],
+    "--chart-3": charts[2],
+    "--chart-4": charts[3],
+    "--chart-5": charts[4],
     "--radius": `${t.radius.control}px`,
     "--sidebar": c.surface,
     "--sidebar-foreground": c.ink,

@@ -35,6 +35,17 @@ Orbit is a made-up invoicing product. The landing page and the dashboard are bui
 nothing else, so they wear whichever theme is installed. Live demos in every theme:
 [dresscodeui.com/templates](https://dresscodeui.com/templates). Docs: [dresscodeui.com/docs](https://dresscodeui.com/docs).
 
+## Components
+
+10 components shadcn/ui doesn't ship, each with several examples (56 in all):
+charts, chat, color-picker, data-table, date-picker, multi-select, navbar, sidebar, stepper, timeline. Every example installs with one command, together with the component it is built on:
+
+```bash
+npx shadcn@latest add https://dresscodeui.com/r/dresscode/data-table-filters.json
+```
+
+Every example live, in every theme: [dresscodeui.com/components](https://dresscodeui.com/components).
+
 ## Short names
 
 ```bash
@@ -47,6 +58,8 @@ npx shadcn@latest add @dresscode/sorbet @dresscode/orbit-landing
 - `registry/dresscode/themes.ts`: the 9 themes (every color role in both modes, fonts, corners) and how they map
   onto shadcn's variables; `dresscode.css` holds the few classes the templates add; `fonts.ts` loads the families.
 - `registry/dresscode/blocks/orbit` and `blocks/orbit-app`: the Orbit landing page and dashboard.
+- `registry/dresscode/components/<name>`: each component (`ui/`, installs to `components/ui`) and its examples
+  (`examples/`, install to `components/dresscode/<name>-<example>.tsx`).
 - `tools/build-dresscode-registry.mjs`: builds `public/r/dresscode` from those sources and refuses a theme that fails
   `tools/dresscode-contrast.mjs`.
 - `registry.json` and `public/r/dresscode`: the shadcn registry, exactly what https://dresscodeui.com/r/dresscode serves.

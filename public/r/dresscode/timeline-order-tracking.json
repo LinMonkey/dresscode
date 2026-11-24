@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "timeline-order-tracking",
+  "type": "registry:block",
+  "title": "Timeline: Order tracking",
+  "description": "Done, in progress and upcoming steps in a card, with overall progress.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [
+    "lucide-react@^1.73.0"
+  ],
+  "registryDependencies": [
+    "card",
+    "progress",
+    "https://dresscodeui.com/r/dresscode/timeline.json"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/components/timeline/examples/order-tracking.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/timeline-order-tracking.tsx",
+      "content": "// Order tracking: steps that are done, the one in progress, and what is still to come.\nimport { Check, Home, Package, PackageCheck, Truck } from \"lucide-react\"\n\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Progress } from \"@/components/ui/progress\"\nimport {\n  Timeline,\n  TimelineContent,\n  TimelineDescription,\n  TimelineHeader,\n  TimelineIndicator,\n  TimelineItem,\n  TimelineSeparator,\n  TimelineTime,\n  TimelineTitle,\n} from \"@/components/ui/timeline\"\n\nconst STEPS = [\n  { icon: PackageCheck, title: \"Order placed\", note: \"Payment confirmed.\", time: \"Nov 21, 09:14\", status: \"done\" },\n  { icon: Package, title: \"Packed\", note: \"Two boxes, 3.4 kg.\", time: \"Nov 22, 16:40\", status: \"done\" },\n  { icon: Truck, title: \"In transit\", note: \"Left the Leeds depot. Next stop: Manchester.\", time: \"Nov 24, 07:02\", status: \"current\" },\n  { icon: Truck, title: \"Out for delivery\", note: \"Expected Nov 25, 9:00 to 13:00.\", status: \"upcoming\" },\n  { icon: Home, title: \"Delivered\", status: \"upcoming\" },\n] as const\n\nexport default function TimelineOrderTracking() {\n  return (\n    <Card className=\"w-full max-w-md\">\n      <CardHeader>\n        <CardTitle>Order #48213</CardTitle>\n        <CardDescription>Arriving tomorrow, Nov 25</CardDescription>\n        <Progress value={58} aria-label=\"Delivery progress\" className=\"mt-3\" />\n      </CardHeader>\n      <CardContent>\n        <Timeline>\n          {STEPS.map((s) => (\n            <TimelineItem key={s.title} status={s.status}>\n              <TimelineSeparator />\n              <TimelineIndicator>{s.status === \"done\" ? <Check /> : <s.icon />}</TimelineIndicator>\n              <TimelineContent>\n                <TimelineHeader className=\"justify-between\">\n                  <TimelineTitle>{s.title}</TimelineTitle>\n                  {\"time\" in s ? <TimelineTime>{s.time}</TimelineTime> : null}\n                </TimelineHeader>\n                {\"note\" in s ? <TimelineDescription>{s.note}</TimelineDescription> : null}\n              </TimelineContent>\n            </TimelineItem>\n          ))}\n        </Timeline>\n      </CardContent>\n    </Card>\n  )\n}\n"
+    }
+  ],
+  "docs": "The example is in components/dresscode/timeline-order-tracking.tsx. Install a DressCode theme for its colors, fonts and corners: https://dresscodeui.com/themes"
+}

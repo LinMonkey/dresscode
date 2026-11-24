@@ -18,7 +18,7 @@
 //   --base sets the host written into URLs (http://localhost:3700 to test installs locally).
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { dirname, join, resolve } from "node:path"
-import { fileURLToPath } from "node:url"
+import { fileURLToPath, pathToFileURL } from "node:url"
 
 import { registryItemSchema, registrySchema } from "shadcn/schema"
 
@@ -361,6 +361,13 @@ const BLOCKS = [
 ]
 
 const IGNORED_PACKAGES = new Set(["react", "react-dom", "next"])
+// npm packages install at the major version the code was written against (an unpinned name gets the
+// latest, and a new major, like @tanstack/react-table 9, breaks the types).
+const SITE_DEPS = JSON.parse(read("package.json")).dependencies
+const pinned = (name) => {
+  if (!SITE_DEPS[name]) throw new Error(`${name} is imported by a registry file but is not in package.json`)
+  return `${name}@${SITE_DEPS[name]}`
+}
 function importsOf(src) {
   const npm = new Set()
   const ui = new Set()
@@ -407,7 +414,7 @@ function blockItem(b) {
     title: b.title,
     description: b.description,
     author: AUTHOR,
-    dependencies: [...npm].sort(),
+    dependencies: [...npm].sort().map(pinned),
     registryDependencies: [...ui].sort(),
     files: [...out, ...pages],
     docs: [
@@ -431,6 +438,130 @@ for (const b of BLOCKS) {
   outputs.push(item)
   index.push({ name: item.name, type: item.type, title: item.title, description: item.description })
 }
+// ---------------------------------------------------------------------------------------------
+// Components: every folder in registry/dresscode/components with a meta.ts (see types.ts there).
+// A component's own files (ui/) become a registry:ui item named after the folder; each example
+// becomes a registry:block "<name>-<variant>" that installs to components/dresscode/. The site gets
+// an index of them (components/generated.ts) and their code as installed (generated-code.json).
+
+const COMPONENTS_DIR = "registry/dresscode/components"
+const componentDirs = readdirSync(join(root, COMPONENTS_DIR), { withFileTypes: true })
+  .filter((e) => e.isDirectory() && existsSync(join(root, COMPONENTS_DIR, e.name, "meta.ts")))
+  .map((e) => e.name)
+  .sort()
+
+const BASE_IMPORT = /^@\/registry\/dresscode\/components\/([\w-]+)\/ui\/([\w-]+)$/
+/** What a component file imports: stock shadcn/ui, other DressCode components, npm packages. */
+function componentImports(src, where) {
+  const npm = new Set()
+  const ui = new Set()
+  const bases = new Set()
+  for (const [, spec] of src.matchAll(/from "([^"]+)"/g)) {
+    let m
+    if ((m = /^@\/components\/ui\/([\w-]+)$/.exec(spec))) ui.add(m[1])
+    else if ((m = BASE_IMPORT.exec(spec))) bases.add(m[1])
+    else if (spec === "@/lib/utils") continue
+    else if (spec.startsWith(".") || spec.startsWith("@/")) throw new Error(`${where}: import ${spec} would not resolve in a user's project`)
+    else {
+      const parts = spec.split("/")
+      const name = spec.startsWith("@") ? parts.slice(0, 2).join("/") : parts[0]
+      if (!IGNORED_PACKAGES.has(name)) npm.add(name)
+    }
+  }
+  return { npm, ui, bases }
+}
+const installedComponent = (src) => src.replace(/@\/registry\/dresscode\/components\/[\w-]+\/ui\//g, "@/components/ui/")
+
+const componentDocs = []
+const componentCode = {}
+for (const name of componentDirs) {
+  const dirPath = `${COMPONENTS_DIR}/${name}`
+  const meta = (await import(pathToFileURL(join(root, dirPath, "meta.ts")).href)).default
+  if (meta.name !== name) throw new Error(`${dirPath}/meta.ts: name "${meta.name}" should be "${name}"`)
+  const uiDir = join(root, dirPath, "ui")
+  const uiFiles = existsSync(uiDir) ? readdirSync(uiDir).filter((f) => /\.tsx?$/.test(f)).sort() : []
+  componentCode[name] = { base: [], variants: {} }
+
+  if (uiFiles.length) {
+    const npm = new Set()
+    const ui = new Set()
+    const deps = new Set()
+    const files = uiFiles.map((f) => {
+      const path = `${dirPath}/ui/${f}`
+      const src = read(path)
+      const im = componentImports(src, path)
+      im.npm.forEach((x) => npm.add(x))
+      im.ui.forEach((x) => ui.add(x))
+      im.bases.forEach((x) => x !== name && deps.add(x))
+      const content = installedComponent(src)
+      componentCode[name].base.push({ file: `components/ui/${f}`, code: content })
+      return { path, type: "registry:ui", content }
+    })
+    const item = {
+      $schema: SCHEMA,
+      name,
+      type: "registry:ui",
+      title: meta.title,
+      description: meta.description,
+      author: AUTHOR,
+      dependencies: [...npm].sort().map(pinned),
+      registryDependencies: [...[...ui].sort(), ...[...deps].sort().map(url)],
+      files,
+      docs: `${meta.title} is in components/ui. Examples: https://dresscodeui.com/components/${name}`,
+    }
+    outputs.push(item)
+    index.push({ name: item.name, type: item.type, title: item.title, description: item.description })
+  }
+
+  const load = []
+  for (const v of meta.variants) {
+    const path = `${dirPath}/examples/${v.id}.tsx`
+    if (!existsSync(join(root, path))) throw new Error(`${path} is missing (variant "${v.id}" in meta.ts)`)
+    const src = read(path)
+    if (!/export default function/.test(src)) throw new Error(`${path}: needs an \`export default function\``)
+    const im = componentImports(src, path)
+    const target = `components/dresscode/${name}-${v.id}.tsx`
+    const content = installedComponent(src)
+    componentCode[name].variants[v.id] = { file: target, code: content }
+    const item = {
+      $schema: SCHEMA,
+      name: `${name}-${v.id}`,
+      type: "registry:block",
+      title: `${meta.title}: ${v.title}`,
+      description: v.description,
+      author: AUTHOR,
+      dependencies: [...im.npm].sort().map(pinned),
+      registryDependencies: [...[...im.ui].sort(), ...[...im.bases].sort().map(url)],
+      files: [{ path, type: "registry:component", target, content }],
+      docs: `The example is in ${target}. Install a DressCode theme for its colors, fonts and corners: https://dresscodeui.com/themes`,
+    }
+    outputs.push(item)
+    index.push({ name: item.name, type: item.type, title: item.title, description: item.description })
+    load.push(`    ${JSON.stringify(v.id)}: () => import("./${name}/examples/${v.id}"),`)
+  }
+  componentDocs.push({ name, load })
+}
+
+// The site's index of components: metadata and a lazy import per example (for the demo routes).
+write(
+  `${COMPONENTS_DIR}/generated.ts`,
+  [
+    "// Generated by tools/build-dresscode-registry.mjs from the component folders. Do not edit.",
+    'import type { ComponentType } from "react"',
+    "",
+    'import type { ComponentMeta } from "./types"',
+    ...componentDocs.map((c, i) => `import meta${i} from "./${c.name}/meta"`),
+    "",
+    "export type ComponentDoc = { meta: ComponentMeta; load: Record<string, () => Promise<{ default: ComponentType }>> }",
+    "",
+    "export const COMPONENT_DOCS: ComponentDoc[] = [",
+    ...componentDocs.map((c, i) => [`  {`, `    meta: meta${i},`, `    load: {`, ...c.load.map((l) => `  ${l}`), `    },`, `  },`].join("\n")),
+    "]",
+    "",
+  ].join("\n"),
+)
+write(`${COMPONENTS_DIR}/generated-code.json`, json(componentCode))
+
 for (const item of fontItems.values()) {
   outputs.push(item)
   index.push({ name: item.name, type: item.type, title: item.title, font: item.font })
@@ -453,5 +584,5 @@ for (const f of readdirSync(dir)) if (!written.has(join(dir, f))) rmSync(join(di
 
 const warns = rows.filter((r) => r.ratio < r.min && r.template).length
 console.log(
-  `[dresscode] ${THEMES.length} themes (light + dark, ${rows.length} contrast pairs ok${warns ? `, ${warns} template warnings` : ""}), ${BLOCKS.length} blocks, ${fontItems.size} fonts -> ${OUT} (base ${BASE})`,
+  `[dresscode] ${THEMES.length} themes (light + dark, ${rows.length} contrast pairs ok${warns ? `, ${warns} template warnings` : ""}), ${BLOCKS.length} templates, ${componentDirs.length} components (${outputs.filter((o) => o.name.includes("-") && o.type === "registry:block" && !BLOCKS.some((b) => b.name === o.name)).length} examples), ${fontItems.size} fonts -> ${OUT} (base ${BASE})`,
 )

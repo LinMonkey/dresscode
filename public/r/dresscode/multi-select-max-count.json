@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "multi-select-max-count",
+  "type": "registry:block",
+  "title": "Multi select: Limit",
+  "description": "At most three picks: a meter and hint count them and the rest of the list is disabled once full.",
+  "author": "DressCode UI <https://dresscodeui.com>",
+  "dependencies": [],
+  "registryDependencies": [
+    "avatar",
+    "badge",
+    "card",
+    "label",
+    "https://dresscodeui.com/r/dresscode/multi-select.json"
+  ],
+  "files": [
+    {
+      "path": "registry/dresscode/components/multi-select/examples/max-count.tsx",
+      "type": "registry:component",
+      "target": "components/dresscode/multi-select-max-count.tsx",
+      "content": "\"use client\"\n\n// Top skills: at most three picks. A meter and a hint count them, the list disables the rest once\n// it is full (and says why), and the idle field shows two chips and \"+1 more\".\nimport * as React from \"react\"\n\nimport { Avatar, AvatarFallback } from \"@/components/ui/avatar\"\nimport { Badge } from \"@/components/ui/badge\"\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Label } from \"@/components/ui/label\"\nimport { MultiSelect, type MultiSelectOption } from \"@/components/ui/multi-select\"\nimport { cn } from \"@/lib/utils\"\n\nconst MAX = 3\n\nconst SKILLS: MultiSelectOption[] = [\n  { value: \"ux-research\", label: \"UX research\" },\n  { value: \"interaction-design\", label: \"Interaction design\" },\n  { value: \"visual-design\", label: \"Visual design\" },\n  { value: \"prototyping\", label: \"Prototyping\" },\n  { value: \"design-systems\", label: \"Design systems\" },\n  { value: \"copywriting\", label: \"UX writing\", keywords: [\"copywriting\", \"content\"] },\n  { value: \"illustration\", label: \"Illustration\" },\n  { value: \"motion-design\", label: \"Motion design\", keywords: [\"animation\"] },\n  { value: \"frontend\", label: \"Frontend development\", keywords: [\"code\", \"react\"] },\n  { value: \"accessibility\", label: \"Accessibility audits\", keywords: [\"a11y\", \"wcag\"] },\n  { value: \"workshops\", label: \"Workshop facilitation\" },\n  { value: \"brand-strategy\", label: \"Brand strategy\" },\n]\n\nexport default function MultiSelectMaxCount() {\n  const [skills, setSkills] = React.useState<string[]>([\"design-systems\", \"prototyping\", \"ux-research\"])\n  const full = skills.length >= MAX\n  const labels = skills.map((v) => SKILLS.find((s) => s.value === v)?.label ?? v)\n\n  return (\n    <Card className=\"mx-auto w-full max-w-lg\">\n      <CardHeader>\n        <CardTitle>Top skills</CardTitle>\n        <CardDescription>Pick up to three. They show on your public profile and help clients find you in search.</CardDescription>\n      </CardHeader>\n      <CardContent className=\"grid gap-2\">\n        <Label htmlFor=\"top-skills\">Skills</Label>\n        <MultiSelect\n          id=\"top-skills\"\n          aria-describedby=\"top-skills-hint\"\n          options={SKILLS}\n          value={skills}\n          onValueChange={setSkills}\n          max={MAX}\n          maxChips={2}\n          placeholder=\"Pick up to three skills…\"\n          emptyMessage={(query) => `No skill called “${query}”.`}\n        />\n        <div className=\"flex items-center gap-3\">\n          <div aria-hidden=\"true\" className=\"flex gap-1\">\n            {Array.from({ length: MAX }, (_, i) => (\n              <span key={i} className={cn(\"h-1.5 w-6 rounded-full transition-colors\", i < skills.length ? \"bg-primary\" : \"bg-muted\")} />\n            ))}\n          </div>\n          <p id=\"top-skills-hint\" aria-live=\"polite\" className=\"text-xs text-muted-foreground\">\n            {full ? \"3 of 3 picked. Remove one to choose another.\" : `${skills.length} of ${MAX} picked`}\n          </p>\n        </div>\n\n        <div className=\"mt-3 rounded-lg border border-border bg-muted/40 p-3\">\n          <p className=\"mb-2.5 text-xs text-muted-foreground\">How clients see it</p>\n          <div className=\"flex items-start gap-3\">\n            <Avatar>\n              <AvatarFallback>ML</AvatarFallback>\n            </Avatar>\n            <div className=\"min-w-0\">\n              <p className=\"text-sm leading-tight font-medium\">Maya Lindqvist</p>\n              <p className=\"text-xs text-muted-foreground\">Freelance product designer, Oslo</p>\n              <div className=\"mt-2 flex flex-wrap gap-1\">\n                {labels.length ? (\n                  labels.map((l) => (\n                    <Badge key={l} variant=\"outline\">\n                      {l}\n                    </Badge>\n                  ))\n                ) : (\n                  <span className=\"text-xs text-muted-foreground\">Your top skills show here.</span>\n                )}\n              </div>\n            </div>\n          </div>\n        </div>\n      </CardContent>\n    </Card>\n  )\n}\n"
+    }
+  ],
+  "docs": "The example is in components/dresscode/multi-select-max-count.tsx. Install a DressCode theme for its colors, fonts and corners: https://dresscodeui.com/themes"
+}
