@@ -30,10 +30,13 @@ Install a theme first, then:
 ```bash
 npx shadcn@latest add https://dresscodeui.com/r/dresscode/orbit-landing.json   # landing page, 18 sections, at /orbit
 npx shadcn@latest add https://dresscodeui.com/r/dresscode/orbit-app.json       # app dashboard, 13 screens, at /orbit-app
+npx shadcn@latest add https://dresscodeui.com/r/dresscode/portfolio.json       # personal site, two homes, at /portfolio
 ```
 
-Orbit is a made-up invoicing product. The landing page and the dashboard are built from shadcn/ui components and
-nothing else, so they wear whichever theme is installed. Live demos in every theme:
+Orbit is a made-up invoicing product; the portfolio belongs to a made-up designer. All three are built from shadcn/ui
+components and nothing else, so they wear whichever theme is installed. The portfolio has two home pages (a
+text-first index or a grid of covers) and every page a personal site needs: work, case studies and galleries, about,
+a resume that prints to one A4 page, services with prices, writing, contact, uses and now. Live demos in every theme:
 [dresscodeui.com/templates](https://dresscodeui.com/templates). Docs: [dresscodeui.com/docs](https://dresscodeui.com/docs).
 
 ## Components
@@ -70,7 +73,8 @@ npx shadcn@latest add @dresscode/sorbet @dresscode/orbit-landing
 
 - `registry/dresscode/themes.ts`: the 9 themes (every color role in both modes, fonts, corners) and how they map
   onto shadcn's variables; `dresscode.css` holds the few classes the templates and blocks use; `fonts.ts` loads the families.
-- `registry/dresscode/blocks/orbit` and `blocks/orbit-app`: the Orbit landing page and dashboard.
+- `registry/dresscode/blocks/orbit` and `blocks/orbit-app`: the Orbit landing page and dashboard;
+  `blocks/portfolio`: the Portfolio site (its content is all in `data.ts`).
 - `registry/dresscode/components/<name>`: each component (`ui/`, installs to `components/ui`) and its examples
   (`examples/`, install to `components/dresscode/<name>-<example>.tsx`).
 - `registry/dresscode/sections/<category>`: the blocks, one file each (install to
@@ -78,7 +82,7 @@ npx shadcn@latest add @dresscode/sorbet @dresscode/orbit-landing
 - `tools/build-dresscode-registry.mjs`: builds `public/r/dresscode` from those sources and refuses a theme that fails
   `tools/dresscode-contrast.mjs`.
 - `registry.json` and `public/r/dresscode`: the shadcn registry, exactly what https://dresscodeui.com/r/dresscode serves.
-- `examples/orbit` and `examples/orbit-app`: the pages the two templates install into `app/`.
+- `examples/orbit`, `examples/orbit-app` and `examples/portfolio`: the pages the templates install into `app/`.
 
 ## History
 

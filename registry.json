@@ -70,6 +70,12 @@
       "description": "The app behind the Orbit landing page: a shell with sidebar, command palette, notifications and user menu, and 13 screens (overview, invoices, invoice detail and editor, recurring, clients and client detail, payments, reports, settings, sign in, sign up, not found). Wears whichever DressCode theme is installed, in light and dark."
     },
     {
+      "name": "portfolio",
+      "type": "registry:block",
+      "title": "Portfolio site",
+      "description": "A personal site for a designer or developer, in 14 kinds of page: two home pages (a text-first index or a grid of covers), work with a tag filter, case-study and gallery project pages, about, a résumé that prints to one A4 page, services with prices, writing with code highlighting, contact form, uses, now and a 404. Wears whichever DressCode theme is installed, in light and dark."
+    },
+    {
       "name": "charts-area-interactive",
       "type": "registry:block",
       "title": "Charts: Area chart with time range",

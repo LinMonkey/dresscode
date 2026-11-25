@@ -9,6 +9,8 @@
 //       npx shadcn@latest add https://dresscodeui.com/r/dresscode/orbit-landing.json
 //   public/r/dresscode/orbit-app.json         the Orbit app dashboard: its screens and /orbit-app/<screen> pages
 //       npx shadcn@latest add https://dresscodeui.com/r/dresscode/orbit-app.json
+//   public/r/dresscode/portfolio.json         the Portfolio site: its pages and /portfolio/<page> routes
+//       npx shadcn@latest add https://dresscodeui.com/r/dresscode/portfolio.json
 //   public/r/dresscode/<component>[-<example>].json  a component and its examples (registry/dresscode/components)
 //   public/r/dresscode/<category>-<block>.json  a block, one file (registry/dresscode/sections)
 //   public/r/dresscode/registry.json          the index
@@ -170,7 +172,7 @@ function themeItem(t) {
     `// The DressCode theme this project wears: ${t.name}. Written by`,
     `//   npx shadcn@latest add ${url(t.id)}`,
     "// Its colors (light in :root, dark in .dark), fonts and corners are CSS variables in your globals.css.",
-    "// These are the layout choices that come with it; the Orbit templates read them.",
+    "// These are the layout choices that come with it; the templates read them.",
     `// ${t.name} was designed ${t.mode} (mode). ${t.mode === "dark" ? 'Put className="dark" on <html> for it, or use next-themes with defaultTheme="dark".' : 'Put className="dark" on <html> (or use next-themes) for its dark version.'}`,
     `export const dresscode = ${TS({
       theme: t.id,
@@ -206,7 +208,7 @@ function themeItem(t) {
       `DressCode ${t.name} is installed: both modes' colors in globals.css (:root is light, .dark is dark), the dc-* classes, and lib/dresscode-theme.ts.`,
       `Fonts: ${fontNames}. The CLI added the next/font calls to app/layout.tsx and their variables to <html>; outside Next.js it installs them from Fontsource.${extraFontOptions(roles)}`,
       `${t.name} was designed ${t.mode}: ${t.mode === "dark" ? 'put className="dark" on <html> for it' : `add className="dark" on <html> for its ${other} version`} (or use next-themes).`,
-      `Templates: npx shadcn@latest add ${url("orbit-landing")} (landing page) and ${url("orbit-app")} (app dashboard)`,
+      `Templates: npx shadcn@latest add ${url("orbit-landing")} (landing page), ${url("orbit-app")} (app dashboard) and ${url("portfolio")} (personal site)`,
       "Components and blocks that wear it: https://dresscodeui.com/components and https://dresscodeui.com/blocks",
     ].join("\n"),
   }
@@ -309,6 +311,83 @@ const ORBIT_APP_SCREEN = [
   "",
 ].join("\n")
 
+const PORTFOLIO_LAYOUT = [
+  "// The Portfolio site in your DressCode theme (lib/dresscode-theme.ts, written by the theme install).",
+  "// Light or dark is <html class=\"dark\">, as in shadcn/ui: until a visitor picks, the site follows your root",
+  "// layout (a theme designed dark wants className=\"dark\" there, or next-themes). The site's switch remembers",
+  '// the pick under localStorage "theme", the key next-themes uses; this applies it before the first paint.',
+  'import type { ReactNode } from "react"',
+  "",
+  'const MODE = `try{var m=localStorage.getItem("theme"),h=document.documentElement;if(m==="light"||m==="dark"){h.classList.toggle("dark",m==="dark");h.style.colorScheme=m}}catch(e){}`',
+  "",
+  "export default function PortfolioLayout({ children }: { children: ReactNode }) {",
+  "  return (",
+  "    <>",
+  "      <script dangerouslySetInnerHTML={{ __html: MODE }} />",
+  "      {children}",
+  "    </>",
+  "  )",
+  "}",
+  "",
+].join("\n")
+
+const PORTFOLIO_HOME = [
+  "// The Portfolio site's home page: the index or the grid home, whichever HOME in components/portfolio/data.ts says.",
+  'import type { Metadata } from "next"',
+  "",
+  'import { PortfolioSite, portfolioMetadata } from "@/components/portfolio/portfolio"',
+  'import { dresscode } from "@/lib/dresscode-theme"',
+  "",
+  "export const metadata: Metadata = portfolioMetadata([])",
+  "",
+  "export default function PortfolioHome() {",
+  '  return <PortfolioSite path={[]} base="/portfolio" theme={dresscode.theme} brutal={dresscode.layout.brutal} />',
+  "}",
+  "",
+].join("\n")
+
+const PORTFOLIO_PAGE = [
+  "// Every other page of the Portfolio site: /portfolio/work, /portfolio/work/<project>, /portfolio/about,",
+  "// /portfolio/writing/<post> and so on. All of them are built at build time; anything else is the",
+  "// site's own 404 (not-found.tsx).",
+  'import type { Metadata } from "next"',
+  'import { notFound } from "next/navigation"',
+  "",
+  'import { allPaths, PortfolioSite, portfolioMetadata, resolve } from "@/components/portfolio/portfolio"',
+  'import { dresscode } from "@/lib/dresscode-theme"',
+  "",
+  "export function generateStaticParams() {",
+  "  return allPaths()",
+  "    .filter((path) => path.length)",
+  "    .map((path) => ({ path }))",
+  "}",
+  "",
+  "type Params = { params: Promise<{ path: string[] }> }",
+  "",
+  "export async function generateMetadata({ params }: Params): Promise<Metadata> {",
+  "  const { path } = await params",
+  "  return portfolioMetadata(path)",
+  "}",
+  "",
+  "export default async function PortfolioPage({ params }: Params) {",
+  "  const { path } = await params",
+  "  if (!resolve(path)) notFound()",
+  '  return <PortfolioSite path={path} base="/portfolio" theme={dresscode.theme} brutal={dresscode.layout.brutal} />',
+  "}",
+  "",
+].join("\n")
+
+const PORTFOLIO_NOT_FOUND = [
+  "// A missing page under /portfolio, in the site's own frame.",
+  'import { PortfolioSite } from "@/components/portfolio/portfolio"',
+  'import { dresscode } from "@/lib/dresscode-theme"',
+  "",
+  "export default function PortfolioNotFound() {",
+  '  return <PortfolioSite path={["not-found"]} base="/portfolio" theme={dresscode.theme} brutal={dresscode.layout.brutal} />',
+  "}",
+  "",
+].join("\n")
+
 const BLOCKS = [
   {
     name: "orbit-landing",
@@ -359,6 +438,27 @@ const BLOCKS = [
     docs: [
       "Orbit app dashboard: the screens are in components/orbit-app/ and the routes are /orbit-app/<screen> (start at /orbit-app/overview).",
       "Sample data lives in components/orbit-app/data.ts; replace it with your own as you wire the screens to your backend.",
+    ],
+  },
+  {
+    name: "portfolio",
+    title: "Portfolio site",
+    description:
+      "A personal site for a designer or developer, in 14 kinds of page: two home pages (a text-first index or a grid of covers), work with a tag filter, case-study and gallery project pages, about, a résumé that prints to one A4 page, services with prices, writing with code highlighting, contact form, uses, now and a 404. Wears whichever DressCode theme is installed, in light and dark.",
+    dir: "registry/dresscode/blocks/portfolio",
+    target: "components/portfolio",
+    exts: [".tsx", ".ts"],
+    exclude: [],
+    pages: [
+      { name: "layout.tsx", target: "app/portfolio/layout.tsx", content: PORTFOLIO_LAYOUT },
+      { name: "page.tsx", target: "app/portfolio/page.tsx", content: PORTFOLIO_HOME },
+      { name: "path-page.tsx", target: "app/portfolio/[...path]/page.tsx", content: PORTFOLIO_PAGE },
+      { name: "not-found.tsx", target: "app/portfolio/not-found.tsx", content: PORTFOLIO_NOT_FOUND },
+    ],
+    docs: [
+      "Portfolio site: the pages are in components/portfolio/ and the routes are /portfolio, /portfolio/work, /portfolio/about and so on.",
+      "Make it yours in components/portfolio/data.ts: your name, projects, posts and prices, and HOME (\"index\" or \"grid\") for the home page.",
+      "Give each project an image (and its plates a src) to replace the drawn sample covers.",
     ],
   },
 ]
