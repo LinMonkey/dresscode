@@ -50,8 +50,20 @@ export function PortfolioRoot({ theme, brutal, children }: { theme?: string; bru
   )
 }
 
+/** What a portfolio style puts around a page: its own header and footer (or, for Desktop, a window). */
+export type Frame = (props: { base: string; current: PageId; cta?: boolean; children: ReactNode }) => ReactNode
+const FRAMES = new Map<string, Frame>()
+
+/** A portfolio style (Poster, Bento and the others) registers its frame once, so every inner page wears it. */
+export function registerFrame(variant: string, frame: Frame) {
+  FRAMES.set(variant, frame)
+}
+
 /** Header, page, footer. `cta={false}` drops the footer's call to action (the contact page has its own). */
 export function PageFrame({ base, variant, current, cta = true, children }: { base: string; variant: Variant; current: PageId; cta?: boolean; children: ReactNode }) {
+  // Called, not rendered as <Frame>: frames are server components without state, looked up per variant.
+  const frame = FRAMES.get(variant)
+  if (frame) return frame({ base, current, cta, children })
   return (
     <>
       <a href="#main" className="sr-only z-50 rounded-md bg-background px-3 py-2 focus:not-sr-only focus:fixed focus:top-3 focus:left-3">

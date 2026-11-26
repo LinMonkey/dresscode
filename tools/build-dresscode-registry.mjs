@@ -388,6 +388,247 @@ const PORTFOLIO_NOT_FOUND = [
   "",
 ].join("\n")
 
+// The portfolio styles (Sidebar, Poster, Bento, Desktop): one home each, the Portfolio template's pages
+// in the style's own frame, at the same /portfolio routes. Each installs the Portfolio template's files
+// too (components/portfolio), so it stands alone.
+const styleRoutes = (style, Site, meta) => [
+  { name: "layout.tsx", target: "app/portfolio/layout.tsx", content: PORTFOLIO_LAYOUT },
+  {
+    name: "page.tsx",
+    target: "app/portfolio/page.tsx",
+    content: [
+      `// The ${style[0].toUpperCase() + style.slice(1)} portfolio's home page.`,
+      'import type { Metadata } from "next"',
+      "",
+      `import { ${Site}, ${meta} } from "@/components/portfolio-${style}/${style}"`,
+      'import { dresscode } from "@/lib/dresscode-theme"',
+      "",
+      `export const metadata: Metadata = ${meta}([])`,
+      "",
+      "export default function PortfolioHome() {",
+      `  return <${Site} path={[]} base="/portfolio" theme={dresscode.theme} brutal={dresscode.layout.brutal} />`,
+      "}",
+      "",
+    ].join("\n"),
+  },
+  {
+    name: "path-page.tsx",
+    target: "app/portfolio/[...path]/page.tsx",
+    content: [
+      "// Every other page: /portfolio/work, /portfolio/work/<project>, /portfolio/about, /portfolio/writing/<post>",
+      "// and so on, built at build time; anything else is the site's own 404 (not-found.tsx).",
+      'import type { Metadata } from "next"',
+      'import { notFound } from "next/navigation"',
+      "",
+      'import { allPaths, resolve } from "@/components/portfolio/site"',
+      `import { ${Site}, ${meta} } from "@/components/portfolio-${style}/${style}"`,
+      'import { dresscode } from "@/lib/dresscode-theme"',
+      "",
+      "export function generateStaticParams() {",
+      "  return allPaths()",
+      "    .filter((path) => path.length)",
+      "    .map((path) => ({ path }))",
+      "}",
+      "",
+      "type Params = { params: Promise<{ path: string[] }> }",
+      "",
+      "export async function generateMetadata({ params }: Params): Promise<Metadata> {",
+      "  const { path } = await params",
+      `  return ${meta}(path)`,
+      "}",
+      "",
+      "export default async function PortfolioPage({ params }: Params) {",
+      "  const { path } = await params",
+      "  if (!resolve(path)) notFound()",
+      `  return <${Site} path={path} base="/portfolio" theme={dresscode.theme} brutal={dresscode.layout.brutal} />`,
+      "}",
+      "",
+    ].join("\n"),
+  },
+  {
+    name: "not-found.tsx",
+    target: "app/portfolio/not-found.tsx",
+    content: [
+      "// A missing page under /portfolio, in the site's own frame.",
+      `import { ${Site} } from "@/components/portfolio-${style}/${style}"`,
+      'import { dresscode } from "@/lib/dresscode-theme"',
+      "",
+      "export default function PortfolioNotFound() {",
+      `  return <${Site} path={["not-found"]} base="/portfolio" theme={dresscode.theme} brutal={dresscode.layout.brutal} />`,
+      "}",
+      "",
+    ].join("\n"),
+  },
+]
+
+const portfolioFiles = () =>
+  readdirSync(join(root, "registry/dresscode/blocks/portfolio"))
+    .filter((f) => f.endsWith(".ts") || f.endsWith(".tsx"))
+    .sort()
+    .map((f) => ({ path: `registry/dresscode/blocks/portfolio/${f}`, target: `components/portfolio/${f}` }))
+
+const portfolioStyle = (style, title, description, pages = []) => {
+  const Name = style[0].toUpperCase() + style.slice(1)
+  return {
+    name: `portfolio-${style}`,
+    title,
+    description,
+    // Not published yet: built (and installable from a local server) only with DC_DRAFTS=1.
+    draft: true,
+    dir: `registry/dresscode/blocks/portfolio-${style}`,
+    target: `components/portfolio-${style}`,
+    exts: [".tsx", ".ts"],
+    exclude: [],
+    extra: portfolioFiles(),
+    pages: [...styleRoutes(style, `${Name}Site`, `${style}Metadata`), ...pages],
+    docs: [
+      `${title}: the style is in components/portfolio-${style}/ and the pages it shares with the Portfolio template are in components/portfolio/; the routes are /portfolio, /portfolio/work, /portfolio/about and so on.`,
+      "Make it yours in components/portfolio/data.ts: your name, photo (PERSON.portrait), projects, posts and prices.",
+      "Give each project an image (and its plates a src) to replace the drawn sample covers.",
+    ],
+  }
+}
+
+// The Real estate site: its pages at /realestate, /realestate/buy, /realestate/homes/<listing> and so on.
+const REALESTATE_PAGES = [
+  { name: "layout.tsx", target: "app/realestate/layout.tsx", content: PORTFOLIO_LAYOUT.replace("The Portfolio site", "The Real estate site").replace("PortfolioLayout", "RealEstateLayout") },
+  {
+    name: "page.tsx",
+    target: "app/realestate/page.tsx",
+    content: [
+      "// The Real estate site's home page: the platform or the boutique one, whichever HOME in components/realestate/data.ts says.",
+      'import type { Metadata } from "next"',
+      "",
+      'import { RealEstateSite, realEstateMetadata } from "@/components/realestate/realestate"',
+      'import { dresscode } from "@/lib/dresscode-theme"',
+      "",
+      "export const metadata: Metadata = realEstateMetadata([])",
+      "",
+      "export default function RealEstateHome() {",
+      '  return <RealEstateSite path={[]} base="/realestate" theme={dresscode.theme} brutal={dresscode.layout.brutal} />',
+      "}",
+      "",
+    ].join("\n"),
+  },
+  {
+    name: "path-page.tsx",
+    target: "app/realestate/[...path]/page.tsx",
+    content: [
+      "// Every other page: /realestate/buy, /realestate/homes/<listing>, /realestate/agents/<agent> and so on,",
+      "// built at build time; anything else is the site's own 404 (not-found.tsx).",
+      'import type { Metadata } from "next"',
+      'import { notFound } from "next/navigation"',
+      "",
+      'import { allPaths, RealEstateSite, realEstateMetadata, resolve } from "@/components/realestate/realestate"',
+      'import { dresscode } from "@/lib/dresscode-theme"',
+      "",
+      "export function generateStaticParams() {",
+      "  return allPaths()",
+      "    .filter((path) => path.length)",
+      "    .map((path) => ({ path }))",
+      "}",
+      "",
+      "type Params = { params: Promise<{ path: string[] }> }",
+      "",
+      "export async function generateMetadata({ params }: Params): Promise<Metadata> {",
+      "  const { path } = await params",
+      "  return realEstateMetadata(path)",
+      "}",
+      "",
+      "export default async function RealEstatePage({ params }: Params) {",
+      "  const { path } = await params",
+      "  if (!resolve(path)) notFound()",
+      '  return <RealEstateSite path={path} base="/realestate" theme={dresscode.theme} brutal={dresscode.layout.brutal} />',
+      "}",
+      "",
+    ].join("\n"),
+  },
+  {
+    name: "not-found.tsx",
+    target: "app/realestate/not-found.tsx",
+    content: [
+      "// A missing page under /realestate, in the site's own frame.",
+      'import { RealEstateSite } from "@/components/realestate/realestate"',
+      'import { dresscode } from "@/lib/dresscode-theme"',
+      "",
+      "export default function RealEstateNotFound() {",
+      '  return <RealEstateSite path={["not-found"]} base="/realestate" theme={dresscode.theme} brutal={dresscode.layout.brutal} />',
+      "}",
+      "",
+    ].join("\n"),
+  },
+]
+
+// The E-commerce store: its pages at /store, /store/shop, /store/products/<product>, /store/checkout and so on.
+const ECOMMERCE_PAGES = [
+  { name: "layout.tsx", target: "app/store/layout.tsx", content: PORTFOLIO_LAYOUT.replace("The Portfolio site", "The E-commerce store").replace("PortfolioLayout", "StoreLayout") },
+  {
+    name: "page.tsx",
+    target: "app/store/page.tsx",
+    content: [
+      "// The store's home page: the department store or the brand one, whichever HOME in components/ecommerce/data.ts says.",
+      'import type { Metadata } from "next"',
+      "",
+      'import { EcommerceSite, ecommerceMetadata } from "@/components/ecommerce/ecommerce"',
+      'import { dresscode } from "@/lib/dresscode-theme"',
+      "",
+      "export const metadata: Metadata = ecommerceMetadata([])",
+      "",
+      "export default function StoreHome() {",
+      '  return <EcommerceSite path={[]} base="/store" theme={dresscode.theme} brutal={dresscode.layout.brutal} />',
+      "}",
+      "",
+    ].join("\n"),
+  },
+  {
+    name: "path-page.tsx",
+    target: "app/store/[...path]/page.tsx",
+    content: [
+      "// Every other page: /store/shop, /store/shop/<department>, /store/products/<product>, /store/cart,",
+      "// /store/checkout and so on, built at build time; anything else is the store's own 404 (not-found.tsx).",
+      'import type { Metadata } from "next"',
+      'import { notFound } from "next/navigation"',
+      "",
+      'import { allPaths, EcommerceSite, ecommerceMetadata, resolve } from "@/components/ecommerce/ecommerce"',
+      'import { dresscode } from "@/lib/dresscode-theme"',
+      "",
+      "export function generateStaticParams() {",
+      "  return allPaths()",
+      "    .filter((path) => path.length)",
+      "    .map((path) => ({ path }))",
+      "}",
+      "",
+      "type Params = { params: Promise<{ path: string[] }> }",
+      "",
+      "export async function generateMetadata({ params }: Params): Promise<Metadata> {",
+      "  const { path } = await params",
+      "  return ecommerceMetadata(path)",
+      "}",
+      "",
+      "export default async function StorePage({ params }: Params) {",
+      "  const { path } = await params",
+      "  if (!resolve(path)) notFound()",
+      '  return <EcommerceSite path={path} base="/store" theme={dresscode.theme} brutal={dresscode.layout.brutal} />',
+      "}",
+      "",
+    ].join("\n"),
+  },
+  {
+    name: "not-found.tsx",
+    target: "app/store/not-found.tsx",
+    content: [
+      "// A missing page under /store, in the store's own frame.",
+      'import { EcommerceSite } from "@/components/ecommerce/ecommerce"',
+      'import { dresscode } from "@/lib/dresscode-theme"',
+      "",
+      "export default function StoreNotFound() {",
+      '  return <EcommerceSite path={["not-found"]} base="/store" theme={dresscode.theme} brutal={dresscode.layout.brutal} />',
+      "}",
+      "",
+    ].join("\n"),
+  },
+]
+
 const BLOCKS = [
   {
     name: "orbit-landing",
@@ -461,6 +702,39 @@ const BLOCKS = [
       "Give each project an image (and its plates a src) to replace the drawn sample covers.",
     ],
   },
+  {
+    name: "realestate",
+    title: "Real estate site",
+    description:
+      "A real estate site for a brokerage or a private office: two home pages (search first, or a full-bleed photograph), search with a list and a drawn map (filters, a drawn area, saved searches), listing pages with a photo viewer, tour booking, floor plan, schools and a payment calculator, agents, neighborhoods, a three-step valuation, a mortgage calculator, compare, saved homes, a journal, about and contact. Wears the installed DressCode theme in light and dark.",
+    dir: "registry/dresscode/blocks/realestate",
+    target: "components/realestate",
+    exts: [".tsx", ".ts"],
+    exclude: [],
+    pages: REALESTATE_PAGES,
+    docs: [
+      "Real estate site: the pages are in components/realestate/ and the routes are /realestate, /realestate/buy, /realestate/homes/<listing> and so on.",
+      'Make it yours in components/realestate/data.ts: the brokerage, its city and neighborhoods, the listings, agents and journal, and HOME ("platform" or "boutique").',
+      "The sample photographs load from dresscodeui.com; point the keys in components/realestate/assets.ts at your own photos.",
+    ],
+  },
+  {
+    name: "ecommerce",
+    title: "E-commerce store",
+    description:
+      "An online store for a brand or a shop with many departments: two home pages (a department store with a big search, or a brand with a full-bleed photograph), shop pages with filters in the address bar, product pages with colors, sizes, sold-out sizes, a size guide, reviews and pairs-well-with, a cart drawer with free-shipping progress, one-page checkout with discount codes, taxes and gift cards, order confirmation, account and orders, track an order, gift cards, saved items, search with suggestions, a journal, about, help and contact. Runs on local data with hooks for your payment provider. Wears the installed DressCode theme in light and dark.",
+    dir: "registry/dresscode/blocks/ecommerce",
+    target: "components/ecommerce",
+    exts: [".tsx", ".ts"],
+    exclude: [],
+    pages: ECOMMERCE_PAGES,
+    docs: [
+      "E-commerce store: the pages are in components/ecommerce/ and the routes are /store, /store/shop, /store/products/<product>, /store/checkout and so on.",
+      'Make it yours in components/ecommerce/data.ts: the brand, the store\'s rules (shipping, returns, codes, taxes), departments, products, reviews and journal, and HOME ("department" or "brand").',
+      "The cart, saved items and orders live in the browser (store.ts); payment is a hook (placeOrder in checkout.tsx) for Stripe, Shopify or your own API.",
+      "The sample photographs load from dresscodeui.com; point the keys in components/ecommerce/assets.ts at your own photos.",
+    ],
+  },
 ]
 
 const IGNORED_PACKAGES = new Set(["react", "react-dom", "next"])
@@ -501,6 +775,14 @@ function blockItem(b) {
   const ui = new Set()
   const out = sources.map(({ path, target }) => {
     let src = read(path)
+    if (/^registry\/dresscode\/blocks\/portfolio-[\w-]+\/assets\.ts$/.test(path)) {
+      src = src.replace(/"(\/portfolio\/styles\/[\w-]+\.webp)"/g, (_, asset) =>
+        JSON.stringify("data:image/webp;base64," + readFileSync(join(root, "public", asset)).toString("base64")),
+      )
+    }
+    // The real estate photos are too many to pack: the installed site loads the samples from the site.
+    if (path === "registry/dresscode/blocks/realestate/assets.ts") src = src.replaceAll('"/realestate/', `"${BASE}/realestate/`)
+    if (path === "registry/dresscode/blocks/ecommerce/assets.ts") src = src.replaceAll("`/ecommerce/", `\`${BASE}/ecommerce/`)
     for (const [from, to] of b.rewrite ?? []) if (src.includes(from)) src = src.replace(from, to)
     const deps = importsOf(src)
     deps.npm.forEach((x) => npm.add(x))
@@ -537,6 +819,7 @@ for (const t of THEMES) {
   index.push({ name: item.name, type: item.type, title: item.title, description: item.description })
 }
 for (const b of BLOCKS) {
+  if (b.draft && !process.env.DC_DRAFTS) continue
   const item = blockItem(b)
   outputs.push(item)
   index.push({ name: item.name, type: item.type, title: item.title, description: item.description })
@@ -765,5 +1048,5 @@ for (const f of readdirSync(dir)) if (!written.has(join(dir, f))) rmSync(join(di
 
 const warns = rows.filter((r) => r.ratio < r.min && r.template).length
 console.log(
-  `[dresscode] ${THEMES.length} themes (light + dark, ${rows.length} contrast pairs ok${warns ? `, ${warns} template warnings` : ""}), ${BLOCKS.length} templates, ${componentDirs.length} components (${outputs.filter((o) => o.type === "registry:block" && !o.categories && !BLOCKS.some((b) => b.name === o.name)).length} examples), ${blockCount} blocks in ${sectionDirs.length} categories, ${fontItems.size} fonts -> ${OUT} (base ${BASE})`,
+  `[dresscode] ${THEMES.length} themes (light + dark, ${rows.length} contrast pairs ok${warns ? `, ${warns} template warnings` : ""}), ${BLOCKS.filter((b) => !b.draft || process.env.DC_DRAFTS).length} templates, ${componentDirs.length} components (${outputs.filter((o) => o.type === "registry:block" && !o.categories && !BLOCKS.some((b) => b.name === o.name)).length} examples), ${blockCount} blocks in ${sectionDirs.length} categories, ${fontItems.size} fonts -> ${OUT} (base ${BASE})`,
 )

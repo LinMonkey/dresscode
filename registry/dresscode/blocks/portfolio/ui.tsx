@@ -97,7 +97,11 @@ export function PrintButton({ className }: { className?: string }) {
 }
 
 /** Email sign-up. Wire `onSubmit` to your newsletter service (Buttondown, Kit, Resend) where marked. */
-export function NewsletterForm({ className }: { className?: string }) {
+export function NewsletterForm({
+  className,
+  placeholder = "you@example.com",
+  confirmation = "Thanks. Check your inbox to confirm.",
+}: { className?: string; placeholder?: string; confirmation?: string }) {
   const [state, setState] = useState<"idle" | "done">("idle")
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -106,14 +110,14 @@ export function NewsletterForm({ className }: { className?: string }) {
   }
   return state === "done" ? (
     <p role="status" className={cn("flex items-center gap-2 text-[15px]", className)}>
-      <Check className="size-4 text-[color:var(--dc-accent)]" aria-hidden="true" /> Thanks. Check your inbox to confirm.
+      <Check className="size-4" aria-hidden="true" /> {confirmation}
     </p>
   ) : (
     <form onSubmit={submit} className={cn("flex max-w-[420px] gap-2", className)}>
       <label htmlFor="pf-newsletter" className="sr-only">
         Email address
       </label>
-      <Input id="pf-newsletter" name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="h-10 flex-1" />
+      <Input id="pf-newsletter" name="email" type="email" required autoComplete="email" placeholder={placeholder} className="h-10 flex-1" />
       <Button type="submit" size="lg" className="h-10 px-4">
         Subscribe
       </Button>

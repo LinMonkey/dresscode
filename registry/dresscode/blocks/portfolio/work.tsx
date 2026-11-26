@@ -311,17 +311,19 @@ export function WorkBrowser({ base, variant }: { base: string; variant: Variant 
   const q = new URLSearchParams(search)
   const urlTag = q.get("tag") as Tag | null
   const urlView = q.get("view")
-  const [picked, setPicked] = useState<{ filter: Filter; view: Variant } | null>(null)
+  type WorkView = "index" | "grid"
+  const defaultView: WorkView = variant === "index" ? "index" : "grid"
+  const [picked, setPicked] = useState<{ filter: Filter; view: WorkView } | null>(null)
   const filter: Filter = picked?.filter ?? (urlTag && TAGS.includes(urlTag) ? urlTag : "All")
-  const view: Variant = picked?.view ?? (urlView === "index" || urlView === "grid" ? urlView : variant)
+  const view = picked?.view ?? (urlView === "index" || urlView === "grid" ? urlView : defaultView)
   const transition = useTransition()
 
-  const update = (f: Filter, v: Variant) => {
+  const update = (f: Filter, v: WorkView) => {
     transition(() => setPicked({ filter: f, view: v }))
     const url = new URL(window.location.href)
     if (f === "All") url.searchParams.delete("tag")
     else url.searchParams.set("tag", f)
-    if (v === variant) url.searchParams.delete("view")
+    if (v === defaultView) url.searchParams.delete("view")
     else url.searchParams.set("view", v)
     window.history.replaceState(window.history.state, "", url)
   }

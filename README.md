@@ -31,12 +31,20 @@ Install a theme first, then:
 npx shadcn@latest add https://dresscodeui.com/r/dresscode/orbit-landing.json   # landing page, 18 sections, at /orbit
 npx shadcn@latest add https://dresscodeui.com/r/dresscode/orbit-app.json       # app dashboard, 13 screens, at /orbit-app
 npx shadcn@latest add https://dresscodeui.com/r/dresscode/portfolio.json       # personal site, two homes, at /portfolio
+npx shadcn@latest add https://dresscodeui.com/r/dresscode/realestate.json      # real estate site, two homes, at /realestate
+npx shadcn@latest add https://dresscodeui.com/r/dresscode/ecommerce.json       # online store, two homes, at /store
 ```
 
-Orbit is a made-up invoicing product; the portfolio belongs to a made-up designer. All three are built from shadcn/ui
-components and nothing else, so they wear whichever theme is installed. The portfolio has two home pages (a
-text-first index or a grid of covers) and every page a personal site needs: work, case studies and galleries, about,
-a resume that prints to one A4 page, services with prices, writing, contact, uses and now. Live demos in every theme:
+Orbit is a made-up invoicing product; the portfolio belongs to a made-up designer, the real estate site to a
+made-up brokerage and the store to a made-up home goods brand. All five are built from shadcn/ui components and
+nothing else, so they wear whichever theme is installed. The portfolio has two home pages (a text-first index or a
+grid of covers) and every page a personal site needs: work, case studies and galleries, about, a resume that prints
+to one A4 page, services with prices, writing, contact, uses and now. The real estate site has a platform home and a
+boutique one, search with a drawn map (no map service or key), listing pages with tour booking and a payment
+calculator, agents, neighborhoods, a valuation, compare and saved homes. The store has a department-store home and a
+brand one, shop pages with filters, product pages with colors and sizes, a cart drawer, one-page checkout (payment is
+one function for your provider), an account with orders, gift cards and a journal. Their sample photographs load
+from dresscodeui.com until you point them at yours. Live demos in every theme:
 [dresscodeui.com/templates](https://dresscodeui.com/templates). Docs: [dresscodeui.com/docs](https://dresscodeui.com/docs).
 
 ## Components
@@ -74,7 +82,8 @@ npx shadcn@latest add @dresscode/sorbet @dresscode/orbit-landing
 - `registry/dresscode/themes.ts`: the 9 themes (every color role in both modes, fonts, corners) and how they map
   onto shadcn's variables; `dresscode.css` holds the few classes the templates and blocks use; `fonts.ts` loads the families.
 - `registry/dresscode/blocks/orbit` and `blocks/orbit-app`: the Orbit landing page and dashboard;
-  `blocks/portfolio`: the Portfolio site (its content is all in `data.ts`).
+  `blocks/portfolio`, `blocks/realestate` and `blocks/ecommerce`: the Portfolio site, the Real estate site and
+  the E-commerce store (each one's content is all in its `data.ts`).
 - `registry/dresscode/components/<name>`: each component (`ui/`, installs to `components/ui`) and its examples
   (`examples/`, install to `components/dresscode/<name>-<example>.tsx`).
 - `registry/dresscode/sections/<category>`: the blocks, one file each (install to
@@ -82,7 +91,8 @@ npx shadcn@latest add @dresscode/sorbet @dresscode/orbit-landing
 - `tools/build-dresscode-registry.mjs`: builds `public/r/dresscode` from those sources and refuses a theme that fails
   `tools/dresscode-contrast.mjs`.
 - `registry.json` and `public/r/dresscode`: the shadcn registry, exactly what https://dresscodeui.com/r/dresscode serves.
-- `examples/orbit`, `examples/orbit-app` and `examples/portfolio`: the pages the templates install into `app/`.
+- `examples/orbit`, `examples/orbit-app`, `examples/portfolio`, `examples/realestate` and `examples/store`: the
+  pages the templates install into `app/`.
 
 ## History
 
