@@ -35,6 +35,17 @@ npx shadcn@latest add https://dresscodeui.com/r/dresscode/realestate.json      #
 npx shadcn@latest add https://dresscodeui.com/r/dresscode/ecommerce.json       # online store, two homes, at /store
 ```
 
+The portfolio also comes in five more styles, each its own home page and frame around the same pages and the same
+`data.ts` (install one of them instead of portfolio.json):
+
+```bash
+npx shadcn@latest add https://dresscodeui.com/r/dresscode/portfolio-sidebar.json # Sidebar portfolio
+npx shadcn@latest add https://dresscodeui.com/r/dresscode/portfolio-poster.json # Poster portfolio
+npx shadcn@latest add https://dresscodeui.com/r/dresscode/portfolio-bento.json # Bento portfolio
+npx shadcn@latest add https://dresscodeui.com/r/dresscode/portfolio-desktop.json # Desktop portfolio
+npx shadcn@latest add https://dresscodeui.com/r/dresscode/portfolio-garden.json # Garden portfolio
+```
+
 Orbit is a made-up invoicing product; the portfolio belongs to a made-up designer, the real estate site to a
 made-up brokerage and the store to a made-up home goods brand. All five are built from shadcn/ui components and
 nothing else, so they wear whichever theme is installed. The portfolio has two home pages (a text-first index or a
@@ -83,7 +94,8 @@ npx shadcn@latest add @dresscode/sorbet @dresscode/orbit-landing
   onto shadcn's variables; `dresscode.css` holds the few classes the templates and blocks use; `fonts.ts` loads the families.
 - `registry/dresscode/blocks/orbit` and `blocks/orbit-app`: the Orbit landing page and dashboard;
   `blocks/portfolio`, `blocks/realestate` and `blocks/ecommerce`: the Portfolio site, the Real estate site and
-  the E-commerce store (each one's content is all in its `data.ts`).
+  the E-commerce store (each one's content is all in its `data.ts`); `blocks/portfolio-<style>`: the free
+  portfolio styles (sidebar, poster, bento, desktop, garden).
 - `registry/dresscode/components/<name>`: each component (`ui/`, installs to `components/ui`) and its examples
   (`examples/`, install to `components/dresscode/<name>-<example>.tsx`).
 - `registry/dresscode/sections/<category>`: the blocks, one file each (install to
@@ -92,7 +104,11 @@ npx shadcn@latest add @dresscode/sorbet @dresscode/orbit-landing
   `tools/dresscode-contrast.mjs`.
 - `registry.json` and `public/r/dresscode`: the shadcn registry, exactly what https://dresscodeui.com/r/dresscode serves.
 - `examples/orbit`, `examples/orbit-app`, `examples/portfolio`, `examples/realestate` and `examples/store`: the
-  pages the templates install into `app/`.
+  pages the templates install into `app/`; `examples/portfolio-<style>`: the pages each portfolio style installs
+  into `app/portfolio`.
+
+Some creative portfolio styles on dresscodeui.com are paid templates with their own license; they are not part of
+this repository.
 
 ## History
 

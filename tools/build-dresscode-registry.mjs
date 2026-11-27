@@ -14,6 +14,8 @@
 //   public/r/dresscode/<component>[-<example>].json  a component and its examples (registry/dresscode/components)
 //   public/r/dresscode/<category>-<block>.json  a block, one file (registry/dresscode/sections)
 //   public/r/dresscode/registry.json          the index
+//   private/registry/<name>.json              the paid templates (tools/paid-templates.mjs), NOT public: served to a
+//       license key by app/r/pro/[name], never as static files (tools/check-paid-boundary.mjs checks)
 //
 // Every theme must pass tools/dresscode-contrast.mjs in both modes, and every item must parse with
 // shadcn's own registry-item schema, or nothing is written.
@@ -388,11 +390,11 @@ const PORTFOLIO_NOT_FOUND = [
   "",
 ].join("\n")
 
-// The portfolio styles (Sidebar, Poster, Bento, Desktop): one home each, the Portfolio template's pages
-// in the style's own frame, at the same /portfolio routes. Each installs the Portfolio template's files
-// too (components/portfolio), so it stands alone.
-const styleRoutes = (style, Site, meta) => [
-  { name: "layout.tsx", target: "app/portfolio/layout.tsx", content: PORTFOLIO_LAYOUT },
+// The portfolio styles (Sidebar, Poster, Bento, Desktop, Garden): one home each, the Portfolio template's
+// pages in the style's own frame, at the same /portfolio routes. Each installs the Portfolio template's
+// files too (components/portfolio), so it stands alone. A style may bring its own layout (opts.layout).
+const styleRoutes = (style, Site, meta, layout = PORTFOLIO_LAYOUT) => [
+  { name: "layout.tsx", target: "app/portfolio/layout.tsx", content: layout },
   {
     name: "page.tsx",
     target: "app/portfolio/page.tsx",
@@ -467,21 +469,19 @@ const portfolioFiles = () =>
     .sort()
     .map((f) => ({ path: `registry/dresscode/blocks/portfolio/${f}`, target: `components/portfolio/${f}` }))
 
-const portfolioStyle = (style, title, description, pages = []) => {
+const portfolioStyle = (style, title, description, pages = [], docs = null, opts = {}) => {
   const Name = style[0].toUpperCase() + style.slice(1)
   return {
     name: `portfolio-${style}`,
     title,
     description,
-    // Not published yet: built (and installable from a local server) only with DC_DRAFTS=1.
-    draft: true,
     dir: `registry/dresscode/blocks/portfolio-${style}`,
     target: `components/portfolio-${style}`,
     exts: [".tsx", ".ts"],
     exclude: [],
     extra: portfolioFiles(),
-    pages: [...styleRoutes(style, `${Name}Site`, `${style}Metadata`), ...pages],
-    docs: [
+    pages: [...styleRoutes(style, `${Name}Site`, `${style}Metadata`, opts.layout), ...pages],
+    docs: docs ?? [
       `${title}: the style is in components/portfolio-${style}/ and the pages it shares with the Portfolio template are in components/portfolio/; the routes are /portfolio, /portfolio/work, /portfolio/about and so on.`,
       "Make it yours in components/portfolio/data.ts: your name, photo (PERSON.portrait), projects, posts and prices.",
       "Give each project an image (and its plates a src) to replace the drawn sample covers.",
@@ -735,7 +735,25 @@ const BLOCKS = [
       "The sample photographs load from dresscodeui.com; point the keys in components/ecommerce/assets.ts at your own photos.",
     ],
   },
+  portfolioStyle("sidebar", "Sidebar portfolio", "A personal site laid out like a résumé you can scroll: name, sections and contact stay on the left while experience, projects and writing scroll on the right, with the section you are reading lit up. Every page of the Portfolio template, in the same frame. Wears the installed DressCode theme in light and dark."),
+  portfolioStyle("poster", "Poster portfolio", "A personal site in very big type: the name runs across the home page, the work is a list of huge titles with the cover following the cursor, one colored band and a giant \"Let's talk\". Project pages open with the title at poster size. Every page of the Portfolio template, in the same frame."),
+  portfolioStyle("bento", "Bento portfolio", "A personal site whose home page is one screen of tiles: you and your photo, a drawn map with your local time, a big number, the latest project, writing, now and a newsletter, then a wall of covers with a filter. Every page of the Portfolio template, in the same frame."),
+  portfolioStyle("desktop", "Desktop portfolio", "A personal site that is a computer: a menu bar, icons, windows you can drag, stack and close, a dock and a terminal. Every page (a project, a post, the résumé) opens as a window with its own address; on a phone it is a home screen of apps."),
+  portfolioStyle(
+    "garden",
+    "Garden portfolio",
+    "A personal site laid out like a quiet magazine that is also a digital garden: the home page is an issue with a lead essay, notes you can filter by how finished they are, the work as a photo spread and a newsletter band; essays get a drop cap, numbered margin notes and contents. Ships sample photographs and an RSS feed. Every page of the Portfolio template, in the same frame.",
+    [{ name: "feed-route.ts", target: "app/portfolio/feed.xml/route.ts", content: 'export { portfolioFeed as GET } from "@/components/portfolio-garden/feed"\n' }],
+  ),
 ]
+
+// The paid templates (Stage, Ring and Spec, 11-27) are listed in tools/paid-templates.mjs, which stays out of the
+// open-source export. They are built into PAID_OUT below, never into OUT or registry.json; app/r/pro serves them to
+// a license key. Without that file (the public repo) there are none.
+const PAID_FILE = join(root, "tools/paid-templates.mjs")
+const PAID_BLOCKS = existsSync(PAID_FILE) ? (await import(pathToFileURL(PAID_FILE).href)).paidBlocks({ portfolioStyle, PORTFOLIO_LAYOUT }) : []
+const PAID_OUT = "private/registry"
+const ALL_BLOCKS = [...BLOCKS, ...PAID_BLOCKS]
 
 const IGNORED_PACKAGES = new Set(["react", "react-dom", "next"])
 // npm packages install at the major version the code was written against (an unpinned name gets the
@@ -763,7 +781,7 @@ function importsOf(src) {
 }
 
 // Imports between template folders become imports between the installed folders.
-const toProject = (src) => BLOCKS.reduce((s, x) => s.replaceAll(`@/${x.dir}/`, `@/${x.target}/`), src)
+const toProject = (src) => ALL_BLOCKS.reduce((s, x) => s.replaceAll(`@/${x.dir}/`, `@/${x.target}/`), src)
 
 function blockItem(b) {
   const exts = b.exts ?? [".tsx"]
@@ -783,6 +801,8 @@ function blockItem(b) {
     // The real estate photos are too many to pack: the installed site loads the samples from the site.
     if (path === "registry/dresscode/blocks/realestate/assets.ts") src = src.replaceAll('"/realestate/', `"${BASE}/realestate/`)
     if (path === "registry/dresscode/blocks/ecommerce/assets.ts") src = src.replaceAll("`/ecommerce/", `\`${BASE}/ecommerce/`)
+    // A portfolio style's large sample photographs (public/portfolio/<set>/) load from the site too.
+    if (/^registry\/dresscode\/blocks\/portfolio-[\w-]+\/assets\.ts$/.test(path)) src = src.replace(/"\/portfolio\/(?!styles\/)([\w-]+)\//g, `"${BASE}/portfolio/$1/`)
     for (const [from, to] of b.rewrite ?? []) if (src.includes(from)) src = src.replace(from, to)
     const deps = importsOf(src)
     deps.npm.forEach((x) => npm.add(x))
@@ -1046,7 +1066,32 @@ write(`${OUT}/registry.json`, json(registry))
 const dir = join(root, OUT)
 for (const f of readdirSync(dir)) if (!written.has(join(dir, f))) rmSync(join(dir, f))
 
+// The paid items: the same shape, in a folder the site never serves as files. index.ts lets app/r/pro load one
+// on demand (bundled into the Worker, not into its static assets).
+const paidItems = PAID_BLOCKS.map(blockItem)
+for (const item of paidItems) {
+  const r = registryItemSchema.safeParse(item)
+  if (!r.success) throw new Error(`${item.name}: ${r.error.issues.map((x) => `${x.path.join(".")}: ${x.message}`).join("; ")}`)
+  if (index.some((i) => i.name === item.name)) throw new Error(`${item.name} is paid and must not be in the public registry`)
+  write(`${PAID_OUT}/${item.name}.json`, json(item))
+}
+if (paidItems.length) {
+  write(
+    `${PAID_OUT}/index.ts`,
+    [
+      "// Generated by tools/build-dresscode-registry.mjs from tools/paid-templates.mjs. Do not edit, do not serve as files.",
+      "// The paid registry items, each loaded only when app/r/pro or the zip download needs it.",
+      "export const PAID_ITEMS: Record<string, () => Promise<unknown>> = {",
+      ...paidItems.map((i) => `  ${JSON.stringify(i.name)}: () => import("./${i.name}.json").then((m) => m.default),`),
+      "}",
+      "",
+    ].join("\n"),
+  )
+  const paidDir = join(root, PAID_OUT)
+  for (const f of readdirSync(paidDir)) if (!written.has(join(paidDir, f))) rmSync(join(paidDir, f))
+}
+
 const warns = rows.filter((r) => r.ratio < r.min && r.template).length
 console.log(
-  `[dresscode] ${THEMES.length} themes (light + dark, ${rows.length} contrast pairs ok${warns ? `, ${warns} template warnings` : ""}), ${BLOCKS.filter((b) => !b.draft || process.env.DC_DRAFTS).length} templates, ${componentDirs.length} components (${outputs.filter((o) => o.type === "registry:block" && !o.categories && !BLOCKS.some((b) => b.name === o.name)).length} examples), ${blockCount} blocks in ${sectionDirs.length} categories, ${fontItems.size} fonts -> ${OUT} (base ${BASE})`,
+  `[dresscode] ${THEMES.length} themes (light + dark, ${rows.length} contrast pairs ok${warns ? `, ${warns} template warnings` : ""}), ${BLOCKS.filter((b) => !b.draft || process.env.DC_DRAFTS).length} templates, ${componentDirs.length} components (${outputs.filter((o) => o.type === "registry:block" && !o.categories && !BLOCKS.some((b) => b.name === o.name)).length} examples), ${blockCount} blocks in ${sectionDirs.length} categories, ${fontItems.size} fonts -> ${OUT}; ${paidItems.length} paid templates -> ${PAID_OUT} (base ${BASE})`,
 )
